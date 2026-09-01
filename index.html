@@ -99,7 +99,13 @@
   .img-card .cover { height: 150px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .img-card .cover .c-emoji { font-size: 66px; filter: drop-shadow(0 8px 14px rgba(0,0,0,.28)); }
   .img-card .cover .c-tag { position: absolute; top: 10px; left: 10px; }
-  .img-card .cover .c-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 13px; background: linear-gradient(transparent, rgba(0,0,0,.6)); color: #fff; font-size: 15px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,.45); }
+  .img-card .cover { position: relative; }
+  .img-card .cover .c-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 13px; background: linear-gradient(transparent, rgba(0,0,0,.6)); color: #fff; font-size: 15px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,.45); z-index: 1; }
+  .img-card .cover .c-tag { z-index: 1; }
+  .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-bg, .hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb { object-fit: cover; }
+  .news-cover { background-size: cover; background-position: center; }
   .img-card .img-foot { display: flex; align-items: center; justify-content: space-between; padding: 10px 13px; font-size: 12px; color: var(--text-sub); }
 
   .thumb-row { background: #fff; border-radius: 13px; padding: 10px; margin-bottom: 10px; display: flex; gap: 11px; box-shadow: 0 1px 3px rgba(0,0,0,.04); cursor: pointer; }
@@ -268,8 +274,7 @@
 
         <!-- 主视觉大图 -->
         <div class="hero" onclick="show('eventDetail')">
-          <div class="hero-bg cv-run"></div>
-          <div class="hero-emoji">🏃</div>
+          <img class="hero-bg" src="images/run1.jpg" alt="春季城市马拉松">
           <div class="hero-top">
             <span class="chip-h solid-green">报名中</span>
             <span class="chip-h">免费参赛</span>
@@ -292,16 +297,16 @@
         <!-- 热门赛事（图片卡片） -->
         <div class="sec-title">热门赛事 <span class="more" onclick="switchTab('events')">查看全部 ›</span></div>
         <div class="img-card" onclick="show('eventDetail')">
-          <div class="cover cv-run">
-            <span class="c-emoji">🏃</span>
+          <div class="cover">
+            <img class="cover-img" src="images/run2.jpg" alt="春季城市马拉松">
             <span class="c-tag chip-h solid-green">报名中</span>
             <div class="c-title">2026 春季城市马拉松</div>
           </div>
           <div class="img-foot"><span>📍 滨江体育中心 · 🗓 03-15</span><span>👥 328/500</span></div>
         </div>
         <div class="img-card" onclick="show('eventDetail2')">
-          <div class="cover cv-badminton">
-            <span class="c-emoji">🏸</span>
+          <div class="cover">
+            <img class="cover-img" src="images/badminton1.jpg" alt="职工羽毛球团体赛">
             <span class="c-tag chip-h solid-orange">多项积分</span>
             <div class="c-title">职工羽毛球团体赛</div>
           </div>
@@ -311,21 +316,21 @@
         <!-- 赛事资讯（图片化） -->
         <div class="sec-title">赛事资讯 <span class="more" onclick="show('newsList')">更多 ›</span></div>
         <div class="img-card" onclick="show('newsDetail1')">
-          <div class="cover cv-news1" style="height:118px">
-            <span class="c-emoji">📣</span>
+          <div class="cover" style="height:118px">
+            <img class="cover-img" src="images/run3.jpg" alt="马拉松参赛须知">
             <span class="c-tag chip-h">赛事通知</span>
             <div class="c-title">2026 春季城市马拉松参赛须知</div>
           </div>
         </div>
         <div class="thumb-row" onclick="show('newsDetail2')">
-          <div class="thumb cv-news2">🎯</div>
+          <img class="thumb" src="images/badminton1.jpg" alt="羽毛球团体赛">
           <div class="tr-info">
             <div class="tr-title">职工羽毛球团体赛抽签分组出炉</div>
             <div class="tr-meta">比赛预告 · 02-25 · 阅读 860</div>
           </div>
         </div>
         <div class="thumb-row" onclick="show('newsDetail3')">
-          <div class="thumb cv-news3">🏊</div>
+          <img class="thumb" src="images/swim2.jpg" alt="青少年游泳锦标赛">
           <div class="tr-info">
             <div class="tr-title">青少年游泳锦标赛圆满落幕</div>
             <div class="tr-meta">图文资讯 · 02-12 · 阅读 2.3k</div>
@@ -343,24 +348,24 @@
           <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">已结束</div>
         </div>
         <div class="img-card" onclick="show('eventDetail')">
-          <div class="cover cv-run">
-            <span class="c-emoji">🏃</span>
+          <div class="cover">
+            <img class="cover-img" src="images/run2.jpg" alt="春季城市马拉松">
             <span class="c-tag chip-h solid-green">报名中</span>
             <div class="c-title">2026 春季城市马拉松</div>
           </div>
           <div class="img-foot"><span>📍 滨江体育中心 · 🗓 03-15</span><span>👥 328/500</span></div>
         </div>
         <div class="img-card" onclick="show('eventDetail2')">
-          <div class="cover cv-badminton">
-            <span class="c-emoji">🏸</span>
+          <div class="cover">
+            <img class="cover-img" src="images/badminton1.jpg" alt="职工羽毛球团体赛">
             <span class="c-tag chip-h solid-orange">多项积分</span>
             <div class="c-title">职工羽毛球团体赛</div>
           </div>
           <div class="img-foot"><span>📍 市体育馆 · 🗓 03-20</span><span>👥 12/16 队</span></div>
         </div>
         <div class="img-card" onclick="show('ranking')">
-          <div class="cover cv-swim">
-            <span class="c-emoji">🏊</span>
+          <div class="cover">
+            <img class="cover-img" src="images/swim1.jpg" alt="青少年游泳锦标赛">
             <span class="c-tag chip-h solid-gray">已结束</span>
             <div class="c-title">青少年游泳锦标赛</div>
           </div>
@@ -462,7 +467,7 @@
       <!-- 赛事详情 1 -->
       <div class="screen" id="s-eventDetail">
         <div class="navbar"><button class="back" onclick="back()">‹</button>赛事详情</div>
-        <div class="banner"><h3>2026 春季城市马拉松</h3><p>滨江体育中心 · 2026-03-15 08:00</p></div>
+        <div class="banner" style="background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url(images/run2.jpg);background-size:cover;background-position:center"><h3>2026 春季城市马拉松</h3><p>滨江体育中心 · 2026-03-15 08:00</p></div>
         <div class="card-item">
           <div class="tag-row"><span class="chip green">报名中</span><span class="chip blue">需审核</span><span class="chip gray">免费</span></div>
           <div class="title">赛事信息</div>
@@ -479,7 +484,7 @@
       <!-- 赛事详情 2 -->
       <div class="screen" id="s-eventDetail2">
         <div class="navbar"><button class="back" onclick="back()">‹</button>赛事详情</div>
-        <div class="banner" style="background:linear-gradient(120deg,#ff7a00,#f59e0b)"><h3>职工羽毛球团体赛</h3><p>市体育馆 · 2026-03-20 13:30</p></div>
+        <div class="banner" style="background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url(images/badminton1.jpg);background-size:cover;background-position:center"><h3>职工羽毛球团体赛</h3><p>市体育馆 · 2026-03-20 13:30</p></div>
         <div class="card-item">
           <div class="tag-row"><span class="chip green">报名中</span><span class="chip orange">多项积分</span><span class="chip gray">免费</span></div>
           <div class="title">赛事信息</div>
@@ -572,15 +577,15 @@
       <div class="screen" id="s-newsList">
         <div class="navbar"><button class="back" onclick="back()">‹</button>赛事资讯</div>
         <div class="thumb-row" onclick="show('newsDetail1')">
-          <div class="thumb cv-news1">📣</div>
+          <img class="thumb" src="images/run3.jpg" alt="马拉松参赛须知">
           <div class="tr-info"><div class="tr-title">2026 春季城市马拉松参赛须知</div><div class="tr-meta">赛事通知 · 02-28 · 阅读 1.2k</div></div>
         </div>
         <div class="thumb-row" onclick="show('newsDetail2')">
-          <div class="thumb cv-news2">🎯</div>
+          <img class="thumb" src="images/badminton1.jpg" alt="羽毛球团体赛">
           <div class="tr-info"><div class="tr-title">职工羽毛球团体赛抽签分组出炉</div><div class="tr-meta">比赛预告 · 02-25 · 阅读 860</div></div>
         </div>
         <div class="thumb-row" onclick="show('newsDetail3')">
-          <div class="thumb cv-news3">🏊</div>
+          <img class="thumb" src="images/swim2.jpg" alt="青少年游泳锦标赛">
           <div class="tr-info"><div class="tr-title">青少年游泳锦标赛圆满落幕</div><div class="tr-meta">图文资讯 · 02-12 · 阅读 2.3k</div></div>
         </div>
       </div>
@@ -588,7 +593,7 @@
       <!-- 资讯详情 1 -->
       <div class="screen" id="s-newsDetail1">
         <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
-        <div class="news-cover" style="background:linear-gradient(135deg,#312e81,#6366f1)"><h3>2026 春季城市马拉松参赛须知</h3></div>
+        <div class="news-cover" style="background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.6)),url(images/run3.jpg)"><h3>2026 春季城市马拉松参赛须知</h3></div>
         <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-28 · 阅读 1.2k · 来源：赛事组委会</div>
         <div class="news-body">
           <p>各位参赛选手，2026 春季城市马拉松将于 <b>3 月 15 日 08:00</b> 在滨江体育中心鸣枪开跑。为确保顺利参赛，请仔细阅读以下须知：</p>
@@ -602,7 +607,7 @@
       <!-- 资讯详情 2 -->
       <div class="screen" id="s-newsDetail2">
         <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
-        <div class="news-cover" style="background:linear-gradient(135deg,#9d174d,#ec4899)"><h3>职工羽毛球团体赛抽签分组出炉</h3></div>
+        <div class="news-cover" style="background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.6)),url(images/badminton1.jpg)"><h3>职工羽毛球团体赛抽签分组出炉</h3></div>
         <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-25 · 阅读 860 · 来源：市总工会</div>
         <div class="news-body">
           <p>职工羽毛球团体赛抽签分组已于昨日完成，共 <b>12 支队伍</b> 参与，分为 A、B 两组进行小组赛，每组前四名晋级淘汰赛。</p>
@@ -615,7 +620,7 @@
       <!-- 资讯详情 3 -->
       <div class="screen" id="s-newsDetail3">
         <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
-        <div class="news-cover" style="background:linear-gradient(135deg,#065f46,#10b981)"><h3>青少年游泳锦标赛圆满落幕</h3></div>
+        <div class="news-cover" style="background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.6)),url(images/swim2.jpg)"><h3>青少年游泳锦标赛圆满落幕</h3></div>
         <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-12 · 阅读 2.3k · 来源：市体育局</div>
         <div class="news-body">
           <p>为期两天的青少年游泳锦标赛在水上运动中心圆满落幕，来自全市 18 支代表队的 200 余名小将参赛。</p>
