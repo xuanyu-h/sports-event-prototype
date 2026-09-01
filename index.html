@@ -23,6 +23,11 @@
   .role-switch { display: flex; background: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 22px; }
   .role-switch button { border: none; background: transparent; font-size: 13.5px; font-weight: 600; padding: 9px 24px; border-radius: 999px; cursor: pointer; color: var(--text-sub); transition: .2s; }
   .role-switch button.active { background: var(--primary); color: #fff; }
+  .theme-switch { display: flex; align-items: center; gap: 7px; margin: -8px 0 22px; flex-wrap: wrap; justify-content: center; }
+  .theme-switch .ts-label { font-size: 12.5px; color: var(--text-sub); font-weight: 600; }
+  .theme-switch .ts-btn { border: 1.5px solid #e3e8ef; background: #fff; border-radius: 999px; padding: 5px 13px; font-size: 12px; cursor: pointer; color: #4b5563; font-weight: 600; transition: .15s; }
+  .theme-switch .ts-btn.active { border-color: var(--primary); color: var(--primary); background: #eef4ff; }
+  .theme-switch .sw { width: 14px; height: 14px; border-radius: 4px; display: inline-block; margin-right: 5px; vertical-align: -2px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
 
   /* ===== iPhone 17 模型 ===== */
   .phone {
@@ -38,6 +43,12 @@
     width: 100%; height: 100%; background: var(--bg); border-radius: 52px;
     overflow: hidden; position: relative; display: flex; flex-direction: column;
   }
+  /* 背景主题（仅小程序 C 端，可切换演示） */
+  .phone-screen.bg-blue { background: linear-gradient(180deg, #e7f0ff 0%, #f4f8ff 100%); }
+  .phone-screen.bg-warm { background: linear-gradient(180deg, #fff3e2 0%, #fffaf2 100%); }
+  .phone-screen.bg-green { background: linear-gradient(180deg, #e6f5ea 0%, #f4faf5 100%); }
+  .phone-screen.bg-mint { background: linear-gradient(180deg, #e2f7f1 0%, #f2fbf8 100%); }
+  .phone-screen.bg-img { background: linear-gradient(rgba(255,255,255,.87), rgba(255,255,255,.87)), url('images/run1.jpg') center/cover no-repeat; }
   .dynamic-island {
     position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
     width: 128px; height: 34px; background: #000; border-radius: 20px; z-index: 20;
@@ -261,12 +272,22 @@
   <button id="roleAdmin" onclick="switchRole('admin')">管理后台 · PC Web</button>
 </div>
 
+<div class="theme-switch" id="themeSwitch">
+  <span class="ts-label">背景主题：</span>
+  <button class="ts-btn active" data-bg="" onclick="setBg('')"><span class="sw" style="background:#f3f5f9"></span>浅灰</button>
+  <button class="ts-btn" data-bg="bg-blue" onclick="setBg('bg-blue')"><span class="sw" style="background:linear-gradient(180deg,#e7f0ff,#f4f8ff)"></span>清爽蓝</button>
+  <button class="ts-btn" data-bg="bg-warm" onclick="setBg('bg-warm')"><span class="sw" style="background:linear-gradient(180deg,#fff3e2,#fffaf2)"></span>暖阳</button>
+  <button class="ts-btn" data-bg="bg-green" onclick="setBg('bg-green')"><span class="sw" style="background:linear-gradient(180deg,#e6f5ea,#f4faf5)"></span>活力绿</button>
+  <button class="ts-btn" data-bg="bg-mint" onclick="setBg('bg-mint')"><span class="sw" style="background:linear-gradient(180deg,#e2f7f1,#f2fbf8)"></span>薄荷</button>
+  <button class="ts-btn" data-bg="bg-img" onclick="setBg('bg-img')"><span class="sw" style="background:url('images/run1.jpg') center/cover"></span>运动图</button>
+</div>
+
 <!-- ================= 手机（iPhone 17） ================= -->
 <div class="phone" id="phoneWrap">
   <div class="side-btn sb-power"></div>
   <div class="side-btn sb-vol1"></div>
   <div class="side-btn sb-vol2"></div>
-  <div class="phone-screen">
+  <div class="phone-screen" id="phoneScreen">
     <div class="dynamic-island"></div>
     <div class="statusbar"><span>9:41</span><span class="icons">📶 🔋</span></div>
 
@@ -775,7 +796,17 @@
     document.getElementById('roleAdmin').classList.toggle('active', r==='admin');
     document.getElementById('phoneWrap').style.display = (r==='user') ? 'block' : 'none';
     document.getElementById('pcWrap').style.display = (r==='admin') ? 'block' : 'none';
+    document.getElementById('themeSwitch').style.display = (r==='user') ? 'flex' : 'none';
     if (r === 'user') switchTab('home'); else adminNav('dashboard');
+  }
+
+  function setBg(bg) {
+    var ps = document.getElementById('phoneScreen');
+    ['bg-blue','bg-warm','bg-green','bg-mint','bg-img'].forEach(function(c){ ps.classList.remove(c); });
+    if (bg) ps.classList.add(bg);
+    document.querySelectorAll('.theme-switch .ts-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-bg') === bg);
+    });
   }
 
   function show(id) {
