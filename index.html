@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="NvBSl0lrsEOonhPR2RCdH5">
-<head data-page-node-id="F3f6GnGAE33HE4bZ2YTEaq">
-<meta charset="UTF-8" data-page-node-id="XNAqSdH23b10zgmLWy0na8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="6ud8Qlctv7ygsLOyp3yeWc">
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>体育赛事服务小程序 · 页面原型</title>
 <style>
   :root {
@@ -60,7 +60,7 @@
   .tabbar .tab.active { color: var(--primary); font-weight: 600; }
 
   .screen { display: none; } .screen.show { display: block; }
-  .search { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 12px; padding: 9px 14px; font-size: 13px; color: var(--text-sub); box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 14px; }
+  .search { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 999px; padding: 10px 16px; font-size: 13px; color: var(--text-sub); box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 14px; }
   .banner { height: 132px; border-radius: 14px; background: linear-gradient(120deg, #2563eb, #4f46e5); color: #fff; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; margin-bottom: 16px; position: relative; overflow: hidden; cursor: pointer; }
   .banner::after { content: "🏆"; position: absolute; right: 18px; top: 14px; font-size: 46px; opacity: .35; }
   .banner h3 { font-size: 17px; font-weight: 700; } .banner p { font-size: 12px; opacity: .9; margin-top: 4px; }
@@ -77,6 +77,80 @@
   .chip.red { background: var(--red-bg); color: var(--red); }
   .card-item .title { font-size: 15px; font-weight: 700; color: #1f2937; }
   .card-item .meta { font-size: 12px; color: var(--text-sub); margin-top: 6px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+
+  /* ===== 首页 · 视觉化改版 ===== */
+  .hero { position: relative; height: 176px; border-radius: 18px; overflow: hidden; cursor: pointer; margin-bottom: 16px; box-shadow: 0 10px 24px rgba(30,64,175,.28); }
+  .hero .hero-bg { position: absolute; inset: 0; }
+  .hero .hero-emoji { position: absolute; right: -4px; bottom: -14px; font-size: 108px; line-height: 1; filter: drop-shadow(0 8px 14px rgba(0,0,0,.35)); }
+  .hero .hero-top { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
+  .hero .hero-bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px; background: linear-gradient(transparent, rgba(0,0,0,.6)); color: #fff; }
+  .hero h3 { font-size: 18px; font-weight: 800; text-shadow: 0 1px 4px rgba(0,0,0,.45); }
+  .hero p { font-size: 12px; opacity: .95; margin-top: 3px; }
+  .chip-h { font-size: 10.5px; padding: 3px 9px; border-radius: 999px; font-weight: 700; color: #fff; background: rgba(255,255,255,.24); backdrop-filter: blur(4px); }
+  .chip-h.solid-green { background: #16a34a; }
+  .chip-h.solid-orange { background: #f59e0b; }
+  .chip-h.solid-gray { background: rgba(0,0,0,.45); }
+
+  .quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 4px; background: #fff; border-radius: 16px; padding: 14px 6px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .q-item { display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 11.5px; color: #374151; font-weight: 600; cursor: pointer; }
+  .q-ico { width: 50px; height: 50px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 23px; box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+
+  .img-card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); cursor: pointer; }
+  .img-card .cover { height: 150px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .img-card .cover .c-emoji { font-size: 66px; filter: drop-shadow(0 8px 14px rgba(0,0,0,.28)); }
+  .img-card .cover .c-tag { position: absolute; top: 10px; left: 10px; }
+  .img-card .cover .c-title { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 13px; background: linear-gradient(transparent, rgba(0,0,0,.6)); color: #fff; font-size: 15px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,.45); }
+  .img-card .img-foot { display: flex; align-items: center; justify-content: space-between; padding: 10px 13px; font-size: 12px; color: var(--text-sub); }
+
+  .thumb-row { background: #fff; border-radius: 13px; padding: 10px; margin-bottom: 10px; display: flex; gap: 11px; box-shadow: 0 1px 3px rgba(0,0,0,.04); cursor: pointer; }
+  .thumb-row .thumb { width: 64px; height: 64px; border-radius: 11px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+  .thumb-row .tr-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+  .thumb-row .tr-title { font-size: 13.5px; font-weight: 600; line-height: 1.45; color: #1f2937; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .thumb-row .tr-meta { font-size: 11px; color: var(--text-sub); }
+
+  /* 图片封面（模拟照片的渐变场景） */
+  .cv-run { background: radial-gradient(circle at 85% 12%, rgba(255,255,255,.3), transparent 45%), linear-gradient(135deg, #0f2b5b 0%, #2563eb 55%, #38bdf8 100%); }
+  .cv-badminton { background: radial-gradient(circle at 14% 18%, rgba(255,255,255,.32), transparent 42%), linear-gradient(135deg, #7c2d12 0%, #f97316 60%, #fbbf24 100%); }
+  .cv-swim { background: radial-gradient(circle at 82% 18%, rgba(255,255,255,.3), transparent 45%), linear-gradient(135deg, #065f7a 0%, #0891b2 55%, #67e8f9 100%); }
+  .cv-news1 { background: linear-gradient(135deg, #312e81, #6366f1); }
+  .cv-news2 { background: linear-gradient(135deg, #9d174d, #ec4899); }
+  .cv-news3 { background: linear-gradient(135deg, #065f46, #10b981); }
+
+  /* ===== 我的 · 会员与积分 ===== */
+  .member-card { border-radius: 18px; padding: 16px; margin-bottom: 12px; color: #fff; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #7c3aed 100%); box-shadow: 0 10px 22px rgba(30,64,175,.32); }
+  .member-card .mc-top { display: flex; align-items: center; gap: 12px; }
+  .member-card .avatar { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,.22); border: 2px solid rgba(255,255,255,.55); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; flex-shrink: 0; }
+  .member-card .mc-name { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .vip-badge { font-size: 10px; padding: 2.5px 9px; border-radius: 999px; background: linear-gradient(90deg, #fde68a, #f59e0b); color: #78350f; font-weight: 800; }
+  .member-card .mc-sub { font-size: 11.5px; opacity: .88; margin-top: 3px; }
+  .member-card .mc-stats { display: flex; margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.22); }
+  .member-card .mc-stat { flex: 1; text-align: center; cursor: pointer; }
+  .member-card .mc-stat b { font-size: 17px; font-weight: 800; }
+  .member-card .mc-stat span { display: block; font-size: 10.5px; opacity: .82; margin-top: 2px; }
+
+  .points-entry { display: flex; align-items: center; justify-content: space-between; background: #fff; border-radius: 15px; padding: 13px 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.04); cursor: pointer; }
+  .points-entry .pe-left { display: flex; align-items: center; gap: 11px; }
+  .points-entry .pe-ico { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #fef3c7, #fde68a); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .points-entry b { font-size: 14px; color: #1f2937; }
+  .points-entry .pe-sub { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+  .points-entry .pe-btn { font-size: 12px; color: var(--primary); font-weight: 600; }
+
+  .points-hero { border-radius: 18px; padding: 22px 16px; text-align: center; color: #fff; background: linear-gradient(135deg, #b45309, #f59e0b 60%, #fbbf24); margin-bottom: 14px; box-shadow: 0 10px 22px rgba(245,158,11,.32); }
+  .points-hero .ph-num { font-size: 42px; font-weight: 800; line-height: 1.1; text-shadow: 0 2px 6px rgba(0,0,0,.18); }
+  .points-hero .ph-label { font-size: 12.5px; opacity: .92; margin-top: 4px; }
+  .points-hero .ph-bar { margin-top: 13px; background: rgba(255,255,255,.26); border-radius: 999px; padding: 6px 14px; font-size: 11.5px; }
+  .rule-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #374151; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+  .rule-row:last-child { border-bottom: none; }
+  .rule-row .pts { margin-left: auto; color: #b45309; font-weight: 800; font-size: 13px; }
+  .rule-row .muted { margin-left: auto; color: var(--text-sub); font-size: 12px; }
+  .rule-row.cur { background: #fffbeb; border-radius: 9px; padding: 8px 9px; border-bottom: none; margin: 2px 0; }
+  .points-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--border); }
+  .points-item:last-child { border-bottom: none; }
+  .points-item .pi-l .t { font-size: 13.5px; font-weight: 600; color: #1f2937; }
+  .points-item .pi-l .s { font-size: 11.5px; color: var(--text-sub); margin-top: 2px; }
+  .points-item .pts-add { color: #16a34a; font-weight: 800; font-size: 14.5px; }
+
+  .fixed-cta { position: absolute; left: 0; right: 0; bottom: 24px; padding: 10px 16px 12px; background: #fff; border-top: 1px solid var(--border); box-shadow: 0 -4px 12px rgba(0,0,0,.06); }
 
   .btn { display: block; width: 100%; border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; }
   .btn-primary { background: var(--primary); color: #fff; }
@@ -167,384 +241,512 @@
   .muted { color: var(--text-sub); font-size: 12px; }
 </style>
 </head>
-<body data-page-node-id="GAgb93gRdzGqkucttQEFL3">
+<body>
 
-<h1 class="page-title" data-page-node-id="6M6EnIGmmT8ABo611fQqi0">体育赛事服务小程序 · 页面原型</h1>
-<p class="page-sub" data-page-node-id="cWDTP0F8HZbeKPCmPj7GcN">参赛用户为「微信小程序」（iPhone 17 模型），管理后台为独立的「PC Web 管理端」（浏览器模型）。点卡片 / 按钮可交互浏览。</p>
+<h1 class="page-title">体育赛事服务小程序 · 页面原型</h1>
+<p class="page-sub">参赛用户为「微信小程序」（iPhone 17 模型），管理后台为独立的「PC Web 管理端」（浏览器模型）。点卡片 / 按钮可交互浏览。</p>
 
-<div class="role-switch" data-page-node-id="TrRRIDZYJV2OMTY5eM6PeD">
-  <button id="roleUser" class="active" onclick="switchRole('user')" data-page-node-id="Bor9abNr7Wt6PwYLN4S2GG">参赛用户 · 小程序</button>
-  <button id="roleAdmin" onclick="switchRole('admin')" data-page-node-id="RCBE9U7IgysybFSeiDCf1z">管理后台 · PC Web</button>
+<div class="role-switch">
+  <button id="roleUser" class="active" onclick="switchRole('user')">参赛用户 · 小程序</button>
+  <button id="roleAdmin" onclick="switchRole('admin')">管理后台 · PC Web</button>
 </div>
 
 <!-- ================= 手机（iPhone 17） ================= -->
-<div class="phone" id="phoneWrap" data-page-node-id="McIENvMIWx5iZH7ALy7KgQ">
-  <div class="side-btn sb-power" data-page-node-id="78SUiO5Y4on5SP8Xps7PTl"></div>
-  <div class="side-btn sb-vol1" data-page-node-id="BDjrgo4vlznuWKBKvtm576"></div>
-  <div class="side-btn sb-vol2" data-page-node-id="TerDSugHFVhRANwxlYSgwk"></div>
-  <div class="phone-screen" data-page-node-id="Y3fCn5s4ar5cxLWmFggUo8">
-    <div class="dynamic-island" data-page-node-id="KU7BSCGlPVHnR2zQaHEgTR"></div>
-    <div class="statusbar" data-page-node-id="1mzCvTEwCbVfs0UHrYSakQ"><span data-page-node-id="HEDFnJufPdKdLUCMFq3i0N">9:41</span><span class="icons" data-page-node-id="q8g8JdJFc0ARCjBSkfJuI7">📶 🔋</span></div>
+<div class="phone" id="phoneWrap">
+  <div class="side-btn sb-power"></div>
+  <div class="side-btn sb-vol1"></div>
+  <div class="side-btn sb-vol2"></div>
+  <div class="phone-screen">
+    <div class="dynamic-island"></div>
+    <div class="statusbar"><span>9:41</span><span class="icons">📶 🔋</span></div>
 
-    <div class="content" data-page-node-id="QngLVGcxuKR3nQJKAY7R3C">
-      <!-- 首页 -->
-      <div class="screen" id="s-home" data-page-node-id="DZg5cmpqlE5OyN4U98wnab">
-        <div class="navbar" data-page-node-id="eBN1yFNAGCGOJKSpLuArcu">体育赛事</div>
-        <div class="search" data-page-node-id="JBJGEZLCn8HbB1aY16DnAd">🔍 搜索赛事、资讯</div>
-        <div class="banner" onclick="show('eventDetail')" data-page-node-id="2K4Jb9VbVDMpCRYXj8UnxX">
-          <h3 data-page-node-id="08SGM01C9xDMeQ15CX2aZA">2026 春季城市马拉松</h3><p data-page-node-id="1wopT4XrgP10JWjwikGVQR">报名进行中 · 免费 · 限额 500 人</p>
+    <div class="content">
+      <!-- 首页（视觉化改版） -->
+      <div class="screen" id="s-home">
+        <div class="navbar">体育赛事</div>
+        <div class="search">🔍 搜索赛事、资讯</div>
+
+        <!-- 主视觉大图 -->
+        <div class="hero" onclick="show('eventDetail')">
+          <div class="hero-bg cv-run"></div>
+          <div class="hero-emoji">🏃</div>
+          <div class="hero-top">
+            <span class="chip-h solid-green">报名中</span>
+            <span class="chip-h">免费参赛</span>
+            <span class="chip-h">限额 500 人</span>
+          </div>
+          <div class="hero-bottom">
+            <h3>2026 春季城市马拉松</h3>
+            <p>滨江体育中心 · 03-15 08:00 鸣枪 · 已报 328 人</p>
+          </div>
         </div>
-        <div class="sec-title" data-page-node-id="oBvNvU0bMc1yeslXxpzGus">热门赛事 <span class="more" onclick="switchTab('events')" data-page-node-id="BgjDEdhd80CcxRgrpArktC">查看全部 ›</span></div>
-        <div class="card-item" onclick="show('eventDetail')" data-page-node-id="TW1WK9pmrQulPyC98tWIts">
-          <div class="tag-row" data-page-node-id="lo0gB4ppO1yXvgxu1Odjof"><span class="chip green" data-page-node-id="1ZU1tCYi7E4y8RkPEgNvan">报名中</span><span class="chip blue" data-page-node-id="JDDHHcLjTSFseFdeixJ6Cb">需审核</span></div>
-          <div class="title" data-page-node-id="xCzbzoOq8hOSrx7ri9sTdP">2026 春季城市马拉松</div>
-          <div class="meta" data-page-node-id="9p3ip3lKGFDwWCaOyEiOUJ">📍 滨江体育中心 · 🗓 03-15 · 👥 328/500</div>
+
+        <!-- 快捷入口（金刚区） -->
+        <div class="quick-grid">
+          <div class="q-item" onclick="switchTab('events')"><div class="q-ico" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🏃</div>报名赛事</div>
+          <div class="q-item" onclick="show('ranking')"><div class="q-ico" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🏅</div>成绩排名</div>
+          <div class="q-item" onclick="switchTab('calendar')"><div class="q-ico" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)">📅</div>赛事日历</div>
+          <div class="q-item" onclick="show('points')"><div class="q-ico" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">⭐</div>参赛积分</div>
         </div>
-        <div class="card-item" onclick="show('eventDetail2')" data-page-node-id="rW52U7BZgnDQwubR1sGYQI">
-          <div class="tag-row" data-page-node-id="nNOtWxfeVltujpEI1GIYZu"><span class="chip green" data-page-node-id="OHyGWAEy21HqEUN904uPMX">报名中</span><span class="chip orange" data-page-node-id="zyI7W5LWNvqgaSh2rtauks">多项积分</span></div>
-          <div class="title" data-page-node-id="eGGtAtWOPBDIBkMf9CwSbG">职工羽毛球团体赛</div>
-          <div class="meta" data-page-node-id="W4qKyklCBEgyENfFfykFbk">📍 市体育馆 · 🗓 03-20 · 👥 12/16</div>
+
+        <!-- 热门赛事（图片卡片） -->
+        <div class="sec-title">热门赛事 <span class="more" onclick="switchTab('events')">查看全部 ›</span></div>
+        <div class="img-card" onclick="show('eventDetail')">
+          <div class="cover cv-run">
+            <span class="c-emoji">🏃</span>
+            <span class="c-tag chip-h solid-green">报名中</span>
+            <div class="c-title">2026 春季城市马拉松</div>
+          </div>
+          <div class="img-foot"><span>📍 滨江体育中心 · 🗓 03-15</span><span>👥 328/500</span></div>
         </div>
-        <div class="sec-title" data-page-node-id="M5ZDxNYuypgICTcFt85QDW">赛事资讯 <span class="more" onclick="show('newsList')" data-page-node-id="uOrEtZh2gcCDX7k9lhuNjL">更多 ›</span></div>
-        <div class="card-item" onclick="show('newsDetail1')" data-page-node-id="dAOi6PgGYfuSGz9zJhrJfm">
-          <div class="tag-row" data-page-node-id="ThII5AnZf8YXqZjzvLbBHe"><span class="chip blue" data-page-node-id="ufstdSdGSxxN6dDsduI4uN">赛事通知</span></div>
-          <div class="title" data-page-node-id="NvVy3k4HgadMgLmdX3fVT2">2026 春季城市马拉松参赛须知</div>
-          <div class="meta" data-page-node-id="mEBgu4YW17ANDwGz2XOeof">02-28 · 阅读 1.2k</div>
+        <div class="img-card" onclick="show('eventDetail2')">
+          <div class="cover cv-badminton">
+            <span class="c-emoji">🏸</span>
+            <span class="c-tag chip-h solid-orange">多项积分</span>
+            <div class="c-title">职工羽毛球团体赛</div>
+          </div>
+          <div class="img-foot"><span>📍 市体育馆 · 🗓 03-20</span><span>👥 12/16 队</span></div>
         </div>
-        <div class="card-item" onclick="show('newsDetail2')" data-page-node-id="LjFLufNRD11VGEG490L0ua">
-          <div class="tag-row" data-page-node-id="ccC5k4462loggvTLJgGDRH"><span class="chip blue" data-page-node-id="qYBEqi5FK9hnbTMvGtCWhm">比赛预告</span></div>
-          <div class="title" data-page-node-id="6LCIxVWsY1fbZLFrT07TON">职工羽毛球团体赛抽签分组出炉</div>
-          <div class="meta" data-page-node-id="CRGgXudhCwpaqj0aFFlswV">02-25 · 阅读 860</div>
+
+        <!-- 赛事资讯（图片化） -->
+        <div class="sec-title">赛事资讯 <span class="more" onclick="show('newsList')">更多 ›</span></div>
+        <div class="img-card" onclick="show('newsDetail1')">
+          <div class="cover cv-news1" style="height:118px">
+            <span class="c-emoji">📣</span>
+            <span class="c-tag chip-h">赛事通知</span>
+            <div class="c-title">2026 春季城市马拉松参赛须知</div>
+          </div>
+        </div>
+        <div class="thumb-row" onclick="show('newsDetail2')">
+          <div class="thumb cv-news2">🎯</div>
+          <div class="tr-info">
+            <div class="tr-title">职工羽毛球团体赛抽签分组出炉</div>
+            <div class="tr-meta">比赛预告 · 02-25 · 阅读 860</div>
+          </div>
+        </div>
+        <div class="thumb-row" onclick="show('newsDetail3')">
+          <div class="thumb cv-news3">🏊</div>
+          <div class="tr-info">
+            <div class="tr-title">青少年游泳锦标赛圆满落幕</div>
+            <div class="tr-meta">图文资讯 · 02-12 · 阅读 2.3k</div>
+          </div>
         </div>
       </div>
 
-      <!-- 赛事列表 -->
-      <div class="screen" id="s-events" data-page-node-id="ok7zLBlTGNOrvtpzhgavLl">
-        <div class="navbar" data-page-node-id="Vf5P4VQtiVgau8SYAyeWnV">赛事</div>
-        <div style="display:flex;gap:8px;margin-bottom:14px" data-page-node-id="VSKA0XIMdWSXvMyKmKWtfh">
-          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:var(--primary);color:#fff;font-weight:600" data-page-node-id="ypLiSFhReBEr4ba9Svexnv">全部</div>
-          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600" data-page-node-id="kGkXQ2MS3GzJ4uE9YP1K9C">报名中</div>
-          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600" data-page-node-id="weA2vY4y4B9tKjMF9AyX7N">进行中</div>
-          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600" data-page-node-id="kZXBi3Maf7u3dkEoCvTDzb">已结束</div>
+      <!-- 赛事列表（图片卡片化） -->
+      <div class="screen" id="s-events">
+        <div class="navbar">赛事</div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:var(--primary);color:#fff;font-weight:600">全部</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">报名中</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">进行中</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">已结束</div>
         </div>
-        <div class="card-item" onclick="show('eventDetail')" data-page-node-id="SMF6SkXQMSiW8AMjSgGP3J">
-          <div class="tag-row" data-page-node-id="YlrXp9HmB9S7ZM3q8vkr36"><span class="chip green" data-page-node-id="9LxjSUFDqFDY8ZL8aZSIbf">报名中</span></div>
-          <div class="title" data-page-node-id="PF5eUCDXK9bejGmswxHdIW">2026 春季城市马拉松</div>
-          <div class="meta" data-page-node-id="wqfPzSlx7gKPiV9g6RMQud">📍 滨江体育中心 · 🗓 03-15 · 👥 328/500</div>
+        <div class="img-card" onclick="show('eventDetail')">
+          <div class="cover cv-run">
+            <span class="c-emoji">🏃</span>
+            <span class="c-tag chip-h solid-green">报名中</span>
+            <div class="c-title">2026 春季城市马拉松</div>
+          </div>
+          <div class="img-foot"><span>📍 滨江体育中心 · 🗓 03-15</span><span>👥 328/500</span></div>
         </div>
-        <div class="card-item" onclick="show('eventDetail2')" data-page-node-id="HmTTYlz0n2WUhZ9yseBKAl">
-          <div class="tag-row" data-page-node-id="HVGDs3ZtjXi4AoQlPT9fEz"><span class="chip green" data-page-node-id="FYTj3u6vIS7ArJPu0v5sVq">报名中</span><span class="chip orange" data-page-node-id="1STiduqwJO4XDiHonBxB6M">多项积分</span></div>
-          <div class="title" data-page-node-id="t4xOwViy89SkACbHwHKMBh">职工羽毛球团体赛</div>
-          <div class="meta" data-page-node-id="KDnlvw9nVvTEepC8XetC53">📍 市体育馆 · 🗓 03-20 · 👥 12/16</div>
+        <div class="img-card" onclick="show('eventDetail2')">
+          <div class="cover cv-badminton">
+            <span class="c-emoji">🏸</span>
+            <span class="c-tag chip-h solid-orange">多项积分</span>
+            <div class="c-title">职工羽毛球团体赛</div>
+          </div>
+          <div class="img-foot"><span>📍 市体育馆 · 🗓 03-20</span><span>👥 12/16 队</span></div>
         </div>
-        <div class="card-item" onclick="show('ranking')" data-page-node-id="XGdLb6MZ72PvQxvPlZ8vj6">
-          <div class="tag-row" data-page-node-id="ZGeyoTRa2FgrNlhlW4KJtQ"><span class="chip gray" data-page-node-id="M6v1qVEl4ltf368ZW3qCwl">已结束</span></div>
-          <div class="title" data-page-node-id="7CGOHpDAstDJsSKM81nx7M">青少年游泳锦标赛</div>
-          <div class="meta" data-page-node-id="nc8VXzFmGtqFFu32qCWQNG">📍 水上运动中心 · 🗓 02-10 · 已出成绩</div>
+        <div class="img-card" onclick="show('ranking')">
+          <div class="cover cv-swim">
+            <span class="c-emoji">🏊</span>
+            <span class="c-tag chip-h solid-gray">已结束</span>
+            <div class="c-title">青少年游泳锦标赛</div>
+          </div>
+          <div class="img-foot"><span>📍 水上运动中心 · 🗓 02-10</span><span>已出成绩</span></div>
         </div>
       </div>
 
       <!-- 日历 -->
-      <div class="screen" id="s-calendar" data-page-node-id="B32NCm1LmyEKGGlBeUGbsg">
-        <div class="navbar" data-page-node-id="z0q2lhLMggO13DTk1b4Bl7">赛事日历</div>
-        <div class="cal-head" data-page-node-id="lj5XFlgLeECMiXJVISKmQ5">
-          <button onclick="prevMonth()" data-page-node-id="olH7B0DyF8cKXoHpYLgNLA">‹</button><span class="ym" id="calYM" data-page-node-id="hcl5eWBWB8OLVju3iH23I8">2026年3月</span><button onclick="nextMonth()" data-page-node-id="nVmOllwEP2WzAHIsTphGQy">›</button>
+      <div class="screen" id="s-calendar">
+        <div class="navbar">赛事日历</div>
+        <div class="cal-head">
+          <button onclick="prevMonth()">‹</button><span class="ym" id="calYM">2026年3月</span><button onclick="nextMonth()">›</button>
         </div>
-        <div class="cal-grid" id="calGrid" data-page-node-id="77kSqbjaRBscCm1shyqntq"></div>
-        <div class="sec-title" style="margin-top:0" data-page-node-id="qAqgGuvEFMSoB1bFlZvVRj">03-15 赛事安排</div>
-        <div class="list-row" onclick="show('eventDetail')" data-page-node-id="f7DQ1xie5AKTTBTCyWwwvC"><div class="l" data-page-node-id="ylJC1gMZ8XScNHeOXxnMwN"><span class="t" data-page-node-id="hQJfCwHiMbeUD4SEL3Hu4h">2026 春季城市马拉松</span><span class="s" data-page-node-id="o738ChqyapUCuqHmBllPRJ">08:00 · 滨江体育中心</span></div><div class="r" data-page-node-id="DWixhIz5tYDUkFsRbtMn4u">报名中 ›</div></div>
-        <div class="list-row" onclick="show('eventDetail2')" data-page-node-id="K5uk1nvfYFykQwmnW14W9A"><div class="l" data-page-node-id="dkrugvyGURZZysxeXk5zKk"><span class="t" data-page-node-id="Fj5kJdyM6yl5xxcnZMBChN">职工羽毛球团体赛（小组赛）</span><span class="s" data-page-node-id="2osm7c6aP34OvBExlI2IPl">13:30 · 市体育馆</span></div><div class="r" data-page-node-id="zbMbVYU8TwxQKuSiBTFELI">报名中 ›</div></div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="sec-title" style="margin-top:0">03-15 赛事安排</div>
+        <div class="list-row" onclick="show('eventDetail')"><div class="l"><span class="t">2026 春季城市马拉松</span><span class="s">08:00 · 滨江体育中心</span></div><div class="r">报名中 ›</div></div>
+        <div class="list-row" onclick="show('eventDetail2')"><div class="l"><span class="t">职工羽毛球团体赛（小组赛）</span><span class="s">13:30 · 市体育馆</span></div><div class="r">报名中 ›</div></div>
       </div>
 
-      <!-- 我的 -->
-      <div class="screen" id="s-mine" data-page-node-id="J1F5V794g0mbpLwF12hg5S">
-        <div class="navbar" data-page-node-id="OBjS9SnkZpavJycuuhITUC">我的</div>
-        <div class="card-item" style="display:flex;align-items:center;gap:14px" data-page-node-id="yZDHis9RUl3Y9iP5fNmEXT">
-          <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700" data-page-node-id="gnE8HxCTDNNDQMinq6mPEo">张</div>
-          <div data-page-node-id="aIBoha2hhdbeP1cdXH9w16"><div class="title" data-page-node-id="parTd86HLwOgopxccZh4vK">张三</div><div class="meta" data-page-node-id="3uETp7v3DWlPE33NkBc3g7">已认证 · 手机 138****8888</div></div>
+      <!-- 我的（会员 + 参赛积分） -->
+      <div class="screen" id="s-mine">
+        <div class="navbar">我的</div>
+        <div class="member-card">
+          <div class="mc-top">
+            <div class="avatar">张</div>
+            <div>
+              <div class="mc-name">张三 <span class="vip-badge">⭐ 银牌会员</span></div>
+              <div class="mc-sub">已认证 · 手机 138****8888</div>
+            </div>
+          </div>
+          <div class="mc-stats">
+            <div class="mc-stat"><b>3</b><span>报名场次</span></div>
+            <div class="mc-stat"><b>2</b><span>完赛次数</span></div>
+            <div class="mc-stat" onclick="show('points')"><b>268</b><span>参赛积分 ›</span></div>
+          </div>
         </div>
-        <div class="list-row" onclick="show('myRegistrations')" data-page-node-id="2IGGp0yEFRvVBPzEHSvASd"><div class="l" data-page-node-id="e3nh7pDQTH267ySD6XJOY9"><span class="t" data-page-node-id="q4CjvPXlt5UPnrFo9hrOEj">📋 我的报名</span></div><div class="r" data-page-node-id="KMzjxhqwBJJcNVfh7nzozN">›</div></div>
-        <div class="list-row" onclick="show('ranking')" data-page-node-id="4ztGDSGO7OCHgrtn94vshr"><div class="l" data-page-node-id="MT9HEreGHhIPNEDMcWzzdP"><span class="t" data-page-node-id="VvyBYPAPsBvtEKgMyPzlhz">🏅 我的成绩与排名</span></div><div class="r" data-page-node-id="bg2JFLkSIcYTsqf3Pz2JLv">›</div></div>
-        <div class="list-row" data-page-node-id="Eu4jXLW1lTUG6Y2HZcU0CC"><div class="l" data-page-node-id="UiM7zScluCoePwLgcX6fMi"><span class="t" data-page-node-id="4oahpwWtj2fuTBkIRlF6Ps">⚙️ 设置</span></div><div class="r" data-page-node-id="RCh5zLlHvVA8EoXp0BYC1H">›</div></div>
+        <div class="points-entry" onclick="show('points')">
+          <div class="pe-left">
+            <div class="pe-ico">⭐</div>
+            <div><b>参赛积分 268</b><div class="pe-sub">距金牌会员还差 32 分 · 完赛/获奖自动累加</div></div>
+          </div>
+          <span class="pe-btn">积分中心 ›</span>
+        </div>
+        <div class="list-row" onclick="show('myRegistrations')"><div class="l"><span class="t">📋 我的报名</span></div><div class="r">›</div></div>
+        <div class="list-row" onclick="show('ranking')"><div class="l"><span class="t">🏅 我的成绩与排名</span></div><div class="r">›</div></div>
+        <div class="list-row" onclick="show('points')"><div class="l"><span class="t">⭐ 积分明细与会员等级</span></div><div class="r">›</div></div>
+        <div class="list-row"><div class="l"><span class="t">⚙️ 设置</span></div><div class="r">›</div></div>
+      </div>
+
+      <!-- 参赛积分中心（新增） -->
+      <div class="screen" id="s-points">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>参赛积分</div>
+        <div class="points-hero">
+          <div class="ph-num">268</div>
+          <div class="ph-label">当前积分 · 银牌会员</div>
+          <div class="ph-bar">距「金牌会员（300 分）」还差 32 分</div>
+        </div>
+        <div class="card-item">
+          <div class="title" style="margin-bottom:6px">会员等级</div>
+          <div class="rule-row">👤 注册会员 <span class="muted">0 分起</span></div>
+          <div class="rule-row">🥉 铜牌会员 <span class="muted">100 分</span></div>
+          <div class="rule-row cur">🥈 银牌会员（当前） <span class="pts">200 分</span></div>
+          <div class="rule-row">🥇 金牌会员 <span class="muted">300 分</span></div>
+          <div class="rule-row">💎 铂金会员 <span class="muted">500 分</span></div>
+        </div>
+        <div class="card-item">
+          <div class="title" style="margin-bottom:6px">积分规则</div>
+          <div class="rule-row">🎁 注册会员礼包（一次性） <span class="pts">+8</span></div>
+          <div class="rule-row">📝 报名审核通过 <span class="pts">+5</span></div>
+          <div class="rule-row">🏁 完赛（有有效成绩） <span class="pts">+20</span></div>
+          <div class="rule-row">🥇 获得第 1 名 <span class="pts">+30</span></div>
+          <div class="rule-row">🥈 获得第 2 名 <span class="pts">+20</span></div>
+          <div class="rule-row">🥉 获得第 3 名 <span class="pts">+10</span></div>
+        </div>
+        <div class="sec-title" style="margin-top:6px">积分明细</div>
+        <div class="card-item">
+          <div class="points-item"><div class="pi-l"><div class="t">青少年游泳锦标赛 · 完赛奖励</div><div class="s">2026-02-10</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">青少年游泳锦标赛 · 名次奖励（第 3 名）</div><div class="s">2026-02-10</div></div><span class="pts-add">+10</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">青少年游泳锦标赛 · 报名通过</div><div class="s">2026-01-21</div></div><span class="pts-add">+5</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">城市秋季路跑 · 完赛奖励</div><div class="s">2025-11-02</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">城市秋季路跑 · 名次奖励（第 1 名）</div><div class="s">2025-11-02</div></div><span class="pts-add">+30</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">城市秋季路跑 · 报名通过</div><div class="s">2025-10-20</div></div><span class="pts-add">+5</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">羽毛球单打赛 · 完赛奖励</div><div class="s">2025-09-15</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">羽毛球单打赛 · 名次奖励（第 2 名）</div><div class="s">2025-09-15</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">羽毛球单打赛 · 报名通过</div><div class="s">2025-09-01</div></div><span class="pts-add">+5</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">趣味运动会 · 完赛奖励</div><div class="s">2025-06-13</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">趣味运动会 · 名次奖励（第 1 名）</div><div class="s">2025-06-13</div></div><span class="pts-add">+30</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">趣味运动会 · 报名通过</div><div class="s">2025-06-01</div></div><span class="pts-add">+5</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">春季骑行活动 · 完赛奖励</div><div class="s">2025-04-20</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">春季骑行活动 · 报名通过</div><div class="s">2025-04-12</div></div><span class="pts-add">+5</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">春季长跑赛 · 完赛奖励</div><div class="s">2025-03-16</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">春季长跑赛 · 名次奖励（第 2 名）</div><div class="s">2025-03-16</div></div><span class="pts-add">+20</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">春季长跑赛 · 报名通过</div><div class="s">2025-03-08</div></div><span class="pts-add">+5</span></div>
+          <div class="points-item"><div class="pi-l"><div class="t">注册会员礼包</div><div class="s">2025-08-08</div></div><span class="pts-add">+8</span></div>
+        </div>
+        <div class="hint-box">💡 积分由系统按报名、完赛、名次自动累计，可在报名赛事、完赛、获得名次后获得。</div>
       </div>
 
       <!-- 赛事详情 1 -->
-      <div class="screen" id="s-eventDetail" data-page-node-id="pmEFwPptmP10fHxIKKBk3v">
-        <div class="navbar" data-page-node-id="Xia1jmF7JUdJsIamGh1b4e"><button class="back" onclick="back()" data-page-node-id="z4sZG2FEzUMIvAWaWftIjh">‹</button>赛事详情</div>
-        <div class="banner" data-page-node-id="W78zVTyjCzhTM7DAa78skD"><h3 data-page-node-id="kfHGectjCp6nrxtTBJa6Um">2026 春季城市马拉松</h3><p data-page-node-id="Bx6DfQGCVYpxkfl8PMKAiZ">滨江体育中心 · 2026-03-15 08:00</p></div>
-        <div class="card-item" data-page-node-id="ZM2cbFSYY0GJRucpSfKLEU">
-          <div class="tag-row" data-page-node-id="34SZ9wpvxBYjufEfpGaDHV"><span class="chip green" data-page-node-id="CgnyhHoUNHavUp4gxItLjT">报名中</span><span class="chip blue" data-page-node-id="EhnQaWa3VB49664DGhphJS">需审核</span><span class="chip gray" data-page-node-id="2yC3UI9EMEDB8vckmm9HoO">免费</span></div>
-          <div class="title" data-page-node-id="euHNyBBALisECMyBMRCmtC">赛事信息</div>
-          <div class="meta" data-page-node-id="EPePiWvB5q0BrY83eOGTS1">报名截止：03-10 20:00</div>
-          <div class="meta" data-page-node-id="1P9uz1rX1dBSzuwyGMF5Fh">人数上限：500 人（已报 328）</div>
-          <div class="meta" data-page-node-id="CTxQ9VFfBqky2YlyHr8YNX">项目：男子全马 / 女子全马（按用时排名）</div>
+      <div class="screen" id="s-eventDetail">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛事详情</div>
+        <div class="banner"><h3>2026 春季城市马拉松</h3><p>滨江体育中心 · 2026-03-15 08:00</p></div>
+        <div class="card-item">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip blue">需审核</span><span class="chip gray">免费</span></div>
+          <div class="title">赛事信息</div>
+          <div class="meta">报名截止：03-10 20:00</div>
+          <div class="meta">人数上限：500 人（已报 328）</div>
+          <div class="meta">项目：男子全马 / 女子全马（按用时排名）</div>
         </div>
-        <div class="sec-title" style="margin-top:6px" data-page-node-id="hPPPGJrQLgkEkLEHWjZHAh">赛事介绍</div>
-        <div class="card-item" data-page-node-id="H8w8NE5tNAPbdMtEv93sZN"><div class="meta" style="line-height:1.7" data-page-node-id="XUf9onTewuFP3Wy31oU9A0">本赛事为城市马拉松，设男子、女子两个单项。成绩按完赛用时排名，用时越短名次越靠前；单项成绩相同则并列同名次。</div></div>
-        <div style="height:70px" data-page-node-id="S31gy22R8OQjsZKsHRFagx"></div>
+        <div class="sec-title" style="margin-top:6px">赛事介绍</div>
+        <div class="card-item"><div class="meta" style="line-height:1.7">本赛事为城市马拉松，设男子、女子两个单项。成绩按完赛用时排名，用时越短名次越靠前；单项成绩相同则并列同名次。</div></div>
+        <div style="height:86px"></div>
+        <div class="fixed-cta"><button class="btn btn-primary" onclick="show('registerForm')">立即报名</button></div>
       </div>
 
       <!-- 赛事详情 2 -->
-      <div class="screen" id="s-eventDetail2" data-page-node-id="Ac2iMKuH6kzvGeyWAR3b9U">
-        <div class="navbar" data-page-node-id="8NBIBKeya7wOk0bCADQyO2"><button class="back" onclick="back()" data-page-node-id="36M09CXeoQO4j0PNzpFJGa">‹</button>赛事详情</div>
-        <div class="banner" style="background:linear-gradient(120deg,#ff7a00,#f59e0b)" data-page-node-id="OixtCog6dINUGdNezyqs47"><h3 data-page-node-id="ofy9IebsqyNfA82GjzghQT">职工羽毛球团体赛</h3><p data-page-node-id="sHEcYelQUtVf3UUqRK1OGV">市体育馆 · 2026-03-20 13:30</p></div>
-        <div class="card-item" data-page-node-id="HCX8DTtcL6bUdxk3lalpXF">
-          <div class="tag-row" data-page-node-id="4cY2h9CUjEvJRC5Q0PGMf3"><span class="chip green" data-page-node-id="GND1lLgmdewU92JoNHAsYi">报名中</span><span class="chip orange" data-page-node-id="kHYCKkUn5Vl57yUdizzlBd">多项积分</span><span class="chip gray" data-page-node-id="aBwbW7fMxP97m5KXIlTLxs">免费</span></div>
-          <div class="title" data-page-node-id="inVrgBrnPa49osvPkIlTaX">赛事信息</div>
-          <div class="meta" data-page-node-id="SBdEX9qcHsEKISPAO8tTe6">报名截止：03-15 18:00</div>
-          <div class="meta" data-page-node-id="U3DmLHoDM1bfJa0lpn6PtM">人数上限：16 队（已报 12）</div>
-          <div class="meta" data-page-node-id="TUo2gbsDaGl6Rht53baZgp">项目：男单 / 女单 / 混双（积分累加排名）</div>
+      <div class="screen" id="s-eventDetail2">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛事详情</div>
+        <div class="banner" style="background:linear-gradient(120deg,#ff7a00,#f59e0b)"><h3>职工羽毛球团体赛</h3><p>市体育馆 · 2026-03-20 13:30</p></div>
+        <div class="card-item">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip orange">多项积分</span><span class="chip gray">免费</span></div>
+          <div class="title">赛事信息</div>
+          <div class="meta">报名截止：03-15 18:00</div>
+          <div class="meta">人数上限：16 队（已报 12）</div>
+          <div class="meta">项目：男单 / 女单 / 混双（积分累加排名）</div>
         </div>
-        <div class="sec-title" style="margin-top:6px" data-page-node-id="9HPNemdSRWQGLhPdiCldRF">赛事介绍</div>
-        <div class="card-item" data-page-node-id="rSc5Ntf6oNnr2egVuA3SUr"><div class="meta" style="line-height:1.7" data-page-node-id="mRVNAJIGoTFCBWAuKTdot9">团体赛设男单、女单、混双三个积分项，各队积分累加后排序，积分高者靠前；因多项累加基本不存在同分。</div></div>
-        <div style="height:70px" data-page-node-id="HACKjCVd9ph7EeQmxlRGzL"></div>
+        <div class="sec-title" style="margin-top:6px">赛事介绍</div>
+        <div class="card-item"><div class="meta" style="line-height:1.7">团体赛设男单、女单、混双三个积分项，各队积分累加后排序，积分高者靠前；因多项累加基本不存在同分。</div></div>
+        <div style="height:86px"></div>
+        <div class="fixed-cta"><button class="btn btn-primary" onclick="show('registerForm')">立即报名</button></div>
       </div>
 
       <!-- 报名表单 -->
-      <div class="screen" id="s-registerForm" data-page-node-id="kj0McfV2lbRuxVMO885BQ7">
-        <div class="navbar" data-page-node-id="cwEesGwvyNefrDQfNSOdqS"><button class="back" onclick="back()" data-page-node-id="oNqD32Fr9SRgZ5zPPMrZKR">‹</button>在线报名</div>
-        <div class="notice" data-page-node-id="yRsqsHut3hmQlh8VVciwPR">⚠️ 报名免费，提交后需主办方审核，审核通过方为报名成功。</div>
-        <div class="card-item" data-page-node-id="MsCuyTZnDCI7HaFaEsg9xM">
-          <div class="title" style="margin-bottom:14px" data-page-node-id="xjt1OiByQWHqt5yA6HVCPb">2026 春季城市马拉松</div>
-          <div class="form-item" data-page-node-id="MRdkMKw3QmQCOnTrknSpGB"><label data-page-node-id="5ecei9mtvibqFEsSC8Pcpv">姓名 <span class="req" data-page-node-id="cbufUT0S0HVST52BzrKDiQ">*</span></label><input placeholder="请输入真实姓名" data-page-node-id="FnQ3jmetHJ7f9vzxCmHrUh"></div>
-          <div class="form-item" data-page-node-id="MGjlQhBthWsXQKXGWWfoWM"><label data-page-node-id="IOs7tbrGuLkDa17lQ8iEk1">手机号 <span class="req" data-page-node-id="Y53VFH5Unj7Vje5eERVjpe">*</span></label><input placeholder="请输入手机号" data-page-node-id="h7mEDtpzvYlO8EU5gTl0Dp"></div>
-          <div class="form-item" data-page-node-id="vHSa3B8SiHgSQHr5SSVIjX"><label data-page-node-id="uJ0MVkwdp9hjCUO3iefNeE">性别 <span class="req" data-page-node-id="BMCr3Jl1KNUDofMDF8xMJP">*</span></label><select data-page-node-id="U9dLlUQmmBSA0fWi7wzKxg"><option data-page-node-id="cSQOF9rnrPM3ujpMJrVEGR">男</option><option data-page-node-id="rvKygVYOhQ6g0drcJAXonQ">女</option></select></div>
-          <div class="form-item" data-page-node-id="klrCUHQzRfAeEDhzRe0cmS"><label data-page-node-id="MAQPSAWwuHTZrMe3tpHDFX">证件类型 <span class="req" data-page-node-id="48kHttRtUZ6178IXnxFMB6">*</span></label><select data-page-node-id="T36XPccRqstftaKjEko0F3"><option data-page-node-id="bpAUGIJv61GHWPvmES3A4y">居民身份证</option><option data-page-node-id="BXiCjtQimCDawiRnIIozLW">护照</option></select></div>
-          <div class="form-item" data-page-node-id="u0OVDoZ05uBvUSnGdVeANu"><label data-page-node-id="YeMpMhqzMcZUVs0sjtErAU">证件号码 <span class="req" data-page-node-id="xzUlA5HOEKQi9lwAqneKVT">*</span></label><input placeholder="请输入证件号码" data-page-node-id="RR2AC8lis3UUDq5nHlq1IY"><div class="hint" data-page-node-id="hCyJyBiGXafyV88UyrVYrA">用于参赛资格核验</div></div>
-          <button class="btn btn-primary" onclick="show('registerSuccess')" data-page-node-id="Yo31vAjAyW7ipIowYgDYD7">提交报名</button>
+      <div class="screen" id="s-registerForm">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>在线报名</div>
+        <div class="notice">⚠️ 报名免费，提交后需主办方审核，审核通过方为报名成功。</div>
+        <div class="card-item">
+          <div class="title" style="margin-bottom:14px">2026 春季城市马拉松</div>
+          <div class="form-item"><label>姓名 <span class="req">*</span></label><input placeholder="请输入真实姓名"></div>
+          <div class="form-item"><label>手机号 <span class="req">*</span></label><input placeholder="请输入手机号"></div>
+          <div class="form-item"><label>性别 <span class="req">*</span></label><select><option>男</option><option>女</option></select></div>
+          <div class="form-item"><label>证件类型 <span class="req">*</span></label><select><option>居民身份证</option><option>护照</option></select></div>
+          <div class="form-item"><label>证件号码 <span class="req">*</span></label><input placeholder="请输入证件号码"><div class="hint">用于参赛资格核验</div></div>
+          <button class="btn btn-primary" onclick="show('registerSuccess')">提交报名</button>
         </div>
       </div>
 
       <!-- 报名成功 -->
-      <div class="screen" id="s-registerSuccess" data-page-node-id="lCUCzYrcGqjEG8cHXrPQS1">
-        <div class="navbar" data-page-node-id="l2PAGoGqnWXO8gQQdS7LHr"><button class="back" onclick="back()" data-page-node-id="kKzzqxMuoAfwINcWgonJI4">‹</button>报名结果</div>
-        <div class="card-item" style="text-align:center;padding:40px 20px" data-page-node-id="HxE684PSvizEAlhVKLgHSP">
-          <div style="font-size:52px;margin-bottom:14px" data-page-node-id="ZB7hwoPhhIDXjzvIFPlSSW">✅</div>
-          <div class="title" style="font-size:17px;margin-bottom:8px" data-page-node-id="9DotoRXw3UgQGI5UMjYlCx">报名已提交，等待审核</div>
-          <div class="meta" style="margin-bottom:20px" data-page-node-id="aQrFhH3ic8QDJFv9SM9nUb">主办方将在 3 个工作日内完成资格审核，结果会通过消息通知你。</div>
-          <div class="hint-box" data-page-node-id="gMsMaZSlJ86oJk4MMmEQf1">当前状态：<b data-page-node-id="E7PLB78mwRDj5MhgCt830U">待审核</b>（免费报名 · 无需支付）</div>
-          <button class="btn btn-outline" onclick="show('myRegistrations')" data-page-node-id="UcKLpksr2i7wEtsx7fkQnl">查看我的报名</button>
+      <div class="screen" id="s-registerSuccess">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>报名结果</div>
+        <div class="card-item" style="text-align:center;padding:40px 20px">
+          <div style="font-size:52px;margin-bottom:14px">✅</div>
+          <div class="title" style="font-size:17px;margin-bottom:8px">报名已提交，等待审核</div>
+          <div class="meta" style="margin-bottom:20px">主办方将在 3 个工作日内完成资格审核，结果会通过消息通知你。</div>
+          <div class="hint-box">当前状态：<b>待审核</b>（免费报名 · 无需支付）</div>
+          <button class="btn btn-outline" onclick="show('myRegistrations')">查看我的报名</button>
         </div>
       </div>
 
       <!-- 我的报名 -->
-      <div class="screen" id="s-myRegistrations" data-page-node-id="6em6khbyE16IXvyt2AVRO7">
-        <div class="navbar" data-page-node-id="5i8HwwiQqI6jidjfyPKNZE"><button class="back" onclick="back()" data-page-node-id="4rVyy5myZx0y6jCege5GFt">‹</button>我的报名</div>
-        <div class="list-row" onclick="show('regDetail')" data-page-node-id="97HgaxxUtY0FF9Fu7whMBU"><div class="l" data-page-node-id="Lg3AuumNfusXhpOQGmHODB"><span class="t" data-page-node-id="pNFqcz1iK1ZeBuo5eOe8JF">2026 春季城市马拉松</span><span class="s" data-page-node-id="bq8gcRLr0o9pJIYqIzvxAT">报名时间 03-01 10:24</span></div><div class="r" data-page-node-id="6xxzhZ1a4wVVxk6ezBEKJx"><span class="badge b-orange" data-page-node-id="GwZNgAZaXHqXEQPCwNbkFO">待审核</span></div></div>
-        <div class="list-row" onclick="show('regDetail2')" data-page-node-id="6LWDXDMzcajNj3oih6cI1o"><div class="l" data-page-node-id="3CFA6HRhLPxEULG3mN4j23"><span class="t" data-page-node-id="yKq0HQ4wOj8YAlu33Bz9iF">青少年游泳锦标赛</span><span class="s" data-page-node-id="ALq9bI3c6IcF85wbQX4xbS">报名时间 01-20 15:02</span></div><div class="r" data-page-node-id="UYCM30XcsAwjpX1OL25yEt"><span class="badge b-green" data-page-node-id="hDqMqM25Jk4EpMnp2bcFJ4">已通过</span></div></div>
+      <div class="screen" id="s-myRegistrations">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>我的报名</div>
+        <div class="list-row" onclick="show('regDetail')"><div class="l"><span class="t">2026 春季城市马拉松</span><span class="s">报名时间 03-01 10:24</span></div><div class="r"><span class="badge b-orange">待审核</span></div></div>
+        <div class="list-row" onclick="show('regDetail2')"><div class="l"><span class="t">青少年游泳锦标赛</span><span class="s">报名时间 01-20 15:02</span></div><div class="r"><span class="badge b-green">已通过</span></div></div>
       </div>
 
       <!-- 报名详情 -->
-      <div class="screen" id="s-regDetail" data-page-node-id="JBd7DZPxbFYlH7sdE6JvMn">
-        <div class="navbar" data-page-node-id="oN40B2f2UPAQ8BWLAYxWTh"><button class="back" onclick="back()" data-page-node-id="MLXIdWdgonNp5TFjhYt59D">‹</button>报名详情</div>
-        <div class="card-item" data-page-node-id="zRGF4K7ebMXBXIP0XulMCp">
-          <div class="tag-row" data-page-node-id="jzSIU21aWa5bMFqupA0uCJ"><span class="badge b-orange" data-page-node-id="rNNty4ysCR0du07DpqOUaN">待审核</span></div>
-          <div class="title" style="margin-bottom:10px" data-page-node-id="V8gWgCAMKVMg5Yl0qRIbCJ">2026 春季城市马拉松</div>
-          <div class="meta" data-page-node-id="FRCeGGrUr6A1thWiYRxE4e">姓名：张三 &nbsp; 手机：138****8888</div>
-          <div class="meta" data-page-node-id="IMU3bqvyIcjpONAbJRKM7z">性别：男 &nbsp; 证件：居民身份证 3***********</div>
-          <div class="meta" data-page-node-id="ZJztqG4CZShgxA2ta8qPLf">报名时间：2026-03-01 10:24</div>
+      <div class="screen" id="s-regDetail">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>报名详情</div>
+        <div class="card-item">
+          <div class="tag-row"><span class="badge b-orange">待审核</span></div>
+          <div class="title" style="margin-bottom:10px">2026 春季城市马拉松</div>
+          <div class="meta">姓名：张三 &nbsp; 手机：138****8888</div>
+          <div class="meta">性别：男 &nbsp; 证件：居民身份证 3***********</div>
+          <div class="meta">报名时间：2026-03-01 10:24</div>
         </div>
-        <div class="hint-box" data-page-node-id="z8qU0HtJ2tUiFW1fwWQxDL">📢 你的报名正在等待主办方审核，请留意通知。</div>
+        <div class="hint-box">📢 你的报名正在等待主办方审核，请留意通知。</div>
       </div>
-      <div class="screen" id="s-regDetail2" data-page-node-id="JDhNQmymteYBS2j5RCbzMG">
-        <div class="navbar" data-page-node-id="kWBzzubNkYUkfmiDImnWht"><button class="back" onclick="back()" data-page-node-id="Ot9Y41COw1XLeToFpy389e">‹</button>报名详情</div>
-        <div class="card-item" data-page-node-id="XjMjILgSFFXlTgc5THlLUU">
-          <div class="tag-row" data-page-node-id="hfQyvKD1ebcw8c7hh1aEAP"><span class="badge b-green" data-page-node-id="tdee8IU6gtpAsILUh8l2Dc">已通过</span></div>
-          <div class="title" style="margin-bottom:10px" data-page-node-id="1H7oTMo3HXapG3kKRuxIoB">青少年游泳锦标赛</div>
-          <div class="meta" data-page-node-id="RKAwVN4vX2FOvFdZD3Cafy">姓名：张三 &nbsp; 手机：138****8888</div>
-          <div class="meta" data-page-node-id="lwNIqBzrQnf6rPcJXp42L8">报名时间：2026-01-20 15:02 &nbsp; 审核通过：01-21 09:10</div>
+      <div class="screen" id="s-regDetail2">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>报名详情</div>
+        <div class="card-item">
+          <div class="tag-row"><span class="badge b-green">已通过</span></div>
+          <div class="title" style="margin-bottom:10px">青少年游泳锦标赛</div>
+          <div class="meta">姓名：张三 &nbsp; 手机：138****8888</div>
+          <div class="meta">报名时间：2026-01-20 15:02 &nbsp; 审核通过：01-21 09:10</div>
         </div>
-        <button class="btn btn-primary" onclick="show('ranking')" data-page-node-id="lmp0Q6PVAjNjnKd6HALiHP">查看成绩排名</button>
+        <button class="btn btn-primary" onclick="show('ranking')">查看成绩排名</button>
       </div>
 
       <!-- 排名 -->
-      <div class="screen" id="s-ranking" data-page-node-id="Spxki5ZvZEE9Cafv28YHVZ">
-        <div class="navbar" data-page-node-id="HEpLbhNq45IEvH2onu39l2"><button class="back" onclick="back()" data-page-node-id="a64R3uva55JOYiuh8j1mLj">‹</button>成绩排名</div>
-        <div style="display:flex;gap:8px;margin-bottom:14px" data-page-node-id="86FLCVSyee9ZXfO0TCFKsB">
-          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:var(--primary);color:#fff;font-weight:600" data-page-node-id="bJzLL6nNyDXDfBsUzC52Li">男子全马</div>
-          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600" data-page-node-id="TD6w0GxpH2eSkuEi0AwX23">女子全马</div>
+      <div class="screen" id="s-ranking">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>成绩排名</div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:var(--primary);color:#fff;font-weight:600">男子全马</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">女子全马</div>
         </div>
-        <div class="hint-box" data-page-node-id="IsbdnELrXW5ceYSUF4YUfQ">🏅 按完赛用时排名，用时越短靠前；单项同用时并列同名次。</div>
-        <div class="rank-list" data-page-node-id="ruHccSrX5oXYFVtZrBdkKR">
-          <div class="rank-item" data-page-node-id="bTbs5ZqMGqKQ1PWVGHHLvb"><div class="rank-no top1" data-page-node-id="NzCVtb44jVGJ6NeVZ2C5HB">1</div><div class="rank-info" data-page-node-id="syq9XP6o3LCsjCdEnQHBQ1"><div class="nm" data-page-node-id="glps3O6FMaoqm2Q9cX553Q">李强</div><div class="ev" data-page-node-id="mixlUBO4BWLGlqEEb6hZcs">男子全马</div></div><div class="rank-score" data-page-node-id="oSYAiJTnL0PSByDsUnDoeU">2:18:42</div></div>
-          <div class="rank-item" data-page-node-id="jCEDiyCJ02gm75xBg95VjF"><div class="rank-no top2" data-page-node-id="05yUTjEv58fghXujbFCGCr">2</div><div class="rank-info" data-page-node-id="yfSEjIwBpkqNqVrDhiCwgc"><div class="nm" data-page-node-id="9fK69iyqD0an6zcRDvvoI0">王磊</div><div class="ev" data-page-node-id="eIeLZVrCTVbGL0kXRAyWRt">男子全马</div></div><div class="rank-score" data-page-node-id="8yUixKRFbyIO0bh5sHhU0n">2:21:09</div></div>
-          <div class="rank-item" data-page-node-id="soyduqRf1he9bn45zY28Xo"><div class="rank-no top2" data-page-node-id="B5LAsv6RpqVcWyQd6Qr3jU">2</div><div class="rank-info" data-page-node-id="mMswRi3L1FefrFblmNJrC6"><div class="nm" data-page-node-id="8PykXIoiNJebJYC4qrCbAs">赵鹏</div><div class="ev" data-page-node-id="1RoRstneSxAVCrDShVbsNr">男子全马 · 并列</div></div><div class="rank-score" data-page-node-id="VJOVTUfPYde3jGT8olybrE">2:21:09</div></div>
-          <div class="rank-item" data-page-node-id="4txq3d3gFMWq4U9WXIgdhH"><div class="rank-no" data-page-node-id="SWqOwwafeqZlHxGvrvJxFn">4</div><div class="rank-info" data-page-node-id="mZthGqN3WfEutDbfWMChlz"><div class="nm" data-page-node-id="c6Nd8xEiNmdarJjKHE40tr">刘洋</div><div class="ev" data-page-node-id="l4oNx5MpQm1IHSFqaqhC4Q">男子全马</div></div><div class="rank-score" data-page-node-id="j8G5ApQEHelL7qAJ40qDFi">2:24:55</div></div>
-          <div class="rank-item" style="background:#fff7ed" data-page-node-id="6cPn4saEAsDsNhkHFL6I3r"><div class="rank-no" data-page-node-id="wLTbfvm3BExCxNwG19CdZq">18</div><div class="rank-info" data-page-node-id="GlbVPcIwPslRRQQz15NeAh"><div class="nm" data-page-node-id="cr2gwlhzT43JRS5pMiVLII">张三</div><div class="ev" data-page-node-id="7DfNO8c4jAOwBVgDJqu25Y">男子全马 · 我</div></div><div class="rank-score" data-page-node-id="2Xlby414JjxTIYEEJiR2vR">2:58:13</div></div>
+        <div class="hint-box">🏅 按完赛用时排名，用时越短靠前；单项同用时并列同名次。</div>
+        <div class="rank-list">
+          <div class="rank-item"><div class="rank-no top1">1</div><div class="rank-info"><div class="nm">李强</div><div class="ev">男子全马</div></div><div class="rank-score">2:18:42</div></div>
+          <div class="rank-item"><div class="rank-no top2">2</div><div class="rank-info"><div class="nm">王磊</div><div class="ev">男子全马</div></div><div class="rank-score">2:21:09</div></div>
+          <div class="rank-item"><div class="rank-no top2">2</div><div class="rank-info"><div class="nm">赵鹏</div><div class="ev">男子全马 · 并列</div></div><div class="rank-score">2:21:09</div></div>
+          <div class="rank-item"><div class="rank-no">4</div><div class="rank-info"><div class="nm">刘洋</div><div class="ev">男子全马</div></div><div class="rank-score">2:24:55</div></div>
+          <div class="rank-item" style="background:#fff7ed"><div class="rank-no">18</div><div class="rank-info"><div class="nm">张三</div><div class="ev">男子全马 · 我</div></div><div class="rank-score">2:58:13</div></div>
         </div>
-        <div class="notice" style="margin-top:14px" data-page-node-id="Ya6Tz9dnPC422ef20yzBkz">第 2、3 名成绩相同（2:21:09），并列处理，下一名次为第 4 名。</div>
+        <div class="notice" style="margin-top:14px">第 2、3 名成绩相同（2:21:09），并列处理，下一名次为第 4 名。</div>
       </div>
 
       <!-- 资讯列表 -->
-      <div class="screen" id="s-newsList" data-page-node-id="7u0hvnzdN13qjB0lH3aFhG">
-        <div class="navbar" data-page-node-id="7U21aXlS7zQEKCeQtCtSNv"><button class="back" onclick="back()" data-page-node-id="xLMsdnyIcP1ad2eTEa9ZZP">‹</button>赛事资讯</div>
-        <div class="card-item" onclick="show('newsDetail1')" data-page-node-id="mDD4DtSWGUhwFZj6RHVRH4"><div class="tag-row" data-page-node-id="84xGDYYIfrG9t9UkYKNEey"><span class="chip blue" data-page-node-id="ASy03PF0x8o7q43FxJ8EEW">赛事通知</span></div><div class="title" data-page-node-id="YgXTf45nBSFNiHlE9RpNEE">2026 春季城市马拉松参赛须知</div><div class="meta" data-page-node-id="FEpL2keMAT9hHPAZpAc2YY">02-28 · 阅读 1.2k</div></div>
-        <div class="card-item" onclick="show('newsDetail2')" data-page-node-id="Xjn3U60ACyFTDeaePX5lsJ"><div class="tag-row" data-page-node-id="7sRW1j1w5LnB3ytjsFpHBU"><span class="chip blue" data-page-node-id="qD3kg88fXvxmqeQggc6SEa">比赛预告</span></div><div class="title" data-page-node-id="0kRMEarkudb9jtROtzCMsG">职工羽毛球团体赛抽签分组出炉</div><div class="meta" data-page-node-id="QRljbdHWyeRSLXWw0upeFB">02-25 · 阅读 860</div></div>
-        <div class="card-item" onclick="show('newsDetail3')" data-page-node-id="LBfhzpfew9hMAEvAQzOXnW"><div class="tag-row" data-page-node-id="HEYE5TNweyLqpDeFui9daI"><span class="chip blue" data-page-node-id="QsoWKU46cDI0YR9gPxbRzf">图文资讯</span></div><div class="title" data-page-node-id="Bw31TAdpQAS4QHBZhZxIXP">青少年游泳锦标赛圆满落幕</div><div class="meta" data-page-node-id="NtnhC5xBN5Lqi4jEhwgDJ2">02-12 · 阅读 2.3k</div></div>
+      <div class="screen" id="s-newsList">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛事资讯</div>
+        <div class="thumb-row" onclick="show('newsDetail1')">
+          <div class="thumb cv-news1">📣</div>
+          <div class="tr-info"><div class="tr-title">2026 春季城市马拉松参赛须知</div><div class="tr-meta">赛事通知 · 02-28 · 阅读 1.2k</div></div>
+        </div>
+        <div class="thumb-row" onclick="show('newsDetail2')">
+          <div class="thumb cv-news2">🎯</div>
+          <div class="tr-info"><div class="tr-title">职工羽毛球团体赛抽签分组出炉</div><div class="tr-meta">比赛预告 · 02-25 · 阅读 860</div></div>
+        </div>
+        <div class="thumb-row" onclick="show('newsDetail3')">
+          <div class="thumb cv-news3">🏊</div>
+          <div class="tr-info"><div class="tr-title">青少年游泳锦标赛圆满落幕</div><div class="tr-meta">图文资讯 · 02-12 · 阅读 2.3k</div></div>
+        </div>
       </div>
 
       <!-- 资讯详情 1 -->
-      <div class="screen" id="s-newsDetail1" data-page-node-id="J0WsQv2TX21XHYwtqSRVS9">
-        <div class="navbar" data-page-node-id="A5NzjGdMHTLIPMTGTJzX7u"><button class="back" onclick="back()" data-page-node-id="Z2GqvDvLbTDZjJMabEWniK">‹</button>资讯详情</div>
-        <div class="news-cover" data-page-node-id="yVNr95qVIaZAwqktSJMHbd"><h3 data-page-node-id="JJyXCodo3BZoc47mAInycR">2026 春季城市马拉松参赛须知</h3></div>
-        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px" data-page-node-id="aFMU07wGWOhjoDf2t64UbB">发布于 2026-02-28 · 阅读 1.2k · 来源：赛事组委会</div>
-        <div class="news-body" data-page-node-id="ZKIyL53U5RuhpgdudoHHMg">
-          <p data-page-node-id="KHCcWEyMFtnSuTBaJ6GBSq">各位参赛选手，2026 春季城市马拉松将于 <b data-page-node-id="FeBN9TQcHT7vWdorWIiUJo">3 月 15 日 08:00</b> 在滨江体育中心鸣枪开跑。为确保顺利参赛，请仔细阅读以下须知：</p>
-          <p data-page-node-id="BGEI6b8V1xvB8pTQztwj0k"><b data-page-node-id="dGiAIzdURHvQShNCh9LPKH">一、报名与审核</b>：本赛事免费报名，报名截止时间为 3 月 10 日 20:00，限额 500 人。提交报名后由组委会审核参赛资格，审核结果将以站内消息通知，请保持手机畅通。</p>
-          <p data-page-node-id="P0QAYGP6SAVKx28CzHRcrF"><b data-page-node-id="iYxov2mefxWs41Fd1m0f8x">二、领物安排</b>：3 月 13—14 日 10:00-20:00 凭报名成功通知及身份证件到滨江体育中心东门领取参赛包（号码布、计时芯片、参赛服）。</p>
-          <p data-page-node-id="SPaD78seePVVQnxeGbzjWi"><b data-page-node-id="uMrYKv5sA5WUGsjnFEdD9j">三、成绩与排名</b>：完赛成绩按计时芯片净用时排名，用时越短名次越靠前；相同用时并列同名次。</p>
-          <p data-page-node-id="T3VHAYJVZ1uMd6bnCzjBLU">预祝各位跑出好成绩！</p>
+      <div class="screen" id="s-newsDetail1">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
+        <div class="news-cover" style="background:linear-gradient(135deg,#312e81,#6366f1)"><h3>2026 春季城市马拉松参赛须知</h3></div>
+        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-28 · 阅读 1.2k · 来源：赛事组委会</div>
+        <div class="news-body">
+          <p>各位参赛选手，2026 春季城市马拉松将于 <b>3 月 15 日 08:00</b> 在滨江体育中心鸣枪开跑。为确保顺利参赛，请仔细阅读以下须知：</p>
+          <p><b>一、报名与审核</b>：本赛事免费报名，报名截止时间为 3 月 10 日 20:00，限额 500 人。提交报名后由组委会审核参赛资格，审核结果将以站内消息通知，请保持手机畅通。</p>
+          <p><b>二、领物安排</b>：3 月 13—14 日 10:00-20:00 凭报名成功通知及身份证件到滨江体育中心东门领取参赛包（号码布、计时芯片、参赛服）。</p>
+          <p><b>三、成绩与排名</b>：完赛成绩按计时芯片净用时排名，用时越短名次越靠前；相同用时并列同名次。</p>
+          <p>预祝各位跑出好成绩！</p>
         </div>
       </div>
 
       <!-- 资讯详情 2 -->
-      <div class="screen" id="s-newsDetail2" data-page-node-id="JRTSCwlMN87Spj0HEZUCKX">
-        <div class="navbar" data-page-node-id="ly0uyolzA6ojiSpNdWKq60"><button class="back" onclick="back()" data-page-node-id="iXCcdEXmgBshgwAEyjFUfz">‹</button>资讯详情</div>
-        <div class="news-cover" style="background:linear-gradient(120deg,#ff7a00,#f59e0b)" data-page-node-id="ru7sEzwBqK5HnVXGoJCZgz"><h3 data-page-node-id="owMlYjJzY9I7IJvDMPvHUk">职工羽毛球团体赛抽签分组出炉</h3></div>
-        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px" data-page-node-id="E2xnXfcYQ74Tqz6ucunFOc">发布于 2026-02-25 · 阅读 860 · 来源：市总工会</div>
-        <div class="news-body" data-page-node-id="WiVnjsVJXxy9xAqk6QjkU6">
-          <p data-page-node-id="WfOONu7FgS9M0B3NBQ8KUn">职工羽毛球团体赛抽签分组已于昨日完成，共 <b data-page-node-id="w6H7FPt3Bc36ZFdxdHwVN8">12 支队伍</b> 参与，分为 A、B 两组进行小组赛，每组前四名晋级淘汰赛。</p>
-          <p data-page-node-id="TDKFBLl0jVPE009zAHE7e7"><b data-page-node-id="KCww3DBiPt8i5Fp2Q3NKPA">A 组</b>：一厂、三厂、机关一队、财务联队、研发中心、后勤联队。</p>
-          <p data-page-node-id="7dVWzX6RLXEBnhLOrrTq9o"><b data-page-node-id="rqsRfPGYDLIWnqDcwUpt64">B 组</b>：二厂、四厂、机关二队、市场联队、质量中心、安全联队。</p>
-          <p data-page-node-id="2c6B8894J5lTEN3RULKEIO">团体赛设男单、女单、混双三个积分项，各队积分累加排名。请各队于 3 月 15 日前完成报名确认。</p>
+      <div class="screen" id="s-newsDetail2">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
+        <div class="news-cover" style="background:linear-gradient(135deg,#9d174d,#ec4899)"><h3>职工羽毛球团体赛抽签分组出炉</h3></div>
+        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-25 · 阅读 860 · 来源：市总工会</div>
+        <div class="news-body">
+          <p>职工羽毛球团体赛抽签分组已于昨日完成，共 <b>12 支队伍</b> 参与，分为 A、B 两组进行小组赛，每组前四名晋级淘汰赛。</p>
+          <p><b>A 组</b>：一厂、三厂、机关一队、财务联队、研发中心、后勤联队。</p>
+          <p><b>B 组</b>：二厂、四厂、机关二队、市场联队、质量中心、安全联队。</p>
+          <p>团体赛设男单、女单、混双三个积分项，各队积分累加排名。请各队于 3 月 15 日前完成报名确认。</p>
         </div>
       </div>
 
       <!-- 资讯详情 3 -->
-      <div class="screen" id="s-newsDetail3" data-page-node-id="9wgpPRDsSbrYK8BnzsZT0b">
-        <div class="navbar" data-page-node-id="6NxUTTjA3YOLK5PacsPaQB"><button class="back" onclick="back()" data-page-node-id="BqKiaxUE5MhccxhQKqdeiE">‹</button>资讯详情</div>
-        <div class="news-cover" style="background:linear-gradient(120deg,#16a34a,#0d9488)" data-page-node-id="EI1dKZokW7vHFjH7cXnMdh"><h3 data-page-node-id="wBkoOIoa6cV3lQ4iUiwxMT">青少年游泳锦标赛圆满落幕</h3></div>
-        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px" data-page-node-id="FKu6CKWqNXp4yH7W4xwjGH">发布于 2026-02-12 · 阅读 2.3k · 来源：市体育局</div>
-        <div class="news-body" data-page-node-id="EvN20KN8n1zj0HyAKuLcQq">
-          <p data-page-node-id="YPd23w9hY5JmEgFSkouFcg">为期两天的青少年游泳锦标赛在水上运动中心圆满落幕，来自全市 18 支代表队的 200 余名小将参赛。</p>
-          <p data-page-node-id="M5QygLIjV3RDAt2bkL7daA">比赛设 50 米、100 米自由泳、蛙泳、仰泳等项目，成绩按用时排名，多名选手打破赛会纪录。</p>
-          <p data-page-node-id="fzO3NzRfbCD35MHugoQt2D">最终各组别名次已在小程序「成绩排名」栏目公布，可随时查看。</p>
+      <div class="screen" id="s-newsDetail3">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
+        <div class="news-cover" style="background:linear-gradient(135deg,#065f46,#10b981)"><h3>青少年游泳锦标赛圆满落幕</h3></div>
+        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-12 · 阅读 2.3k · 来源：市体育局</div>
+        <div class="news-body">
+          <p>为期两天的青少年游泳锦标赛在水上运动中心圆满落幕，来自全市 18 支代表队的 200 余名小将参赛。</p>
+          <p>比赛设 50 米、100 米自由泳、蛙泳、仰泳等项目，成绩按用时排名，多名选手打破赛会纪录。</p>
+          <p>最终各组别名次已在小程序「成绩排名」栏目公布，可随时查看。</p>
         </div>
       </div>
     </div>
 
-    <div class="tabbar" id="tabbar" data-page-node-id="s4RYqRmAc0Y2qBBpd3Nbjw">
-      <div class="tab active" id="tab-home" onclick="switchTab('home')" data-page-node-id="xOExbBgkM2qgJt6OyaDHzx"><span class="ico" data-page-node-id="tWTYdZghvmQyzXyHKrC1CF">🏠</span>首页</div>
-      <div class="tab" id="tab-events" onclick="switchTab('events')" data-page-node-id="gLLrDtF32L3bGNlWQIWeZf"><span class="ico" data-page-node-id="HBCFCf37of0OO8b5rv8lwq">🏃</span>赛事</div>
-      <div class="tab" id="tab-calendar" onclick="switchTab('calendar')" data-page-node-id="Q3LnHdOadgwbiGHaVcqxjW"><span class="ico" data-page-node-id="Clb3RBU2ARpqF48jAq3uA8">📅</span>日历</div>
-      <div class="tab" id="tab-mine" onclick="switchTab('mine')" data-page-node-id="8K9V5ORlhoVSxC5B9n046C"><span class="ico" data-page-node-id="iE2SeVe2cEU5p2sLE00GMV">👤</span>我的</div>
+    <div class="tabbar" id="tabbar">
+      <div class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ico">🏠</span>首页</div>
+      <div class="tab" id="tab-events" onclick="switchTab('events')"><span class="ico">🏃</span>赛事</div>
+      <div class="tab" id="tab-calendar" onclick="switchTab('calendar')"><span class="ico">📅</span>日历</div>
+      <div class="tab" id="tab-mine" onclick="switchTab('mine')"><span class="ico">👤</span>我的</div>
     </div>
-    <div class="home-indicator" data-page-node-id="mW8rRBmVUIH9GIUhWDDiDU"></div>
+    <div class="home-indicator"></div>
   </div>
 </div>
 
 <!-- ================= PC 管理后台 ================= -->
-<div class="pc" id="pcWrap" data-page-node-id="qU1zWzqtY2hoPPHZfMOWeP">
-  <div class="pc-chrome" data-page-node-id="QWhB46mc2hErwnX2oXOE1n">
-    <div class="pc-dots" data-page-node-id="PKlBKLT56WjG4OhxRHcd0E"><span class="r" data-page-node-id="KcfBEW5n12ZwBmdGTcl1lR"></span><span class="y" data-page-node-id="6KrCvto7mFA6RLtKE5jfvl"></span><span class="g" data-page-node-id="LaHUG21yDrzxxLqC4lq2II"></span></div>
-    <div class="pc-addr" data-page-node-id="FsJjOyMHeKwkRDE3RIzwGM">🔒 admin.sports.example.com/dashboard</div>
+<div class="pc" id="pcWrap">
+  <div class="pc-chrome">
+    <div class="pc-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+    <div class="pc-addr">🔒 admin.sports.example.com/dashboard</div>
   </div>
-  <div class="pc-body" data-page-node-id="8eeSnWaAARFO43WjobvN7F">
-    <div class="pc-sidebar" data-page-node-id="QrEyieqW9wKMc5GxkEbM0p">
-      <div class="pc-logo" data-page-node-id="TGA4TANVIXx4JkoBPMCdGE"><div class="dot" data-page-node-id="oLxGb7JH97xc7OhoTubzat">🏆</div>赛事管理后台</div>
-      <div class="pc-menu" id="pcMenu" data-page-node-id="nkMMBU6PpEvA0KWI7IDHBS">
-        <div class="mi active" data-page="dashboard" onclick="adminNav('dashboard')" data-page-node-id="xDGlDmIJEzb23xEq1LYGUM">📊 仪表盘</div>
-        <div class="mi" data-page="competitions" onclick="adminNav('competitions')" data-page-node-id="vDb2mDkEsibHeURBLLcOJ8">🏃 赛事管理</div>
-        <div class="mi" data-page="news" onclick="adminNav('news')" data-page-node-id="6Idt06J20xB3tmnbIf2Lfw">📰 资讯管理</div>
-        <div class="mi" data-page="audit" onclick="adminNav('audit')" data-page-node-id="0a9TK6XMWH8feWlrrG7EEd">📋 报名审核 <span class="badge b-orange" style="margin-left:auto" data-page-node-id="JXyKYXl0ipa89RK5F2sSC2">46</span></div>
-        <div class="mi" data-page="results" onclick="adminNav('results')" data-page-node-id="zWzjojqphUGAzFTYMcKjub">✏️ 成绩管理</div>
-        <div class="mi" data-page="ranking" onclick="adminNav('ranking')" data-page-node-id="xW9ZJ37hxlqxrpZbv7dkSb">🏅 排名管理</div>
+  <div class="pc-body">
+    <div class="pc-sidebar">
+      <div class="pc-logo"><div class="dot">🏆</div>赛事管理后台</div>
+      <div class="pc-menu" id="pcMenu">
+        <div class="mi active" data-page="dashboard" onclick="adminNav('dashboard')">📊 仪表盘</div>
+        <div class="mi" data-page="competitions" onclick="adminNav('competitions')">🏃 赛事管理</div>
+        <div class="mi" data-page="news" onclick="adminNav('news')">📰 资讯管理</div>
+        <div class="mi" data-page="audit" onclick="adminNav('audit')">📋 报名审核 <span class="badge b-orange" style="margin-left:auto">46</span></div>
+        <div class="mi" data-page="results" onclick="adminNav('results')">✏️ 成绩管理</div>
+        <div class="mi" data-page="ranking" onclick="adminNav('ranking')">🏅 排名管理</div>
       </div>
     </div>
-    <div class="pc-main" data-page-node-id="7gF0s0qp4bkB4FlrkGIoMw">
-      <div class="topbar" data-page-node-id="1pEynKYWZKyOLMbYbU5SCA">
-        <h2 id="adminTitle" data-page-node-id="6td2w5jR5YW3o1aKBpGBuZ">仪表盘</h2>
-        <div class="user" data-page-node-id="e00dujqyObXHuLjbfkrMYA">👤 管理员 · 运营</div>
+    <div class="pc-main">
+      <div class="topbar">
+        <h2 id="adminTitle">仪表盘</h2>
+        <div class="user">👤 管理员 · 运营</div>
       </div>
 
-      <div class="pc-admin-page show" id="pg-dashboard" data-page-node-id="b8A3GPC2ZIAwTCpPiFxHcG">
-        <div class="pc-stat-grid" data-page-node-id="RRrCyZLcJVUm3TNpT60yao">
-          <div class="pc-stat" data-page-node-id="px6Cp7PBQFZIvutk4Xf5tD"><div class="n" data-page-node-id="gbTLDHcWbBk6NFDg5Q0ein">328</div><div class="l" data-page-node-id="poBglvp2yC9JCH8AROEeQh">累计报名</div><div class="trend" data-page-node-id="jEeLrgXOTZDyR6qCDSWT2U">↑ 本周 +32</div></div>
-          <div class="pc-stat" data-page-node-id="oZhel0Ux7GVJn4n5R1Cxs2"><div class="n" data-page-node-id="dUw1nYUOlIaNh7y4ZqCPNV">46</div><div class="l" data-page-node-id="aUl89xJOuBpAPoEEpSDn9M">待审核</div><div class="trend" style="color:var(--orange)" data-page-node-id="aZGl2pVuhvka8c8NdUXdPb">需处理</div></div>
-          <div class="pc-stat" data-page-node-id="5AlcUfR0J1kahHqXbLnyoA"><div class="n" data-page-node-id="TLbd296HLJxdaI0FGWM9bt">12</div><div class="l" data-page-node-id="PgNGchq8BmkC4EKvS3Uyhr">进行中赛事</div><div class="trend" data-page-node-id="WlJDAFvog83ajWpzwQWrsS">正常</div></div>
-          <div class="pc-stat" data-page-node-id="I9GqUGZfLlhMrrBNn0MhSZ"><div class="n" data-page-node-id="4Dsjd90ndR4Dtovh0ypiJY">3</div><div class="l" data-page-node-id="tvW6rl6Sen4HINeyhSoPUv">待录入成绩</div><div class="trend" style="color:var(--red)" data-page-node-id="NxPbT5OoItYmuZ4QSgbpzE">待办</div></div>
+      <div class="pc-admin-page show" id="pg-dashboard">
+        <div class="pc-stat-grid">
+          <div class="pc-stat"><div class="n">328</div><div class="l">累计报名</div><div class="trend">↑ 本周 +32</div></div>
+          <div class="pc-stat"><div class="n">46</div><div class="l">待审核</div><div class="trend" style="color:var(--orange)">需处理</div></div>
+          <div class="pc-stat"><div class="n">12</div><div class="l">进行中赛事</div><div class="trend">正常</div></div>
+          <div class="pc-stat"><div class="n">3</div><div class="l">待录入成绩</div><div class="trend" style="color:var(--red)">待办</div></div>
         </div>
-        <div class="pc-panel" data-page-node-id="so63nZHlUWCbYM3bb2wPsA">
-          <div class="panel-head" data-page-node-id="cta6eD7uEL2M3ReSlyU8iT"><h3 data-page-node-id="BHWKx5vuHyIefn6vbmdJL5">待办事项</h3><span class="link-btn" onclick="adminNav('audit')" data-page-node-id="t1U7qqEnxei5z533mN2tYa">去审核 ›</span></div>
-          <table class="pc-table" data-page-node-id="STGQ6D43BBCCudmKwWxasF">
-            <thead data-page-node-id="BgNdOmXTwMDONLRY1njbcK"><tr data-page-node-id="qMiOpOlLk3PMIJu7o8b4Jz"><th data-page-node-id="uHSwP2BhSNUh9jJkd0eu2Q">事项</th><th data-page-node-id="Q6wh2IcwW8FBKolBHXBYxu">关联赛事</th><th data-page-node-id="lW8UPdHco8p2hotbcMlarD">时间</th><th data-page-node-id="t2EW5aMN30FRN2vswAOTx6">状态</th></tr></thead>
-            <tbody data-page-node-id="QkHHGfy24iMMJGVafFObIU">
-              <tr data-page-node-id="4IsfDJdig90HpVRzea34qU"><td data-page-node-id="vD5x5iOi9SRhJR5vF8Cf7m">报名审核</td><td data-page-node-id="G2RnUw8QHujbZyDrRp7Slo">2026 春季城市马拉松</td><td class="muted" data-page-node-id="E6rt0GTcirq81NG6GurHos">03-01 10:24</td><td data-page-node-id="xkXEKTOnLiL13L8IE3ZETh"><span class="badge b-orange" data-page-node-id="ZE55MTlqMShX2To3lPPNgC">待审核</span></td></tr>
-              <tr data-page-node-id="gzPIwJR35JmRz9EnegVYwm"><td data-page-node-id="gJ4BcbBA6weNmSfDE6wJHy">成绩录入</td><td data-page-node-id="ppt6hZlJe7xCzs7bqS0EBe">青少年游泳锦标赛</td><td class="muted" data-page-node-id="oD4KGktiFuorgFo1bh8APv">02-10 18:00</td><td data-page-node-id="jdvLZmK67DqhHjv3rTbiJv"><span class="badge b-red" data-page-node-id="yEIMeaoaZjEOFgpCZLvNIo">待录入</span></td></tr>
-              <tr data-page-node-id="3iCjJUMMMANcPdR8QaxcgU"><td data-page-node-id="m7nW7yc6hxT4hJUhTUwzpp">排名重算</td><td data-page-node-id="v6aWEHkwvAzLzcVon0SwCN">青少年游泳锦标赛</td><td class="muted" data-page-node-id="BrOkLU7ZhmxzgvpFEpAyzE">02-11 09:00</td><td data-page-node-id="DorsHKRpxSxnQq9nsV8QHK"><span class="badge b-gray" data-page-node-id="eHReKiGCZBUdRBTVJPFGaZ">已完成</span></td></tr>
+        <div class="pc-panel">
+          <div class="panel-head"><h3>待办事项</h3><span class="link-btn" onclick="adminNav('audit')">去审核 ›</span></div>
+          <table class="pc-table">
+            <thead><tr><th>事项</th><th>关联赛事</th><th>时间</th><th>状态</th></tr></thead>
+            <tbody>
+              <tr><td>报名审核</td><td>2026 春季城市马拉松</td><td class="muted">03-01 10:24</td><td><span class="badge b-orange">待审核</span></td></tr>
+              <tr><td>成绩录入</td><td>青少年游泳锦标赛</td><td class="muted">02-10 18:00</td><td><span class="badge b-red">待录入</span></td></tr>
+              <tr><td>排名重算</td><td>青少年游泳锦标赛</td><td class="muted">02-11 09:00</td><td><span class="badge b-gray">已完成</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="pc-admin-page" id="pg-competitions" data-page-node-id="ASigiVpVnuKwgzHvFHtG1s">
-        <div class="pc-panel" data-page-node-id="jF8yo97zhrfvDCMrsATxx8">
-          <div class="panel-head" data-page-node-id="GmCFsqzCiFCCLhj2Q2soSP"><h3 data-page-node-id="kuaj3FTrXX9LRSB0LDlDGK">赛事列表</h3><button class="btn btn-primary btn-sm" data-page-node-id="hRRX8cvJo1UuntrhRiKsAi">+ 新建赛事</button></div>
-          <table class="pc-table" data-page-node-id="jjhnZbKOoGXqzF7vrxTqFu">
-            <thead data-page-node-id="h0Q4dxzx3DdN6prPTlFJbV"><tr data-page-node-id="0mAkomRmIOseNdrsTqYZJ3"><th data-page-node-id="6V8eBhpUEmyITHzbAzSUk2">赛事名称</th><th data-page-node-id="eZ0RZp3prc0mdYWq6CHaZ5">分类</th><th data-page-node-id="56AocDoJMxBzHtCTvoAS0W">报名截止</th><th data-page-node-id="8mR8UmdaV1Une9i0HcBtCy">人数</th><th data-page-node-id="fJ8L2ytvm4K5fGQrsJEEgh">排名规则</th><th data-page-node-id="53ES2qX4oBSgvMrfDPpfed">状态</th><th data-page-node-id="rEw0mD6ptFS8tXCsHdABmc">操作</th></tr></thead>
-            <tbody data-page-node-id="K1HzIqTNQ4WDUMMcOWh8mN">
-              <tr data-page-node-id="pZG3UCYWY20ZYdHAgo0FB4"><td data-page-node-id="8mNx4vNqOKPnY6ewWZWt5B">2026 春季城市马拉松</td><td data-page-node-id="9Y52JuGBfWTtmFLRTBIE7s">马拉松</td><td class="muted" data-page-node-id="h6CAo4x8DUPlgAV43XHztX">03-10 20:00</td><td data-page-node-id="m3E1Yqqe2WEUSFyCuwOPRU">328/500</td><td data-page-node-id="BwE07drLegiFYPVZESPfYO">按用时</td><td data-page-node-id="tQXjwfDm7nItK0qkVKl3Aj"><span class="badge b-green" data-page-node-id="9UFAWay9G5JUXe0FcQeDNG">报名中</span></td><td data-page-node-id="nStOjJ5hScncOXavxiphRW"><span class="link-btn" data-page-node-id="vznqZ33nnUdDTZ7nljsBy2">编辑</span></td></tr>
-              <tr data-page-node-id="dnSY1K57oNFPZ2PgUUWIHE"><td data-page-node-id="YhZ9ZvOKoRZ84Ta3XrnDF3">职工羽毛球团体赛</td><td data-page-node-id="712Lao2GWUWCfQI6BIzAg4">球类</td><td class="muted" data-page-node-id="vIXrQpJyBPScZPJXykDJ4h">03-15 18:00</td><td data-page-node-id="2c6MGcqRhvvjaP0ZnsSsrB">12/16</td><td data-page-node-id="QpDSAEmYzGTicakorId0RV">多项积分</td><td data-page-node-id="cELUARgelw6kTjAqayzTbd"><span class="badge b-green" data-page-node-id="NJDT35snkLmGSYoPViMdxB">报名中</span></td><td data-page-node-id="21dhpaD9NCRMhncwe7jiuP"><span class="link-btn" data-page-node-id="v18gZkSywkfHLNY7AJNH14">编辑</span></td></tr>
-              <tr data-page-node-id="asa4rOCO0UX4LKEynMRAIF"><td data-page-node-id="Oa5czyJgSCdRHL4Y5yZzmb">青少年游泳锦标赛</td><td data-page-node-id="9aC3GEwvUuZVvvt1nkgOaT">游泳</td><td class="muted" data-page-node-id="z8TNFGAsb1Wt2DBoZ3JQih">01-25 20:00</td><td data-page-node-id="zJQQmc5jc1te7bMUd2uHjE">200/200</td><td data-page-node-id="Adk4aw20wwbdNI4VTP3xHp">按用时</td><td data-page-node-id="V7AnPAydTKSZa9DFFMWljl"><span class="badge b-gray" data-page-node-id="83HBzATydXNwOoZw2Q8kIz">已结束</span></td><td data-page-node-id="DBQe99MV6FOEPVf0O4rwF7"><span class="link-btn" data-page-node-id="sGHpsDlMCoSzHfFGlD7eEQ">编辑</span></td></tr>
+      <div class="pc-admin-page" id="pg-competitions">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>赛事列表</h3><button class="btn btn-primary btn-sm">+ 新建赛事</button></div>
+          <table class="pc-table">
+            <thead><tr><th>赛事名称</th><th>分类</th><th>报名截止</th><th>人数</th><th>排名规则</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>2026 春季城市马拉松</td><td>马拉松</td><td class="muted">03-10 20:00</td><td>328/500</td><td>按用时</td><td><span class="badge b-green">报名中</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>职工羽毛球团体赛</td><td>球类</td><td class="muted">03-15 18:00</td><td>12/16</td><td>多项积分</td><td><span class="badge b-green">报名中</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>青少年游泳锦标赛</td><td>游泳</td><td class="muted">01-25 20:00</td><td>200/200</td><td>按用时</td><td><span class="badge b-gray">已结束</span></td><td><span class="link-btn">编辑</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="pc-admin-page" id="pg-news" data-page-node-id="dkw5uG4Blw9UX3iUQKJdKD">
-        <div class="pc-panel" data-page-node-id="oDQUpAuZksFibL0LiacaaC">
-          <div class="panel-head" data-page-node-id="foZKflAAC1ADaQMa3ojprC"><h3 data-page-node-id="oB3sYAVlHFyOh60CDBCQdM">资讯列表</h3><button class="btn btn-primary btn-sm" data-page-node-id="mQsDjJAVwjUNdtFHJImr7N">+ 发布资讯</button></div>
-          <table class="pc-table" data-page-node-id="gs9jI7efDvS18PnXPGJWWq">
-            <thead data-page-node-id="PcfTdYUWYFm7rq1Asc2V2a"><tr data-page-node-id="jdV36axfO8MrdaBO0bmNf6"><th data-page-node-id="CAXToDqw8v3fAEFzGDxeSV">标题</th><th data-page-node-id="50Rmc1gNo4492AQNHbs9zs">分类</th><th data-page-node-id="IwAMJktHGSFEIRm4VCiI08">关联赛事</th><th data-page-node-id="eI7FlDhAQ8MVsmzU1tCJ7i">发布时间</th><th data-page-node-id="XWdpuGwKiD6ySqm2zM6G54">状态</th><th data-page-node-id="8xbhfrzFGNE02BHODGLVZN">操作</th></tr></thead>
-            <tbody data-page-node-id="I1P6r7FWIe04kkisvO8ju5">
-              <tr data-page-node-id="AmrkkLJcP0orBu6gblbeFH"><td data-page-node-id="bAClUVdGa2kRq7cahfvGaV">2026 春季城市马拉松参赛须知</td><td data-page-node-id="XcE5mnX4HfXTo8r3dWHeMa">赛事通知</td><td class="muted" data-page-node-id="ZdGaoMAeCCMBVL1TFDx8mR">春季城市马拉松</td><td class="muted" data-page-node-id="gPfKzNmKqMc28XNdcQ6fDm">02-28</td><td data-page-node-id="efpC5FSy2HNFko7NSsJvFc"><span class="badge b-green" data-page-node-id="dH5C1t1IVsZjeM4YEwUYhR">已发布</span></td><td data-page-node-id="4h2Z7sWgoR6FsCB0adQt77"><span class="link-btn" data-page-node-id="Xc9JHHCm7j956EkBYGeQD4">编辑</span></td></tr>
-              <tr data-page-node-id="kAwcDvmZ9mHCstMvZuytT0"><td data-page-node-id="BnM4A9YFeA08wWIfhqqpFh">职工羽毛球团体赛抽签分组出炉</td><td data-page-node-id="em3CDb1OZpcn1Fnl7Ckafx">比赛预告</td><td class="muted" data-page-node-id="tm1F3g9v0zah1df3sPTWld">职工羽毛球团体赛</td><td class="muted" data-page-node-id="B5IUWOnWEpZD1XmnfrTqlV">02-25</td><td data-page-node-id="3pQmorsGy28UquaX5jgkbv"><span class="badge b-green" data-page-node-id="4ZJDo76QMEj5YFwVECsSqR">已发布</span></td><td data-page-node-id="CQZiF32lBzPOYcuIkjJX56"><span class="link-btn" data-page-node-id="4Ep5Mpmh5HDIwRlfZyZLid">编辑</span></td></tr>
-              <tr data-page-node-id="J33v4HcjHcDRhSFjhCFduS"><td data-page-node-id="IoONFjOv9RPYUOR9qZmOJF">青少年游泳锦标赛圆满落幕</td><td data-page-node-id="HjEzNJj21X0SBtDPL64Bb7">图文资讯</td><td class="muted" data-page-node-id="8ZxU8EWI4Q9GggqzdZZ5gH">青少年游泳锦标赛</td><td class="muted" data-page-node-id="54VPZJzzPtzO5oXd3JJWpx">02-12</td><td data-page-node-id="bcGZHp7frKheLqkvAt9EcB"><span class="badge b-green" data-page-node-id="3sLEd0rqn2uqmtqwTWXnuP">已发布</span></td><td data-page-node-id="57CcHTFOLgOqNH1svJbrcA"><span class="link-btn" data-page-node-id="nbJpcuIagyyJ0HVRTEAu3J">编辑</span></td></tr>
+      <div class="pc-admin-page" id="pg-news">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>资讯列表</h3><button class="btn btn-primary btn-sm">+ 发布资讯</button></div>
+          <table class="pc-table">
+            <thead><tr><th>标题</th><th>分类</th><th>关联赛事</th><th>发布时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>2026 春季城市马拉松参赛须知</td><td>赛事通知</td><td class="muted">春季城市马拉松</td><td class="muted">02-28</td><td><span class="badge b-green">已发布</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>职工羽毛球团体赛抽签分组出炉</td><td>比赛预告</td><td class="muted">职工羽毛球团体赛</td><td class="muted">02-25</td><td><span class="badge b-green">已发布</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>青少年游泳锦标赛圆满落幕</td><td>图文资讯</td><td class="muted">青少年游泳锦标赛</td><td class="muted">02-12</td><td><span class="badge b-green">已发布</span></td><td><span class="link-btn">编辑</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="pc-admin-page" id="pg-audit" data-page-node-id="4IzA2UhaZgmnAVDIvnASHg">
-        <div class="pc-panel" data-page-node-id="CuSfZc2t9IprzqkWsy3zyF">
-          <div class="panel-head" data-page-node-id="pfkfln5tZcllD2nRtFR2t0"><h3 data-page-node-id="31lDbafI1aPEVkCXlNBEbn">报名审核（待审核 46）</h3></div>
-          <table class="pc-table" data-page-node-id="GUfiMKubBCMne1rLpSdxHM">
-            <thead data-page-node-id="OPIQfoTdGJmRbiTiwISVcq"><tr data-page-node-id="22Bxtaf5cambVjJ98jSZAz"><th data-page-node-id="lZ3uxkzGDN77lpy0PXT8Ri">姓名</th><th data-page-node-id="oLGeqIeqCJlmAW1dMHfsrP">项目</th><th data-page-node-id="mw15j0fJR9rPfPwFw3BQlX">手机号</th><th data-page-node-id="xL0tGE3789E4odrMPF89iq">报名时间</th><th data-page-node-id="8IUZaShxFugceazezIMxSa">状态</th><th data-page-node-id="phe5z3Z3vII4oFpxMWwKKc">操作</th></tr></thead>
-            <tbody data-page-node-id="2ZJHX1xdqrpZCEaIps0lYd">
-              <tr data-page-node-id="HFGb00yfHKVwuH4llsR46m"><td data-page-node-id="Bs0mX2cz4kbE5k7HBbNTm7">张三</td><td data-page-node-id="sMgR4yZTaZgkNjKftj97Kh">男子全马</td><td class="muted" data-page-node-id="NqMSzyjIOWXpllAsR0g118">138****8888</td><td class="muted" data-page-node-id="fYE1jR7CoiRCf9kxF8fOzX">03-01 10:24</td><td data-page-node-id="oXgeuIBciPZpuBevYwIn7t"><span class="badge b-orange" data-page-node-id="HH2JMvMqpWzwmn8SB5b9FO">待审核</span></td><td data-page-node-id="tEuTRki6JskEhBtHIBR5c2"><span class="link-btn" data-page-node-id="XDBI7K08rTEUnzNFQTvoRC">通过</span> <span class="link-btn" style="color:var(--red)" data-page-node-id="v6FDF57e2Z55sW2MYLRP9C">驳回</span></td></tr>
-              <tr data-page-node-id="JTGvGV9uJBOTMARHr18V5c"><td data-page-node-id="zdokmybU53OtE0nNieBy9c">李芳</td><td data-page-node-id="gjuAet6txqUUy8wE13beY4">女子全马</td><td class="muted" data-page-node-id="iD0KHOJIrKtTzrGYd9voOB">139****2233</td><td class="muted" data-page-node-id="iBkHzhLZrX0DwqBNb36DcW">03-01 11:02</td><td data-page-node-id="R7auNwIeIBNaCk7GC8R30D"><span class="badge b-orange" data-page-node-id="iPiVdAEyzpGnlPoylZXduy">待审核</span></td><td data-page-node-id="1s6F65kMRKiTq1R5NPgRhK"><span class="link-btn" data-page-node-id="9UBn4oXkaJuGOJBIYC2jpy">通过</span> <span class="link-btn" style="color:var(--red)" data-page-node-id="pHWSTyJlbWcflqDkic1gwj">驳回</span></td></tr>
-              <tr data-page-node-id="6603Fy6dI8Llny1zQaa6u0"><td data-page-node-id="6sL38VobAT67AbpxEVeUqZ">王强</td><td data-page-node-id="OSom6XGNYh8MFscW1QQMCa">男子全马</td><td class="muted" data-page-node-id="h9JiTFxEwozQSehsojsl0V">137****5566</td><td class="muted" data-page-node-id="QlZiY2IRmEiB954AJkHvoF">03-01 11:30</td><td data-page-node-id="a4qMnkCvEFxCWunHZNZaQk"><span class="badge b-orange" data-page-node-id="cZAGGwAmA7VGAkk1wGMPX1">待审核</span></td><td data-page-node-id="5juTeL26JiY25jX1CG3MXj"><span class="link-btn" data-page-node-id="odlpuebIaWgwjSwNirmirf">通过</span> <span class="link-btn" style="color:var(--red)" data-page-node-id="V06npwXJNEtm6l39c34qpQ">驳回</span></td></tr>
-              <tr data-page-node-id="Ztbpv7389unCLUCVTmUmrV"><td data-page-node-id="5N74JhCHoviwszJPy8ho3h">赵敏</td><td data-page-node-id="Fl8E3qCIRGkFN87dH1I4Yz">女子全马</td><td class="muted" data-page-node-id="vkMtheOlP9RxHH3KzdbJuZ">136****9901</td><td class="muted" data-page-node-id="y2igSAExZCafbLpBdneI9v">03-01 12:15</td><td data-page-node-id="0B0xEKn6NcTDBBi6CQJKMH"><span class="badge b-green" data-page-node-id="SojKtHSmh0Ype0hAtT8LC8">已通过</span></td><td class="muted" data-page-node-id="lYNqB5RmyJudspzec0Z8Nz">已处理</td></tr>
+      <div class="pc-admin-page" id="pg-audit">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>报名审核（待审核 46）</h3></div>
+          <table class="pc-table">
+            <thead><tr><th>姓名</th><th>项目</th><th>手机号</th><th>报名时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>张三</td><td>男子全马</td><td class="muted">138****8888</td><td class="muted">03-01 10:24</td><td><span class="badge b-orange">待审核</span></td><td><span class="link-btn">通过</span> <span class="link-btn" style="color:var(--red)">驳回</span></td></tr>
+              <tr><td>李芳</td><td>女子全马</td><td class="muted">139****2233</td><td class="muted">03-01 11:02</td><td><span class="badge b-orange">待审核</span></td><td><span class="link-btn">通过</span> <span class="link-btn" style="color:var(--red)">驳回</span></td></tr>
+              <tr><td>王强</td><td>男子全马</td><td class="muted">137****5566</td><td class="muted">03-01 11:30</td><td><span class="badge b-orange">待审核</span></td><td><span class="link-btn">通过</span> <span class="link-btn" style="color:var(--red)">驳回</span></td></tr>
+              <tr><td>赵敏</td><td>女子全马</td><td class="muted">136****9901</td><td class="muted">03-01 12:15</td><td><span class="badge b-green">已通过</span></td><td class="muted">已处理</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="pc-admin-page" id="pg-results" data-page-node-id="5ybjQzw2G4FQzT4NswLNPg">
-        <div class="pc-panel" data-page-node-id="MYhMHfvJ8LDH90yKNkghpt">
-          <div class="panel-head" data-page-node-id="Q9YQZ8ebbTki8weUTyJJiy"><h3 data-page-node-id="KWNI1P9rmflpfzBXghIohl">成绩管理 · 青少年游泳锦标赛</h3><div data-page-node-id="7Ncp3dEEYGPJUG4hfh9i1H"><button class="btn btn-outline btn-sm" style="margin-right:8px" data-page-node-id="lxHn5dUU2gHvidsGx9o2ja">📥 Excel 导入</button><button class="btn btn-primary btn-sm" data-page-node-id="x9xVXME2DzlYltw2d5SDZB">+ 录入成绩</button></div></div>
-          <table class="pc-table" data-page-node-id="SXlvv4eZB4JPnYTsA02Aot">
-            <thead data-page-node-id="mmHyXaXDgWmojHPHVMGeFX"><tr data-page-node-id="5751KQEm6gSo6na6OCACmz"><th data-page-node-id="lRXzEuJsUgdoQurWV2IOsI">参赛者</th><th data-page-node-id="ZFVDztfIhrKh7eud1hcf4R">项目</th><th data-page-node-id="vpE0BrEuBw3GSzBkDOeAYy">成绩</th><th data-page-node-id="Bk9Qj4EnQKZ8xWZJDpFc0k">来源</th><th data-page-node-id="dEUSReZWmp35BOBWAGOAUp">录入时间</th><th data-page-node-id="UQmhHvRWZJpG8QOkOtgmcX">操作</th></tr></thead>
-            <tbody data-page-node-id="VyW9eTxkPl9ju57luOhhZt">
-              <tr data-page-node-id="rZAXGACNicBF9FF8fl6wE7"><td data-page-node-id="Fn1PRvF3Nxlz3ZHTlgYlSe">李强</td><td data-page-node-id="EDjrOQx9QA32tzRv0E2lo8">男子100米自由泳</td><td data-page-node-id="NFedUiZtCvZoNSSI4A6F38">52.18s</td><td data-page-node-id="dI0nPDpsB9qRyvMRMMgNL9"><span class="badge b-gray" data-page-node-id="WOdCApRjPHNyrmdrOqjblV">手工</span></td><td class="muted" data-page-node-id="4pxFuLrjYBAYanKBcwN0fZ">02-10 16:00</td><td data-page-node-id="cL39hdCzE6D0hztHG2wqhx"><span class="link-btn" data-page-node-id="P6ziFg4p7U8YlvXLz9LPHF">编辑</span></td></tr>
-              <tr data-page-node-id="F60QFUeQEYBlEg5U1A0Rvo"><td data-page-node-id="AylfLxWywyDIECf0mvQdF3">王磊</td><td data-page-node-id="CHprCzAJmKSAdgZ4tznms6">男子100米自由泳</td><td data-page-node-id="EDX7YyZH5rJtLsWHCqjhVo">53.02s</td><td data-page-node-id="GwRZSxgCWEEsvg7hKsYoEu"><span class="badge b-gray" data-page-node-id="7wXTBH0XKQVggu9ej5rE8c">手工</span></td><td class="muted" data-page-node-id="7VI3lBHrduaXckSKvkM0Zz">02-10 16:05</td><td data-page-node-id="TMDVTeuCPSqdsUfeLJGmIT"><span class="link-btn" data-page-node-id="O2PpAKhbDICD0EiK6EHfjE">编辑</span></td></tr>
-              <tr data-page-node-id="3zF4H9BP5LMyxMMkXjR0zW"><td data-page-node-id="cNvVKG96Q3vJHeAFxkND1C">张三</td><td data-page-node-id="uYUINbf5FJmKUxfBb9IaLV">男子100米自由泳</td><td data-page-node-id="qW2X3VXbOvur8Jh7ijq8IS">55.40s</td><td data-page-node-id="FcY21Kf7b4aAq6O5rOCMex"><span class="badge b-gray" data-page-node-id="KMemhaUt24nyZIEqCji7hp">导入</span></td><td class="muted" data-page-node-id="ZSaEj1xkYWGbHFH5OyHCIe">02-10 17:00</td><td data-page-node-id="OKIjLo283EV665Ulx4ggaJ"><span class="link-btn" data-page-node-id="Age1PcTDiYZPHctX5m7DUi">编辑</span></td></tr>
+      <div class="pc-admin-page" id="pg-results">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>成绩管理 · 青少年游泳锦标赛</h3><div><button class="btn btn-outline btn-sm" style="margin-right:8px">📥 Excel 导入</button><button class="btn btn-primary btn-sm">+ 录入成绩</button></div></div>
+          <table class="pc-table">
+            <thead><tr><th>参赛者</th><th>项目</th><th>成绩</th><th>来源</th><th>录入时间</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>李强</td><td>男子100米自由泳</td><td>52.18s</td><td><span class="badge b-gray">手工</span></td><td class="muted">02-10 16:00</td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>王磊</td><td>男子100米自由泳</td><td>53.02s</td><td><span class="badge b-gray">手工</span></td><td class="muted">02-10 16:05</td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>张三</td><td>男子100米自由泳</td><td>55.40s</td><td><span class="badge b-gray">导入</span></td><td class="muted">02-10 17:00</td><td><span class="link-btn">编辑</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="pc-admin-page" id="pg-ranking" data-page-node-id="7zlBY8Vllym35vIv65CYVo">
-        <div class="pc-panel" data-page-node-id="ETB32COCRwNCiht17QWtvv">
-          <div class="panel-head" data-page-node-id="SATPGuLmkqbED4OX2L2lIv"><h3 data-page-node-id="T9AvCIomXsB5P9jIbSGfNO">排名管理 · 青少年游泳锦标赛</h3><button class="btn btn-primary btn-sm" data-page-node-id="BvyT2ukDbUfle5YH9A85hA">重新计算排名</button></div>
-          <div style="padding:14px 18px;background:#eef2fb;font-size:12.5px;color:#1e40af" data-page-node-id="jr5vzjKFPEuU0oeYBQ1L1v">🏅 成绩优者靠前；单项同分并列；多项积分累加。排名由系统自动生成。</div>
-          <table class="pc-table" data-page-node-id="aRZyH7fVcbVNbEDBI9FHZx">
-            <thead data-page-node-id="BBsJrCGRfGoGJnFwVdkH1u"><tr data-page-node-id="b3QVZDzFNYhjHR7B72bBv0"><th style="width:70px" data-page-node-id="fsmIy7PFEcMfQn01erQuJB">名次</th><th data-page-node-id="BCGktKrof3DHJC6p0B2YZ4">参赛者</th><th data-page-node-id="P61DKuM7asHOlTonEHqnZV">项目</th><th data-page-node-id="1DuGjJgeQbSlhgCljHNTTK">成绩</th></tr></thead>
-            <tbody data-page-node-id="OswueXGZHgFPAZkEDWA9Ra">
-              <tr data-page-node-id="FPLjMxDcWk8QqVtwzsPP9q"><td data-page-node-id="HBw4gwZZb4sksRbvMVYfeq"><b style="color:#f59e0b" data-page-node-id="S3vBPLpf9G0FdEbaMgAtlT">🥇 1</b></td><td data-page-node-id="izK2PIL9VVvir7RqmkJXIq">李强</td><td data-page-node-id="HPeUqq6oonlBuO9ghabK4s">男子100米自由泳</td><td data-page-node-id="zvZ2feZsNQxMGG1oFMCRA7">52.18s</td></tr>
-              <tr data-page-node-id="CIK3BZAl61AoKCdZpddO5Y"><td data-page-node-id="SNy4kQVhK123YberlDri47"><b style="color:#94a3b8" data-page-node-id="FD6X523E4Ku0kWaSuxNMH2">🥈 2</b></td><td data-page-node-id="FC228B5aVyXQu0hE0xLuev">王磊</td><td data-page-node-id="jVVFitBnlTBEENxhmzd2ff">男子100米自由泳</td><td data-page-node-id="szoiNOeGAn248G8VfRMkd8">53.02s</td></tr>
-              <tr data-page-node-id="0TipWDwniv6VwKd7qcTSAI"><td data-page-node-id="Z612Cc3GmHGka8dVXKalog"><b style="color:#b45309" data-page-node-id="vDoGff51Tz7hoBNrQmXgkg">🥉 3</b></td><td data-page-node-id="niIoVxoArbeH9dvDlUxidY">赵鹏</td><td data-page-node-id="EKhsI8erPDt9uKMjP8JG9y">男子100米自由泳</td><td data-page-node-id="NctGFVUdJSop40XOfbl866">53.02s</td></tr>
-              <tr data-page-node-id="Z6xndVgSnAC1jGRgzQW49t"><td data-page-node-id="zVDAOGV3WBgQJb6pnwe1Ar">4</td><td data-page-node-id="OPaWW1QNRETRl8uTyXqMOR">刘洋</td><td data-page-node-id="5uoHQnXEs55jUTBuJ7qT2C">男子100米自由泳</td><td data-page-node-id="gPDpVqCGmJeUFUAEgZW6Pa">54.10s</td></tr>
+      <div class="pc-admin-page" id="pg-ranking">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>排名管理 · 青少年游泳锦标赛</h3><button class="btn btn-primary btn-sm">重新计算排名</button></div>
+          <div style="padding:14px 18px;background:#eef2fb;font-size:12.5px;color:#1e40af">🏅 成绩优者靠前；单项同分并列；多项积分累加。排名由系统自动生成。</div>
+          <table class="pc-table">
+            <thead><tr><th style="width:70px">名次</th><th>参赛者</th><th>项目</th><th>成绩</th></tr></thead>
+            <tbody>
+              <tr><td><b style="color:#f59e0b">🥇 1</b></td><td>李强</td><td>男子100米自由泳</td><td>52.18s</td></tr>
+              <tr><td><b style="color:#94a3b8">🥈 2</b></td><td>王磊</td><td>男子100米自由泳</td><td>53.02s</td></tr>
+              <tr><td><b style="color:#b45309">🥉 3</b></td><td>赵鹏</td><td>男子100米自由泳</td><td>53.02s</td></tr>
+              <tr><td>4</td><td>刘洋</td><td>男子100米自由泳</td><td>54.10s</td></tr>
             </tbody>
           </table>
         </div>
