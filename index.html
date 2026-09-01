@@ -56,7 +56,8 @@
 
   .tabbar { height: 58px; background: #fff; border-top: 1px solid var(--border); display: flex; flex-shrink: 0; padding-bottom: 4px; }
   .tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 10.5px; color: var(--tab-inactive); cursor: pointer; }
-  .tabbar .tab .ico { font-size: 20px; line-height: 1; }
+  .tabbar .tab .ico { font-size: 20px; line-height: 1; display: flex; }
+  .tabbar .tab .ico svg { width: 23px; height: 23px; }
   .tabbar .tab.active { color: var(--primary); font-weight: 600; }
 
   .screen { display: none; } .screen.show { display: block; }
@@ -93,7 +94,8 @@
 
   .quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 4px; background: #fff; border-radius: 16px; padding: 14px 6px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
   .q-item { display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 11.5px; color: #374151; font-weight: 600; cursor: pointer; }
-  .q-ico { width: 50px; height: 50px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 23px; box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+  .q-ico { width: 50px; height: 50px; border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+  .q-ico svg { width: 25px; height: 25px; }
 
   .img-card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); cursor: pointer; }
   .img-card .cover { height: 150px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -224,6 +226,8 @@
   .pc-logo { display: flex; align-items: center; gap: 10px; padding: 0 20px 18px; font-size: 15px; font-weight: 700; color: #fff; border-bottom: 1px solid #334155; margin-bottom: 12px; }
   .pc-logo .dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#2563eb,#4f46e5); display:flex; align-items:center; justify-content:center; font-size:14px; }
   .pc-menu .mi { display: flex; align-items: center; gap: 11px; padding: 12px 22px; font-size: 14px; cursor: pointer; color: #cbd5e1; border-left: 3px solid transparent; }
+  .pc-menu .mi svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .pc-logo .dot svg { width: 16px; height: 16px; }
   .pc-menu .mi:hover { background: #273449; }
   .pc-menu .mi.active { background: #273449; color: #fff; border-left-color: #2563eb; font-weight: 600; }
   .pc-main { flex: 1; background: #f5f7fa; padding: 22px 24px; overflow: hidden; }
@@ -288,10 +292,10 @@
 
         <!-- 快捷入口（金刚区） -->
         <div class="quick-grid">
-          <div class="q-item" onclick="switchTab('events')"><div class="q-ico" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🏃</div>报名赛事</div>
-          <div class="q-item" onclick="show('ranking')"><div class="q-ico" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🏅</div>成绩排名</div>
-          <div class="q-item" onclick="switchTab('calendar')"><div class="q-ico" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)">📅</div>赛事日历</div>
-          <div class="q-item" onclick="show('points')"><div class="q-ico" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)">⭐</div>参赛积分</div>
+          <div class="q-item" onclick="switchTab('events')"><div class="q-ico" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div>报名赛事</div>
+          <div class="q-item" onclick="show('ranking')"><div class="q-ico" style="background:linear-gradient(135deg,#fef3c7,#fde68a)"><svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>成绩排名</div>
+          <div class="q-item" onclick="switchTab('calendar')"><div class="q-ico" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg></div>赛事日历</div>
+          <div class="q-item" onclick="show('points')"><div class="q-ico" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8)"><svg viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>参赛积分</div>
         </div>
 
         <!-- 热门赛事（图片卡片） -->
@@ -631,10 +635,10 @@
     </div>
 
     <div class="tabbar" id="tabbar">
-      <div class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ico">🏠</span>首页</div>
-      <div class="tab" id="tab-events" onclick="switchTab('events')"><span class="ico">🏃</span>赛事</div>
-      <div class="tab" id="tab-calendar" onclick="switchTab('calendar')"><span class="ico">📅</span>日历</div>
-      <div class="tab" id="tab-mine" onclick="switchTab('mine')"><span class="ico">👤</span>我的</div>
+      <div class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>首页</div>
+      <div class="tab" id="tab-events" onclick="switchTab('events')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>赛事</div>
+      <div class="tab" id="tab-calendar" onclick="switchTab('calendar')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg></span>日历</div>
+      <div class="tab" id="tab-mine" onclick="switchTab('mine')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>我的</div>
     </div>
     <div class="home-indicator"></div>
   </div>
@@ -648,14 +652,14 @@
   </div>
   <div class="pc-body">
     <div class="pc-sidebar">
-      <div class="pc-logo"><div class="dot">🏆</div>赛事管理后台</div>
+      <div class="pc-logo"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>赛事管理后台</div>
       <div class="pc-menu" id="pcMenu">
-        <div class="mi active" data-page="dashboard" onclick="adminNav('dashboard')">📊 仪表盘</div>
-        <div class="mi" data-page="competitions" onclick="adminNav('competitions')">🏃 赛事管理</div>
-        <div class="mi" data-page="news" onclick="adminNav('news')">📰 资讯管理</div>
-        <div class="mi" data-page="audit" onclick="adminNav('audit')">📋 报名审核 <span class="badge b-orange" style="margin-left:auto">46</span></div>
-        <div class="mi" data-page="results" onclick="adminNav('results')">✏️ 成绩管理</div>
-        <div class="mi" data-page="ranking" onclick="adminNav('ranking')">🏅 排名管理</div>
+        <div class="mi active" data-page="dashboard" onclick="adminNav('dashboard')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>仪表盘</div>
+        <div class="mi" data-page="competitions" onclick="adminNav('competitions')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>赛事管理</div>
+        <div class="mi" data-page="news" onclick="adminNav('news')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0V6"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>资讯管理</div>
+        <div class="mi" data-page="audit" onclick="adminNav('audit')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>报名审核 <span class="badge b-orange" style="margin-left:auto">46</span></div>
+        <div class="mi" data-page="results" onclick="adminNav('results')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>成绩管理</div>
+        <div class="mi" data-page="ranking" onclick="adminNav('ranking')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>排名管理</div>
       </div>
     </div>
     <div class="pc-main">
