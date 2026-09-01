@@ -328,6 +328,19 @@
   .field-item.locked { background: #fafbfc; cursor: default; }
   .field-item.locked .cb { background: #e5e7eb; border-color: #e5e7eb; }
   .field-item.locked .cb::after { content: ""; position: absolute; inset: 4px; background: #fff; border-radius: 3px; }
+
+  /* ===== 新建赛事弹窗 ===== */
+  .modal-mask { position: fixed; inset: 0; background: rgba(15,23,42,.45); display: none; align-items: center; justify-content: center; z-index: 1000; }
+  .modal-mask.show { display: flex; }
+  .modal { width: 470px; max-width: 92vw; background: #fff; border-radius: 14px; padding: 22px 24px; box-shadow: 0 30px 70px rgba(0,0,0,.3); }
+  .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+  .modal .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .modal .form-grid .full { grid-column: 1 / -1; }
+  .modal .f-label { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 5px; }
+  .modal input, .modal select { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; font-size: 13px; outline: none; }
+  .modal input:focus, .modal select:focus { border-color: var(--primary); }
+  .modal .modal-foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+  .modal .btn-plain { border: 1px solid #d3dbe6; background: #fff; color: #4b5563; border-radius: 8px; padding: 8px 18px; font-size: 13px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -818,12 +831,12 @@
 
       <div class="pc-admin-page" id="pg-competitions">
         <div class="pc-panel" style="margin-bottom:16px">
-          <div class="panel-head"><h3>报名配置 · 2026 春季城市马拉松</h3><select style="border:1px solid #e3e8ef;border-radius:8px;padding:5px 10px;font-size:12.5px;color:#4b5563"><option>切换赛事</option><option>职工羽毛球团体赛</option><option>青少年游泳锦标赛</option></select></div>
+          <div class="panel-head"><h3 id="cfgTitle">报名配置 · 2026 春季城市马拉松</h3><select id="cfgEventSel" onchange="switchEvent(this.value)" style="border:1px solid #e3e8ef;border-radius:8px;padding:5px 10px;font-size:12.5px;color:#4b5563"><option value="" disabled selected>切换赛事</option><option value="2026 春季城市马拉松">2026 春季城市马拉松</option><option value="职工羽毛球团体赛">职工羽毛球团体赛</option><option value="青少年游泳锦标赛">青少年游泳锦标赛</option></select></div>
           <div style="padding:16px 18px">
             <div style="font-size:13px;font-weight:600;margin-bottom:12px">报名模式</div>
             <div class="opt-mode">
-              <div class="om-btn active" onclick="optMode(this)"><span class="om-r"></span><div><div class="om-title">个人报名</div><div class="om-desc">每人独立填写并提交</div></div></div>
-              <div class="om-btn" onclick="optMode(this)"><span class="om-r"></span><div><div class="om-title">团队报名</div><div class="om-desc">队长建队，队员各自填写</div></div></div>
+              <div class="om-btn active" data-mode="single" onclick="optMode(this)"><span class="om-r"></span><div><div class="om-title">个人报名</div><div class="om-desc">每人独立填写并提交</div></div></div>
+              <div class="om-btn" data-mode="team" onclick="optMode(this)"><span class="om-r"></span><div><div class="om-title">团队报名</div><div class="om-desc">队长建队，队员各自填写</div></div></div>
             </div>
             <div style="font-size:13px;font-weight:600;margin:18px 0 12px">报名字段（勾选后，C 端报名页展示）</div>
             <div class="field-grid">
@@ -840,7 +853,7 @@
           </div>
         </div>
         <div class="pc-panel">
-          <div class="panel-head"><h3>赛事列表</h3><button class="btn btn-primary btn-sm">+ 新建赛事</button></div>
+          <div class="panel-head"><h3>赛事列表</h3><button class="btn btn-primary btn-sm" onclick="newEvent()">+ 新建赛事</button></div>
           <table class="pc-table">
             <thead><tr><th>赛事名称</th><th>分类</th><th>报名截止</th><th>人数</th><th>排名规则</th><th>状态</th><th>操作</th></tr></thead>
             <tbody>
@@ -1003,6 +1016,25 @@
   </div>
 </div>
 
+<!-- 新建赛事弹窗 -->
+<div class="modal-mask" id="newEventModal" onclick="if(event.target===this)closeNewEvent()">
+  <div class="modal">
+    <h3>新建赛事</h3>
+    <div class="form-grid">
+      <div class="full"><div class="f-label">赛事名称</div><input placeholder="例如：2026 秋季登山节"></div>
+      <div><div class="f-label">分类</div><select><option>田径</option><option>球类</option><option>游泳</option><option>其他</option></select></div>
+      <div><div class="f-label">报名模式</div><select><option>个人报名</option><option>团队报名</option></select></div>
+      <div><div class="f-label">人数上限</div><input placeholder="例如：500"></div>
+      <div><div class="f-label">排名规则</div><select><option>按用时</option><option>多项积分</option></select></div>
+      <div class="full"><div class="f-label">报名截止时间</div><input placeholder="例如：2026-09-30 20:00"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-plain" onclick="closeNewEvent()">取消</button>
+      <button class="btn btn-primary btn-sm" style="width:auto" onclick="confirmNewEvent()">创建赛事</button>
+    </div>
+  </div>
+</div>
+
 <script>
   var role = 'user';
   var prev = [];
@@ -1146,6 +1178,35 @@
   }
   function toggleField(el) {
     el.classList.toggle('checked');
+  }
+  function switchEvent(name) {
+    if (!name) return;
+    document.getElementById('cfgTitle').textContent = '报名配置 · ' + name;
+    var mode = (name.indexOf('羽毛球') >= 0) ? 'team' : 'single';
+    document.querySelectorAll('.opt-mode .om-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-mode') === mode);
+    });
+    var preset = {
+      '2026 春季城市马拉松': ['衣服尺码','紧急联系人'],
+      '职工羽毛球团体赛': ['紧急联系人','所属单位'],
+      '青少年游泳锦标赛': ['紧急联系人','血型']
+    };
+    var on = preset[name] || [];
+    document.querySelectorAll('.field-item:not(.locked)').forEach(function(f){
+      var fn = f.querySelector('.fn').textContent;
+      f.classList.toggle('checked', on.indexOf(fn) >= 0);
+    });
+    toast('已切换到「' + name + '」的独立配置');
+  }
+  function newEvent() { document.getElementById('newEventModal').classList.add('show'); }
+  function closeNewEvent() { document.getElementById('newEventModal').classList.remove('show'); }
+  function confirmNewEvent() { closeNewEvent(); toast('✅ 赛事已创建，可继续配置报名信息'); }
+  function toast(msg) {
+    var tip = document.createElement('div');
+    tip.style.cssText = 'position:fixed;top:24px;right:24px;background:#16a34a;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;box-shadow:0 8px 24px rgba(22,163,74,.35);z-index:1001;font-weight:600';
+    tip.textContent = msg;
+    document.body.appendChild(tip);
+    setTimeout(function(){ tip.remove(); }, 2200);
   }
 
   var calYear = 2026, calMonth = 3;
