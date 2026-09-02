@@ -6,8 +6,10 @@
 
 | 版本 | 链接 | 说明 |
 | --- | --- | --- |
-| **v2.0 完整版** | https://xuanyu-h.github.io/sports-event-prototype/ | 11 个模块（当前主版本） |
-| **v1.0 基础版** | https://xuanyu-h.github.io/sports-event-prototype/v1/ | 4 个模块（基线存档） |
+| **V2 完整版** | https://xuanyu-h.github.io/sports-event-prototype/v2/ | 11 个模块（当前主版本） |
+| **V1 基础版** | https://xuanyu-h.github.io/sports-event-prototype/v1/ | 4 个模块（基线存档） |
+
+根路径 https://xuanyu-h.github.io/sports-event-prototype/ 为版本选择页。
 
 > 两个版本页面右下角均有「版本切换」浮标，可互相跳转。
 
@@ -48,10 +50,12 @@
 
 ```
 .
-├── index.html                  # v2.0 完整版原型（交互式，可切换 C 端 / PC 后台）
+├── index.html                  # 版本选择页（V1 / V2 入口）
 ├── v1/
-│   └── index.html              # v1.0 基础版原型（4 模块，来自 v1.0.0 tag）
-├── images/                     # 原型图片素材
+│   └── index.html              # V1 基础版原型（4 模块，来自 v1.0.0 tag）
+├── v2/
+│   └── index.html              # V2 完整版原型（11 模块，交互式，可切换 C 端 / PC 后台）
+├── images/                     # 原型图片素材（V2 引用）
 └── docs/
     └── 功能范围确认清单.md      # 一期功能范围（待客户确认）
 ```
