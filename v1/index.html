@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>体育赛事服务小程序 · 页面原型</title>
+<style>
+  :root {
+    --primary: #2563eb; --primary-dark: #1e40af; --accent: #ff7a00;
+    --bg: #f3f5f9; --card: #ffffff; --text: #1f2937; --text-sub: #8a94a6; --border: #eceff4;
+    --green: #16a34a; --green-bg: #e7f6ec; --orange: #f59e0b; --orange-bg: #fff4e0;
+    --red: #dc2626; --red-bg: #fee9e7; --blue-bg: #e8f0fe; --tab-inactive: #9aa3b2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #e8ecf3; color: var(--text); line-height: 1.5;
+    display: flex; flex-direction: column; align-items: center; padding: 28px 16px 60px;
+  }
+  h1.page-title { font-size: 20px; font-weight: 700; color: #334155; margin-bottom: 4px; }
+  p.page-sub { font-size: 13px; color: var(--text-sub); margin-bottom: 22px; text-align: center; max-width: 720px; }
+
+  .role-switch { display: flex; background: #fff; border-radius: 999px; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.06); margin-bottom: 22px; }
+  .role-switch button { border: none; background: transparent; font-size: 13.5px; font-weight: 600; padding: 9px 24px; border-radius: 999px; cursor: pointer; color: var(--text-sub); transition: .2s; }
+  .role-switch button.active { background: var(--primary); color: #fff; }
+
+  /* ===== iPhone 17 模型 ===== */
+  .phone {
+    width: 402px; height: 874px; background: #16181d; border-radius: 64px; padding: 12px;
+    box-shadow: 0 30px 70px rgba(20,24,35,.4), inset 0 0 0 2px #3a3f4a;
+    position: relative; display: none;
+  }
+  .phone .side-btn { position: absolute; background: #2a2e37; border-radius: 3px; }
+  .phone .sb-power { right: -3px; top: 180px; width: 4px; height: 90px; }
+  .phone .sb-vol1 { left: -3px; top: 170px; width: 4px; height: 40px; }
+  .phone .sb-vol2 { left: -3px; top: 220px; width: 4px; height: 60px; }
+  .phone-screen {
+    width: 100%; height: 100%; background: var(--bg); border-radius: 52px;
+    overflow: hidden; position: relative; display: flex; flex-direction: column;
+  }
+  .dynamic-island {
+    position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
+    width: 128px; height: 34px; background: #000; border-radius: 20px; z-index: 20;
+  }
+  .statusbar { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px 0 34px; font-size: 14px; font-weight: 700; color: #1f2937; flex-shrink: 0; }
+  .statusbar .icons { display: flex; gap: 5px; align-items: center; font-size: 13px; }
+  .home-indicator { height: 22px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 7px; flex-shrink: 0; }
+  .home-indicator::after { content: ""; width: 130px; height: 5px; background: #1f2937; border-radius: 3px; }
+
+  .navbar { height: 46px; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; color: #1f2937; position: relative; flex-shrink: 0; }
+  .navbar .back { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border: none; background: transparent; cursor: pointer; font-size: 22px; color: #1f2937; line-height: 1; }
+  .navbar .right { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--primary); font-weight: 600; }
+
+  .content { flex: 1; overflow-y: auto; padding: 12px 16px 16px; scrollbar-width: none; }
+  .content::-webkit-scrollbar { display: none; }
+
+  .tabbar { height: 58px; background: #fff; border-top: 1px solid var(--border); display: flex; flex-shrink: 0; padding-bottom: 4px; }
+  .tabbar .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 10.5px; color: var(--tab-inactive); cursor: pointer; }
+  .tabbar .tab .ico { font-size: 20px; line-height: 1; }
+  .tabbar .tab.active { color: var(--primary); font-weight: 600; }
+
+  .screen { display: none; } .screen.show { display: block; }
+  .search { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 12px; padding: 9px 14px; font-size: 13px; color: var(--text-sub); box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 14px; }
+  .banner { height: 132px; border-radius: 14px; background: linear-gradient(120deg, #2563eb, #4f46e5); color: #fff; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; margin-bottom: 16px; position: relative; overflow: hidden; cursor: pointer; }
+  .banner::after { content: "🏆"; position: absolute; right: 18px; top: 14px; font-size: 46px; opacity: .35; }
+  .banner h3 { font-size: 17px; font-weight: 700; } .banner p { font-size: 12px; opacity: .9; margin-top: 4px; }
+  .sec-title { font-size: 15px; font-weight: 700; color: #1f2937; margin: 18px 0 10px; display: flex; justify-content: space-between; align-items: center; }
+  .sec-title .more { font-size: 12px; color: var(--primary); font-weight: 500; cursor: pointer; }
+
+  .card-item { background: #fff; border-radius: 14px; padding: 14px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.04); cursor: pointer; }
+  .card-item .tag-row { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .chip { font-size: 10.5px; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+  .chip.blue { background: var(--blue-bg); color: var(--primary); }
+  .chip.green { background: var(--green-bg); color: var(--green); }
+  .chip.orange { background: var(--orange-bg); color: var(--orange); }
+  .chip.gray { background: #f1f3f7; color: #7b8494; }
+  .chip.red { background: var(--red-bg); color: var(--red); }
+  .card-item .title { font-size: 15px; font-weight: 700; color: #1f2937; }
+  .card-item .meta { font-size: 12px; color: var(--text-sub); margin-top: 6px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+
+  .btn { display: block; width: 100%; border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-outline { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
+  .btn-sm { width: auto; padding: 7px 16px; font-size: 13px; border-radius: 8px; display: inline-block; }
+
+  .form-item { margin-bottom: 16px; }
+  .form-item label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+  .form-item label .req { color: var(--red); }
+  .form-item input, .form-item select { width: 100%; border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px; font-size: 14px; background: #fff; outline: none; }
+  .form-item input:focus { border-color: var(--primary); }
+  .form-item .hint { font-size: 11.5px; color: var(--text-sub); margin-top: 5px; }
+
+  .notice { background: var(--orange-bg); border: 1px solid #fde3b0; border-radius: 10px; padding: 10px 12px; font-size: 12px; color: #9a6b00; margin-bottom: 14px; }
+  .list-row { background: #fff; border-radius: 12px; padding: 13px 14px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,.04); cursor: pointer; }
+  .list-row .l { display: flex; flex-direction: column; gap: 4px; }
+  .list-row .l .t { font-size: 14px; font-weight: 600; }
+  .list-row .l .s { font-size: 12px; color: var(--text-sub); }
+  .list-row .r { font-size: 12px; color: var(--text-sub); display: flex; align-items: center; gap: 4px; }
+
+  .badge { display: inline-block; padding: 3px 9px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+  .b-green { background: var(--green-bg); color: var(--green); }
+  .b-orange { background: var(--orange-bg); color: var(--orange); }
+  .b-red { background: var(--red-bg); color: var(--red); }
+  .b-gray { background: #f1f3f7; color: #7b8494; }
+
+  .rank-list { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .rank-item { display: flex; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .rank-item:last-child { border-bottom: none; }
+  .rank-no { width: 34px; font-size: 15px; font-weight: 800; color: var(--text-sub); text-align: center; }
+  .rank-no.top1 { color: #f59e0b; font-size: 17px; }
+  .rank-no.top2 { color: #94a3b8; font-size: 17px; }
+  .rank-no.top3 { color: #b45309; font-size: 17px; }
+  .rank-info { flex: 1; margin-left: 10px; }
+  .rank-info .nm { font-size: 14px; font-weight: 600; }
+  .rank-info .ev { font-size: 11.5px; color: var(--text-sub); margin-top: 2px; }
+  .rank-score { font-size: 14px; font-weight: 700; color: var(--primary); }
+
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .cal-head .ym { font-size: 16px; font-weight: 700; }
+  .cal-head button { border: none; background: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px; }
+  .cal-grid .wd { text-align: center; font-size: 11px; color: var(--text-sub); padding: 4px 0; }
+  .cal-grid .day { aspect-ratio: 1; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 13px; cursor: pointer; position: relative; }
+  .cal-grid .day.has { background: var(--blue-bg); color: var(--primary); font-weight: 700; }
+  .cal-grid .day.today { border: 1.5px solid var(--primary); }
+  .cal-grid .day.other { color: #cbd2dd; }
+
+  .hint-box { background: var(--blue-bg); border: 1px solid #c9dbfc; border-radius: 10px; padding: 10px 12px; font-size: 12px; color: #1e40af; margin-bottom: 14px; }
+
+  .news-cover { height: 150px; border-radius: 12px; background: linear-gradient(120deg,#334155,#1f2937); color:#fff; display:flex; align-items:flex-end; padding:16px; margin-bottom:14px; }
+  .news-cover h3 { font-size:17px; font-weight:700; }
+  .news-body { font-size: 13.5px; color: #374151; line-height: 1.8; }
+  .news-body p { margin-bottom: 12px; }
+
+  /* ===== PC 管理后台 ===== */
+  .pc { width: 1100px; max-width: 100%; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 70px rgba(20,24,35,.28); display: none; }
+  .pc-chrome { background: #e5e7eb; height: 40px; display: flex; align-items: center; gap: 14px; padding: 0 16px; }
+  .pc-dots { display: flex; gap: 7px; }
+  .pc-dots span { width: 12px; height: 12px; border-radius: 50%; }
+  .pc-dots .r { background: #ff5f57; } .pc-dots .y { background: #febc2e; } .pc-dots .g { background: #28c840; }
+  .pc-addr { flex: 1; background: #fff; border-radius: 7px; height: 26px; display: flex; align-items: center; padding: 0 12px; font-size: 12px; color: #7b8494; }
+  .pc-body { display: flex; min-height: 640px; }
+  .pc-sidebar { width: 220px; background: #1e293b; color: #cbd5e1; flex-shrink: 0; padding: 16px 0; }
+  .pc-logo { display: flex; align-items: center; gap: 10px; padding: 0 20px 18px; font-size: 15px; font-weight: 700; color: #fff; border-bottom: 1px solid #334155; margin-bottom: 12px; }
+  .pc-logo .dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#2563eb,#4f46e5); display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .pc-menu .mi { display: flex; align-items: center; gap: 11px; padding: 12px 22px; font-size: 14px; cursor: pointer; color: #cbd5e1; border-left: 3px solid transparent; }
+  .pc-menu .mi:hover { background: #273449; }
+  .pc-menu .mi.active { background: #273449; color: #fff; border-left-color: #2563eb; font-weight: 600; }
+  .pc-main { flex: 1; background: #f5f7fa; padding: 22px 24px; overflow: hidden; }
+  .pc-main .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .pc-main .topbar h2 { font-size: 18px; font-weight: 700; color: #1f2937; }
+  .pc-main .topbar .user { font-size: 13px; color: var(--text-sub); display: flex; align-items: center; gap: 8px; }
+  .pc-panel { background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+  .pc-panel .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .pc-panel .panel-head h3 { font-size: 15px; font-weight: 700; }
+  .pc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pc-table th, .pc-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  .pc-table thead th { background: #f8fafc; color: #64748b; font-weight: 600; font-size: 12px; white-space: nowrap; }
+  .pc-table tbody tr:hover { background: #f8fafc; }
+  .pc-stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 18px; }
+  .pc-stat { background: #fff; border-radius: 12px; border: 1px solid var(--border); padding: 18px; }
+  .pc-stat .n { font-size: 26px; font-weight: 800; color: var(--primary); }
+  .pc-stat .l { font-size: 12.5px; color: var(--text-sub); margin-top: 4px; }
+  .pc-stat .trend { font-size: 11px; color: var(--green); margin-top: 6px; }
+  .pc-admin-page { display: none; } .pc-admin-page.show { display: block; }
+  .link-btn { color: var(--primary); font-size: 12.5px; cursor: pointer; font-weight: 600; }
+  .muted { color: var(--text-sub); font-size: 12px; }
+</style>
+</head>
+<body><div style="position:fixed;right:12px;bottom:14px;z-index:9999;background:#1e6fff;color:#fff;font-size:12px;padding:8px 14px;border-radius:20px;box-shadow:0 4px 12px rgba(30,111,255,.4);text-decoration:none;font-family:sans-serif" onclick="location.href='../'">v1.0 基础版（4 模块）· 查看完整版 →</div>
+
+<h1 class="page-title">体育赛事服务小程序 · 页面原型</h1>
+<p class="page-sub">参赛用户为「微信小程序」（iPhone 17 模型），管理后台为独立的「PC Web 管理端」（浏览器模型）。点卡片 / 按钮可交互浏览。</p>
+
+<div class="role-switch">
+  <button id="roleUser" class="active" onclick="switchRole('user')">参赛用户 · 小程序</button>
+  <button id="roleAdmin" onclick="switchRole('admin')">管理后台 · PC Web</button>
+</div>
+
+<!-- ================= 手机（iPhone 17） ================= -->
+<div class="phone" id="phoneWrap">
+  <div class="side-btn sb-power"></div>
+  <div class="side-btn sb-vol1"></div>
+  <div class="side-btn sb-vol2"></div>
+  <div class="phone-screen">
+    <div class="dynamic-island"></div>
+    <div class="statusbar"><span>9:41</span><span class="icons">📶 🔋</span></div>
+
+    <div class="content">
+      <!-- 首页 -->
+      <div class="screen" id="s-home">
+        <div class="navbar">体育赛事</div>
+        <div class="search">🔍 搜索赛事、资讯</div>
+        <div class="banner" onclick="show('eventDetail')">
+          <h3>2026 春季城市马拉松</h3><p>报名进行中 · 免费 · 限额 500 人</p>
+        </div>
+        <div class="sec-title">热门赛事 <span class="more" onclick="switchTab('events')">查看全部 ›</span></div>
+        <div class="card-item" onclick="show('eventDetail')">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip blue">需审核</span></div>
+          <div class="title">2026 春季城市马拉松</div>
+          <div class="meta">📍 滨江体育中心 · 🗓 03-15 · 👥 328/500</div>
+        </div>
+        <div class="card-item" onclick="show('eventDetail2')">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip orange">多项积分</span></div>
+          <div class="title">职工羽毛球团体赛</div>
+          <div class="meta">📍 市体育馆 · 🗓 03-20 · 👥 12/16</div>
+        </div>
+        <div class="sec-title">赛事资讯 <span class="more" onclick="show('newsList')">更多 ›</span></div>
+        <div class="card-item" onclick="show('newsDetail1')">
+          <div class="tag-row"><span class="chip blue">赛事通知</span></div>
+          <div class="title">2026 春季城市马拉松参赛须知</div>
+          <div class="meta">02-28 · 阅读 1.2k</div>
+        </div>
+        <div class="card-item" onclick="show('newsDetail2')">
+          <div class="tag-row"><span class="chip blue">比赛预告</span></div>
+          <div class="title">职工羽毛球团体赛抽签分组出炉</div>
+          <div class="meta">02-25 · 阅读 860</div>
+        </div>
+      </div>
+
+      <!-- 赛事列表 -->
+      <div class="screen" id="s-events">
+        <div class="navbar">赛事</div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:var(--primary);color:#fff;font-weight:600">全部</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">报名中</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">进行中</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">已结束</div>
+        </div>
+        <div class="card-item" onclick="show('eventDetail')">
+          <div class="tag-row"><span class="chip green">报名中</span></div>
+          <div class="title">2026 春季城市马拉松</div>
+          <div class="meta">📍 滨江体育中心 · 🗓 03-15 · 👥 328/500</div>
+        </div>
+        <div class="card-item" onclick="show('eventDetail2')">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip orange">多项积分</span></div>
+          <div class="title">职工羽毛球团体赛</div>
+          <div class="meta">📍 市体育馆 · 🗓 03-20 · 👥 12/16</div>
+        </div>
+        <div class="card-item" onclick="show('ranking')">
+          <div class="tag-row"><span class="chip gray">已结束</span></div>
+          <div class="title">青少年游泳锦标赛</div>
+          <div class="meta">📍 水上运动中心 · 🗓 02-10 · 已出成绩</div>
+        </div>
+      </div>
+
+      <!-- 日历 -->
+      <div class="screen" id="s-calendar">
+        <div class="navbar">赛事日历</div>
+        <div class="cal-head">
+          <button onclick="prevMonth()">‹</button><span class="ym" id="calYM">2026年3月</span><button onclick="nextMonth()">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="sec-title" style="margin-top:0">03-15 赛事安排</div>
+        <div class="list-row" onclick="show('eventDetail')"><div class="l"><span class="t">2026 春季城市马拉松</span><span class="s">08:00 · 滨江体育中心</span></div><div class="r">报名中 ›</div></div>
+        <div class="list-row" onclick="show('eventDetail2')"><div class="l"><span class="t">职工羽毛球团体赛（小组赛）</span><span class="s">13:30 · 市体育馆</span></div><div class="r">报名中 ›</div></div>
+      </div>
+
+      <!-- 我的 -->
+      <div class="screen" id="s-mine">
+        <div class="navbar">我的</div>
+        <div class="card-item" style="display:flex;align-items:center;gap:14px">
+          <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700">张</div>
+          <div><div class="title">张三</div><div class="meta">已认证 · 手机 138****8888</div></div>
+        </div>
+        <div class="list-row" onclick="show('myRegistrations')"><div class="l"><span class="t">📋 我的报名</span></div><div class="r">›</div></div>
+        <div class="list-row" onclick="show('ranking')"><div class="l"><span class="t">🏅 我的成绩与排名</span></div><div class="r">›</div></div>
+        <div class="list-row"><div class="l"><span class="t">⚙️ 设置</span></div><div class="r">›</div></div>
+      </div>
+
+      <!-- 赛事详情 1 -->
+      <div class="screen" id="s-eventDetail">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛事详情</div>
+        <div class="banner"><h3>2026 春季城市马拉松</h3><p>滨江体育中心 · 2026-03-15 08:00</p></div>
+        <div class="card-item">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip blue">需审核</span><span class="chip gray">免费</span></div>
+          <div class="title">赛事信息</div>
+          <div class="meta">报名截止：03-10 20:00</div>
+          <div class="meta">人数上限：500 人（已报 328）</div>
+          <div class="meta">项目：男子全马 / 女子全马（按用时排名）</div>
+        </div>
+        <div class="sec-title" style="margin-top:6px">赛事介绍</div>
+        <div class="card-item"><div class="meta" style="line-height:1.7">本赛事为城市马拉松，设男子、女子两个单项。成绩按完赛用时排名，用时越短名次越靠前；单项成绩相同则并列同名次。</div></div>
+        <div style="height:70px"></div>
+      </div>
+
+      <!-- 赛事详情 2 -->
+      <div class="screen" id="s-eventDetail2">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛事详情</div>
+        <div class="banner" style="background:linear-gradient(120deg,#ff7a00,#f59e0b)"><h3>职工羽毛球团体赛</h3><p>市体育馆 · 2026-03-20 13:30</p></div>
+        <div class="card-item">
+          <div class="tag-row"><span class="chip green">报名中</span><span class="chip orange">多项积分</span><span class="chip gray">免费</span></div>
+          <div class="title">赛事信息</div>
+          <div class="meta">报名截止：03-15 18:00</div>
+          <div class="meta">人数上限：16 队（已报 12）</div>
+          <div class="meta">项目：男单 / 女单 / 混双（积分累加排名）</div>
+        </div>
+        <div class="sec-title" style="margin-top:6px">赛事介绍</div>
+        <div class="card-item"><div class="meta" style="line-height:1.7">团体赛设男单、女单、混双三个积分项，各队积分累加后排序，积分高者靠前；因多项累加基本不存在同分。</div></div>
+        <div style="height:70px"></div>
+      </div>
+
+      <!-- 报名表单 -->
+      <div class="screen" id="s-registerForm">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>在线报名</div>
+        <div class="notice">⚠️ 报名免费，提交后需主办方审核，审核通过方为报名成功。</div>
+        <div class="card-item">
+          <div class="title" style="margin-bottom:14px">2026 春季城市马拉松</div>
+          <div class="form-item"><label>姓名 <span class="req">*</span></label><input placeholder="请输入真实姓名"></div>
+          <div class="form-item"><label>手机号 <span class="req">*</span></label><input placeholder="请输入手机号"></div>
+          <div class="form-item"><label>性别 <span class="req">*</span></label><select><option>男</option><option>女</option></select></div>
+          <div class="form-item"><label>证件类型 <span class="req">*</span></label><select><option>居民身份证</option><option>护照</option></select></div>
+          <div class="form-item"><label>证件号码 <span class="req">*</span></label><input placeholder="请输入证件号码"><div class="hint">用于参赛资格核验</div></div>
+          <button class="btn btn-primary" onclick="show('registerSuccess')">提交报名</button>
+        </div>
+      </div>
+
+      <!-- 报名成功 -->
+      <div class="screen" id="s-registerSuccess">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>报名结果</div>
+        <div class="card-item" style="text-align:center;padding:40px 20px">
+          <div style="font-size:52px;margin-bottom:14px">✅</div>
+          <div class="title" style="font-size:17px;margin-bottom:8px">报名已提交，等待审核</div>
+          <div class="meta" style="margin-bottom:20px">主办方将在 3 个工作日内完成资格审核，结果会通过消息通知你。</div>
+          <div class="hint-box">当前状态：<b>待审核</b>（免费报名 · 无需支付）</div>
+          <button class="btn btn-outline" onclick="show('myRegistrations')">查看我的报名</button>
+        </div>
+      </div>
+
+      <!-- 我的报名 -->
+      <div class="screen" id="s-myRegistrations">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>我的报名</div>
+        <div class="list-row" onclick="show('regDetail')"><div class="l"><span class="t">2026 春季城市马拉松</span><span class="s">报名时间 03-01 10:24</span></div><div class="r"><span class="badge b-orange">待审核</span></div></div>
+        <div class="list-row" onclick="show('regDetail2')"><div class="l"><span class="t">青少年游泳锦标赛</span><span class="s">报名时间 01-20 15:02</span></div><div class="r"><span class="badge b-green">已通过</span></div></div>
+      </div>
+
+      <!-- 报名详情 -->
+      <div class="screen" id="s-regDetail">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>报名详情</div>
+        <div class="card-item">
+          <div class="tag-row"><span class="badge b-orange">待审核</span></div>
+          <div class="title" style="margin-bottom:10px">2026 春季城市马拉松</div>
+          <div class="meta">姓名：张三 &nbsp; 手机：138****8888</div>
+          <div class="meta">性别：男 &nbsp; 证件：居民身份证 3***********</div>
+          <div class="meta">报名时间：2026-03-01 10:24</div>
+        </div>
+        <div class="hint-box">📢 你的报名正在等待主办方审核，请留意通知。</div>
+      </div>
+      <div class="screen" id="s-regDetail2">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>报名详情</div>
+        <div class="card-item">
+          <div class="tag-row"><span class="badge b-green">已通过</span></div>
+          <div class="title" style="margin-bottom:10px">青少年游泳锦标赛</div>
+          <div class="meta">姓名：张三 &nbsp; 手机：138****8888</div>
+          <div class="meta">报名时间：2026-01-20 15:02 &nbsp; 审核通过：01-21 09:10</div>
+        </div>
+        <button class="btn btn-primary" onclick="show('ranking')">查看成绩排名</button>
+      </div>
+
+      <!-- 排名 -->
+      <div class="screen" id="s-ranking">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>成绩排名</div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:var(--primary);color:#fff;font-weight:600">男子全马</div>
+          <div style="flex:1;text-align:center;padding:8px 0;border-radius:10px;font-size:13px;background:#fff;color:var(--text-sub);font-weight:600">女子全马</div>
+        </div>
+        <div class="hint-box">🏅 按完赛用时排名，用时越短靠前；单项同用时并列同名次。</div>
+        <div class="rank-list">
+          <div class="rank-item"><div class="rank-no top1">1</div><div class="rank-info"><div class="nm">李强</div><div class="ev">男子全马</div></div><div class="rank-score">2:18:42</div></div>
+          <div class="rank-item"><div class="rank-no top2">2</div><div class="rank-info"><div class="nm">王磊</div><div class="ev">男子全马</div></div><div class="rank-score">2:21:09</div></div>
+          <div class="rank-item"><div class="rank-no top2">2</div><div class="rank-info"><div class="nm">赵鹏</div><div class="ev">男子全马 · 并列</div></div><div class="rank-score">2:21:09</div></div>
+          <div class="rank-item"><div class="rank-no">4</div><div class="rank-info"><div class="nm">刘洋</div><div class="ev">男子全马</div></div><div class="rank-score">2:24:55</div></div>
+          <div class="rank-item" style="background:#fff7ed"><div class="rank-no">18</div><div class="rank-info"><div class="nm">张三</div><div class="ev">男子全马 · 我</div></div><div class="rank-score">2:58:13</div></div>
+        </div>
+        <div class="notice" style="margin-top:14px">第 2、3 名成绩相同（2:21:09），并列处理，下一名次为第 4 名。</div>
+      </div>
+
+      <!-- 资讯列表 -->
+      <div class="screen" id="s-newsList">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛事资讯</div>
+        <div class="card-item" onclick="show('newsDetail1')"><div class="tag-row"><span class="chip blue">赛事通知</span></div><div class="title">2026 春季城市马拉松参赛须知</div><div class="meta">02-28 · 阅读 1.2k</div></div>
+        <div class="card-item" onclick="show('newsDetail2')"><div class="tag-row"><span class="chip blue">比赛预告</span></div><div class="title">职工羽毛球团体赛抽签分组出炉</div><div class="meta">02-25 · 阅读 860</div></div>
+        <div class="card-item" onclick="show('newsDetail3')"><div class="tag-row"><span class="chip blue">图文资讯</span></div><div class="title">青少年游泳锦标赛圆满落幕</div><div class="meta">02-12 · 阅读 2.3k</div></div>
+      </div>
+
+      <!-- 资讯详情 1 -->
+      <div class="screen" id="s-newsDetail1">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
+        <div class="news-cover"><h3>2026 春季城市马拉松参赛须知</h3></div>
+        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-28 · 阅读 1.2k · 来源：赛事组委会</div>
+        <div class="news-body">
+          <p>各位参赛选手，2026 春季城市马拉松将于 <b>3 月 15 日 08:00</b> 在滨江体育中心鸣枪开跑。为确保顺利参赛，请仔细阅读以下须知：</p>
+          <p><b>一、报名与审核</b>：本赛事免费报名，报名截止时间为 3 月 10 日 20:00，限额 500 人。提交报名后由组委会审核参赛资格，审核结果将以站内消息通知，请保持手机畅通。</p>
+          <p><b>二、领物安排</b>：3 月 13—14 日 10:00-20:00 凭报名成功通知及身份证件到滨江体育中心东门领取参赛包（号码布、计时芯片、参赛服）。</p>
+          <p><b>三、成绩与排名</b>：完赛成绩按计时芯片净用时排名，用时越短名次越靠前；相同用时并列同名次。</p>
+          <p>预祝各位跑出好成绩！</p>
+        </div>
+      </div>
+
+      <!-- 资讯详情 2 -->
+      <div class="screen" id="s-newsDetail2">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
+        <div class="news-cover" style="background:linear-gradient(120deg,#ff7a00,#f59e0b)"><h3>职工羽毛球团体赛抽签分组出炉</h3></div>
+        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-25 · 阅读 860 · 来源：市总工会</div>
+        <div class="news-body">
+          <p>职工羽毛球团体赛抽签分组已于昨日完成，共 <b>12 支队伍</b> 参与，分为 A、B 两组进行小组赛，每组前四名晋级淘汰赛。</p>
+          <p><b>A 组</b>：一厂、三厂、机关一队、财务联队、研发中心、后勤联队。</p>
+          <p><b>B 组</b>：二厂、四厂、机关二队、市场联队、质量中心、安全联队。</p>
+          <p>团体赛设男单、女单、混双三个积分项，各队积分累加排名。请各队于 3 月 15 日前完成报名确认。</p>
+        </div>
+      </div>
+
+      <!-- 资讯详情 3 -->
+      <div class="screen" id="s-newsDetail3">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>资讯详情</div>
+        <div class="news-cover" style="background:linear-gradient(120deg,#16a34a,#0d9488)"><h3>青少年游泳锦标赛圆满落幕</h3></div>
+        <div class="meta" style="font-size:12px;color:var(--text-sub);margin-bottom:12px">发布于 2026-02-12 · 阅读 2.3k · 来源：市体育局</div>
+        <div class="news-body">
+          <p>为期两天的青少年游泳锦标赛在水上运动中心圆满落幕，来自全市 18 支代表队的 200 余名小将参赛。</p>
+          <p>比赛设 50 米、100 米自由泳、蛙泳、仰泳等项目，成绩按用时排名，多名选手打破赛会纪录。</p>
+          <p>最终各组别名次已在小程序「成绩排名」栏目公布，可随时查看。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabbar" id="tabbar">
+      <div class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ico">🏠</span>首页</div>
+      <div class="tab" id="tab-events" onclick="switchTab('events')"><span class="ico">🏃</span>赛事</div>
+      <div class="tab" id="tab-calendar" onclick="switchTab('calendar')"><span class="ico">📅</span>日历</div>
+      <div class="tab" id="tab-mine" onclick="switchTab('mine')"><span class="ico">👤</span>我的</div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+
+<!-- ================= PC 管理后台 ================= -->
+<div class="pc" id="pcWrap">
+  <div class="pc-chrome">
+    <div class="pc-dots"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+    <div class="pc-addr">🔒 admin.sports.example.com/dashboard</div>
+  </div>
+  <div class="pc-body">
+    <div class="pc-sidebar">
+      <div class="pc-logo"><div class="dot">🏆</div>赛事管理后台</div>
+      <div class="pc-menu" id="pcMenu">
+        <div class="mi active" data-page="dashboard" onclick="adminNav('dashboard')">📊 仪表盘</div>
+        <div class="mi" data-page="competitions" onclick="adminNav('competitions')">🏃 赛事管理</div>
+        <div class="mi" data-page="news" onclick="adminNav('news')">📰 资讯管理</div>
+        <div class="mi" data-page="audit" onclick="adminNav('audit')">📋 报名审核 <span class="badge b-orange" style="margin-left:auto">46</span></div>
+        <div class="mi" data-page="results" onclick="adminNav('results')">✏️ 成绩管理</div>
+        <div class="mi" data-page="ranking" onclick="adminNav('ranking')">🏅 排名管理</div>
+      </div>
+    </div>
+    <div class="pc-main">
+      <div class="topbar">
+        <h2 id="adminTitle">仪表盘</h2>
+        <div class="user">👤 管理员 · 运营</div>
+      </div>
+
+      <div class="pc-admin-page show" id="pg-dashboard">
+        <div class="pc-stat-grid">
+          <div class="pc-stat"><div class="n">328</div><div class="l">累计报名</div><div class="trend">↑ 本周 +32</div></div>
+          <div class="pc-stat"><div class="n">46</div><div class="l">待审核</div><div class="trend" style="color:var(--orange)">需处理</div></div>
+          <div class="pc-stat"><div class="n">12</div><div class="l">进行中赛事</div><div class="trend">正常</div></div>
+          <div class="pc-stat"><div class="n">3</div><div class="l">待录入成绩</div><div class="trend" style="color:var(--red)">待办</div></div>
+        </div>
+        <div class="pc-panel">
+          <div class="panel-head"><h3>待办事项</h3><span class="link-btn" onclick="adminNav('audit')">去审核 ›</span></div>
+          <table class="pc-table">
+            <thead><tr><th>事项</th><th>关联赛事</th><th>时间</th><th>状态</th></tr></thead>
+            <tbody>
+              <tr><td>报名审核</td><td>2026 春季城市马拉松</td><td class="muted">03-01 10:24</td><td><span class="badge b-orange">待审核</span></td></tr>
+              <tr><td>成绩录入</td><td>青少年游泳锦标赛</td><td class="muted">02-10 18:00</td><td><span class="badge b-red">待录入</span></td></tr>
+              <tr><td>排名重算</td><td>青少年游泳锦标赛</td><td class="muted">02-11 09:00</td><td><span class="badge b-gray">已完成</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pc-admin-page" id="pg-competitions">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>赛事列表</h3><button class="btn btn-primary btn-sm">+ 新建赛事</button></div>
+          <table class="pc-table">
+            <thead><tr><th>赛事名称</th><th>分类</th><th>报名截止</th><th>人数</th><th>排名规则</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>2026 春季城市马拉松</td><td>马拉松</td><td class="muted">03-10 20:00</td><td>328/500</td><td>按用时</td><td><span class="badge b-green">报名中</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>职工羽毛球团体赛</td><td>球类</td><td class="muted">03-15 18:00</td><td>12/16</td><td>多项积分</td><td><span class="badge b-green">报名中</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>青少年游泳锦标赛</td><td>游泳</td><td class="muted">01-25 20:00</td><td>200/200</td><td>按用时</td><td><span class="badge b-gray">已结束</span></td><td><span class="link-btn">编辑</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pc-admin-page" id="pg-news">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>资讯列表</h3><button class="btn btn-primary btn-sm">+ 发布资讯</button></div>
+          <table class="pc-table">
+            <thead><tr><th>标题</th><th>分类</th><th>关联赛事</th><th>发布时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>2026 春季城市马拉松参赛须知</td><td>赛事通知</td><td class="muted">春季城市马拉松</td><td class="muted">02-28</td><td><span class="badge b-green">已发布</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>职工羽毛球团体赛抽签分组出炉</td><td>比赛预告</td><td class="muted">职工羽毛球团体赛</td><td class="muted">02-25</td><td><span class="badge b-green">已发布</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>青少年游泳锦标赛圆满落幕</td><td>图文资讯</td><td class="muted">青少年游泳锦标赛</td><td class="muted">02-12</td><td><span class="badge b-green">已发布</span></td><td><span class="link-btn">编辑</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pc-admin-page" id="pg-audit">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>报名审核（待审核 46）</h3></div>
+          <table class="pc-table">
+            <thead><tr><th>姓名</th><th>项目</th><th>手机号</th><th>报名时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>张三</td><td>男子全马</td><td class="muted">138****8888</td><td class="muted">03-01 10:24</td><td><span class="badge b-orange">待审核</span></td><td><span class="link-btn">通过</span> <span class="link-btn" style="color:var(--red)">驳回</span></td></tr>
+              <tr><td>李芳</td><td>女子全马</td><td class="muted">139****2233</td><td class="muted">03-01 11:02</td><td><span class="badge b-orange">待审核</span></td><td><span class="link-btn">通过</span> <span class="link-btn" style="color:var(--red)">驳回</span></td></tr>
+              <tr><td>王强</td><td>男子全马</td><td class="muted">137****5566</td><td class="muted">03-01 11:30</td><td><span class="badge b-orange">待审核</span></td><td><span class="link-btn">通过</span> <span class="link-btn" style="color:var(--red)">驳回</span></td></tr>
+              <tr><td>赵敏</td><td>女子全马</td><td class="muted">136****9901</td><td class="muted">03-01 12:15</td><td><span class="badge b-green">已通过</span></td><td class="muted">已处理</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pc-admin-page" id="pg-results">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>成绩管理 · 青少年游泳锦标赛</h3><div><button class="btn btn-outline btn-sm" style="margin-right:8px">📥 Excel 导入</button><button class="btn btn-primary btn-sm">+ 录入成绩</button></div></div>
+          <table class="pc-table">
+            <thead><tr><th>参赛者</th><th>项目</th><th>成绩</th><th>来源</th><th>录入时间</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>李强</td><td>男子100米自由泳</td><td>52.18s</td><td><span class="badge b-gray">手工</span></td><td class="muted">02-10 16:00</td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>王磊</td><td>男子100米自由泳</td><td>53.02s</td><td><span class="badge b-gray">手工</span></td><td class="muted">02-10 16:05</td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>张三</td><td>男子100米自由泳</td><td>55.40s</td><td><span class="badge b-gray">导入</span></td><td class="muted">02-10 17:00</td><td><span class="link-btn">编辑</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="pc-admin-page" id="pg-ranking">
+        <div class="pc-panel">
+          <div class="panel-head"><h3>排名管理 · 青少年游泳锦标赛</h3><button class="btn btn-primary btn-sm">重新计算排名</button></div>
+          <div style="padding:14px 18px;background:#eef2fb;font-size:12.5px;color:#1e40af">🏅 成绩优者靠前；单项同分并列；多项积分累加。排名由系统自动生成。</div>
+          <table class="pc-table">
+            <thead><tr><th style="width:70px">名次</th><th>参赛者</th><th>项目</th><th>成绩</th></tr></thead>
+            <tbody>
+              <tr><td><b style="color:#f59e0b">🥇 1</b></td><td>李强</td><td>男子100米自由泳</td><td>52.18s</td></tr>
+              <tr><td><b style="color:#94a3b8">🥈 2</b></td><td>王磊</td><td>男子100米自由泳</td><td>53.02s</td></tr>
+              <tr><td><b style="color:#b45309">🥉 3</b></td><td>赵鹏</td><td>男子100米自由泳</td><td>53.02s</td></tr>
+              <tr><td>4</td><td>刘洋</td><td>男子100米自由泳</td><td>54.10s</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var role = 'user';
+  var prev = [];
+  var tabPages = { 'home':'s-home','events':'s-events','calendar':'s-calendar','mine':'s-mine' };
+
+  function switchRole(r) {
+    role = r;
+    document.getElementById('roleUser').classList.toggle('active', r==='user');
+    document.getElementById('roleAdmin').classList.toggle('active', r==='admin');
+    document.getElementById('phoneWrap').style.display = (r==='user') ? 'block' : 'none';
+    document.getElementById('pcWrap').style.display = (r==='admin') ? 'block' : 'none';
+    if (r === 'user') switchTab('home'); else adminNav('dashboard');
+  }
+
+  function show(id) {
+    var el = document.getElementById(id);
+    if (!el) el = document.getElementById('s-' + id);
+    if (!el) return;
+    prev.push(currentScreen());
+    document.querySelectorAll('.phone .screen').forEach(function(s){ s.classList.remove('show'); });
+    el.classList.add('show');
+    document.getElementById('tabbar').style.display = 'none';
+  }
+  function back() {
+    if (prev.length > 0) {
+      var target = prev.pop();
+      document.querySelectorAll('.phone .screen').forEach(function(s){ s.classList.remove('show'); });
+      document.getElementById(target).classList.add('show');
+      if (isTabPage(target)) { document.getElementById('tabbar').style.display='flex'; highlightTab(target); }
+    } else {
+      switchTab('home');
+    }
+  }
+  function currentScreen() {
+    var shown = document.querySelector('.phone .screen.show');
+    return shown ? shown.id : 's-home';
+  }
+  function isTabPage(id) { return ['s-home','s-events','s-calendar','s-mine'].indexOf(id) >= 0; }
+
+  function switchTab(name) {
+    prev = [];
+    document.querySelectorAll('.phone .screen').forEach(function(s){ s.classList.remove('show'); });
+    document.getElementById(tabPages[name]).classList.add('show');
+    document.getElementById('tabbar').style.display = 'flex';
+    highlightTab(tabPages[name]);
+  }
+  function highlightTab(screenId) {
+    var map = { 's-home':'tab-home','s-events':'tab-events','s-calendar':'tab-calendar','s-mine':'tab-mine' };
+    document.querySelectorAll('.tabbar .tab').forEach(function(t){ t.classList.remove('active'); });
+    var k = map[screenId]; if (k) document.getElementById(k).classList.add('active');
+  }
+
+  var adminTitles = { dashboard:'仪表盘', competitions:'赛事管理', news:'资讯管理', audit:'报名审核', results:'成绩管理', ranking:'排名管理' };
+  function adminNav(page) {
+    document.querySelectorAll('.pc-menu .mi').forEach(function(m){ m.classList.toggle('active', m.getAttribute('data-page')===page); });
+    document.querySelectorAll('.pc-admin-page').forEach(function(p){ p.classList.remove('show'); });
+    document.getElementById('pg-'+page).classList.add('show');
+    document.getElementById('adminTitle').textContent = adminTitles[page];
+  }
+
+  var calYear = 2026, calMonth = 3;
+  function renderCal() {
+    var grid = document.getElementById('calGrid');
+    var days = ['日','一','二','三','四','五','六'];
+    var html = days.map(function(d){ return '<div class="wd">'+d+'</div>'; }).join('');
+    var first = new Date(calYear, calMonth-1, 1).getDay();
+    var total = new Date(calYear, calMonth, 0).getDate();
+    for (var i=0;i<first;i++) html += '<div class="day other"></div>';
+    for (var d=1; d<=total; d++){
+      var has = (d===15 || d===20);
+      var today = (d===15);
+      html += '<div class="day'+(has?' has':'')+(today?' today':'')+'" onclick="calPick('+d+')">'+d+'</div>';
+    }
+    grid.innerHTML = html;
+    document.getElementById('calYM').textContent = calYear+'年'+calMonth+'月';
+  }
+  function prevMonth(){ calMonth--; if(calMonth<1){calMonth=12;calYear--;} renderCal(); }
+  function nextMonth(){ calMonth++; if(calMonth>12){calMonth=1;calYear++;} renderCal(); }
+  function calPick(d){}
+
+  renderCal();
+  switchRole('user');
+</script>
+</body>
+</html>

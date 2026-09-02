@@ -4,7 +4,12 @@
 
 ## 在线预览
 
-https://xuanyu-h.github.io/sports-event-prototype/
+| 版本 | 链接 | 说明 |
+| --- | --- | --- |
+| **v2.0 完整版** | https://xuanyu-h.github.io/sports-event-prototype/ | 11 个模块（当前主版本） |
+| **v1.0 基础版** | https://xuanyu-h.github.io/sports-event-prototype/v1/ | 4 个模块（基线存档） |
+
+> 两个版本页面右下角均有「版本切换」浮标，可互相跳转。
 
 ## 版本
 
@@ -43,7 +48,9 @@ https://xuanyu-h.github.io/sports-event-prototype/
 
 ```
 .
-├── index.html                  # 页面原型（交互式，可切换 C 端 / PC 后台）
+├── index.html                  # v2.0 完整版原型（交互式，可切换 C 端 / PC 后台）
+├── v1/
+│   └── index.html              # v1.0 基础版原型（4 模块，来自 v1.0.0 tag）
 ├── images/                     # 原型图片素材
 └── docs/
     └── 功能范围确认清单.md      # 一期功能范围（待客户确认）
