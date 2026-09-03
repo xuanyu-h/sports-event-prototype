@@ -195,6 +195,7 @@
   .b-orange { background: var(--orange-bg); color: var(--orange); }
   .b-red { background: var(--red-bg); color: var(--red); }
   .b-gray { background: #f1f3f7; color: #7b8494; }
+  .b-blue { background: #eef4ff; color: #2563eb; }
 
   .rank-list { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
   .rank-item { display: flex; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border); }
@@ -909,6 +910,7 @@
         <div class="mi" data-page="results" onclick="adminNav('results')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>成绩管理</div>
         <div class="mi" data-page="ranking" onclick="adminNav('ranking')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>排名管理</div>
         <div class="mi" data-page="theme" onclick="adminNav('theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.8C22 5.9 17.5 2 12 2Z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="11.5" r="1"/></svg>主题设置 <span style="font-size:10px;background:#eef4ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:4px;padding:0 5px;line-height:15px;font-weight:600;">进阶版</span></div>
+        <div class="mi" data-page="admins" onclick="adminNav('admins')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>多管理员 <span style="font-size:10px;background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe;border-radius:4px;padding:0 5px;line-height:15px;font-weight:600;">尊享版</span></div>
       </div>
     </div>
     <div class="pc-main">
@@ -1138,6 +1140,22 @@
           </div>
         </div>
       </div>
+
+      <div class="pc-admin-page" id="pg-admins">
+        <div class="hint-box" style="margin:0 0 16px">👥 可添加多个管理员账号，按角色分配不同权限范围，实现分工协作、责任到人。</div>
+        <div class="pc-panel">
+          <div class="panel-head"><h3>管理员列表</h3><button class="btn btn-primary btn-sm" onclick="toast('已发送管理员邀请')">+ 新增管理员</button></div>
+          <table class="pc-table">
+            <thead><tr><th>账号</th><th>角色</th><th>权限范围</th><th>最近登录</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>admin@tijing.com</td><td><span class="badge b-red">超级管理员</span></td><td>全部功能</td><td class="muted">今天 09:12</td><td><span class="badge b-green">正常</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>yunying@tijing.com</td><td><span class="badge b-blue">运营编辑</span></td><td>赛事 / 资讯 / 报名审核</td><td class="muted">今天 08:47</td><td><span class="badge b-green">正常</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>caipan@tijing.com</td><td><span class="badge b-blue">赛事管理员</span></td><td>赛程 / 成绩 / 排名</td><td class="muted">昨天 18:20</td><td><span class="badge b-green">正常</span></td><td><span class="link-btn">编辑</span></td></tr>
+              <tr><td>zhiyuan@tijing.com</td><td><span class="badge b-gray">志愿者</span></td><td>仅查看</td><td class="muted">03-02 14:05</td><td><span class="badge b-gray">已停用</span></td><td><span class="link-btn">启用</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1224,7 +1242,7 @@
     var k = map[screenId]; if (k) document.getElementById(k).classList.add('active');
   }
 
-  var adminTitles = { dashboard:'仪表盘', competitions:'赛事管理', news:'资讯管理', audit:'报名审核', schedule:'赛程编排', results:'成绩管理', ranking:'排名管理', theme:'主题设置' };
+  var adminTitles = { dashboard:'仪表盘', competitions:'赛事管理', news:'资讯管理', audit:'报名审核', schedule:'赛程编排', results:'成绩管理', ranking:'排名管理', theme:'主题设置', admins:'多管理员' };
 
   // ===== 赛事分类 tab（C端） =====
   function catTab(el) {
