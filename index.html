@@ -186,6 +186,26 @@
   .btn-sm { width: auto; padding: 7px 16px; font-size: 13px; border-radius: 8px; display: inline-block; }
 
   .form-item { margin-bottom: 16px; }
+  .form-row { display:flex; align-items:flex-start; padding:14px 18px; border-bottom:1px solid #f1f3f7; }
+  .form-row:last-child { border-bottom:none; }
+  .form-label { width:120px; flex-shrink:0; font-size:13.5px; color:#5a6473; font-weight:600; padding-top:9px; }
+  .form-control { flex:1; }
+  .form-tip { font-size:11.5px; color:#9aa3b1; margin-top:4px; line-height:1.5; }
+  .required { color:#ef4444; margin-left:2px; }
+  .pc-input { width:100%; padding:9px 12px; border:1px solid #e2e6ed; border-radius:8px; font-size:13.5px; outline:none; transition:border .15s; box-sizing:border-box; font-family:inherit; }
+  .pc-input:focus { border-color:var(--primary); }
+  textarea.pc-input { resize:vertical; min-height:60px; line-height:1.6; }
+
+  .kw-tag { display:inline-flex; align-items:center; gap:6px; padding:6px 10px 6px 12px; background:#eef4ff; color:#1e40af; border:1px solid #bfdbfe; border-radius:6px; font-size:13px; font-weight:500; }
+  .kw-x { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; background:rgba(30,64,175,.12); color:#1e40af; border-radius:50%; font-size:13px; line-height:1; cursor:pointer; font-weight:600; }
+  .kw-x:hover { background:#ef4444; color:#fff; }
+
+  .seo-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px dashed #eef0f4; }
+  .seo-item:last-child { border-bottom:none; }
+  .seo-num { width:24px; height:24px; flex-shrink:0; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:700; }
+  .seo-body { flex:1; }
+  .seo-title { font-size:14px; font-weight:600; color:#1a2233; margin-bottom:3px; }
+  .seo-desc { font-size:12.5px; color:#5a6473; line-height:1.6; }
   .form-item label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
   .form-item label .req { color: var(--red); }
   .form-item input, .form-item select { width: 100%; border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px; font-size: 14px; background: #fff; outline: none; }
@@ -942,6 +962,7 @@
         <div class="mi" data-page="results" onclick="adminNav('results')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>成绩管理</div>
         <div class="mi" data-page="ranking" onclick="adminNav('ranking')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>排名管理</div>
         <div class="mi" data-page="theme" onclick="adminNav('theme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-1.1.9-2 2-2h2.4A4.6 4.6 0 0 0 22 10.8C22 5.9 17.5 2 12 2Z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="11.5" r="1"/></svg>主题设置 <span style="font-size:10px;background:#eef4ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:4px;padding:0 5px;line-height:15px;font-weight:600;">进阶版</span></div>
+        <div class="mi" data-page="miniapp" onclick="adminNav('miniapp')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>小程序设置 <span style="font-size:10px;background:#eef4ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:4px;padding:0 5px;line-height:15px;font-weight:600;">进阶版</span></div>
         <div class="mi" data-page="checkin" onclick="adminNav('checkin')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>签到管理</div>
       </div>
     </div>
@@ -1173,6 +1194,90 @@
         </div>
       </div>
 
+      <div class="pc-admin-page" id="pg-miniapp">
+        <div class="hint-box" style="margin:0 0 16px">🔍 推广搜索优化（一次性服务）：专业建议小程序名称、简介、关键词与描述文案，让用户更容易在微信中搜索到您。配置完成后由我方代为提交微信平台审核。</div>
+
+        <div class="pc-panel" style="margin-bottom:16px">
+          <div class="panel-head"><h3>小程序基础信息</h3></div>
+          <div class="form-row">
+            <div class="form-label">小程序名称 <span class="required">*</span></div>
+            <div class="form-control"><input class="pc-input" value="体竞文化" /><div class="form-tip">含"体育赛事"行业关键词，建议长度 4-12 个字</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">小程序简介</div>
+            <div class="form-control"><textarea class="pc-input" rows="2">城市体育赛事报名、对阵、成绩、积分一站式服务平台</textarea><div class="form-tip">建议 30-60 字，含 2-3 个核心关键词</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">AppID</div>
+            <div class="form-control"><input class="pc-input" value="wx1234567890abcdef" readonly style="background:#f6f7f9;color:#7b8494" /></div>
+          </div>
+        </div>
+
+        <div class="pc-panel" style="margin-bottom:16px">
+          <div class="panel-head">
+            <h3>搜索关键词（最多 10 个）</h3>
+            <button class="btn btn-sm" onclick="addKeyword()">+ 添加关键词</button>
+          </div>
+          <div id="kwList" style="padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px">
+            <span class="kw-tag">体育赛事<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">马拉松报名<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">城市马拉松<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">羽毛球赛<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">足球联赛<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">赛事积分<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">体育竞赛<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+            <span class="kw-tag">团体赛<span class="kw-x" onclick="this.parentNode.remove()">×</span></span>
+          </div>
+          <div style="padding:0 18px 14px;font-size:12px;color:#7b8494">💡 建议包含赛事类型、城市、用户搜索习惯词</div>
+        </div>
+
+        <div class="pc-panel" style="margin-bottom:16px">
+          <div class="panel-head"><h3>描述文案（SEO 优化版）</h3></div>
+          <div class="form-row">
+            <div class="form-control"><textarea class="pc-input" rows="4">体竞文化是国内领先的城市体育赛事服务平台，覆盖马拉松、羽毛球、足球、篮球等 10+ 赛事类型。提供在线报名、赛程对阵、成绩查询、积分累计、签到管理一站式服务。累计服务赛事 1,200+ 场、报名用户 8 万+。</textarea><div class="form-tip">已根据 SEO 最佳实践优化（含品类、地域、数据、动词）</div></div>
+          </div>
+        </div>
+
+        <div class="pc-panel" style="margin-bottom:16px">
+          <div class="panel-head"><h3>搜索排名建议（我方提供）</h3></div>
+          <div style="padding:14px 18px">
+            <div class="seo-item">
+              <div class="seo-num">1</div>
+              <div class="seo-body">
+                <div class="seo-title">建议名称加"城市"地理标签</div>
+                <div class="seo-desc">"体竞文化" → "体竞文化-城市体育赛事"；用户搜索"XX市体育赛事"时命中率提升约 40%</div>
+              </div>
+            </div>
+            <div class="seo-item">
+              <div class="seo-num">2</div>
+              <div class="seo-body">
+                <div class="seo-title">简介前置核心品类词</div>
+                <div class="seo-desc">已把"体育赛事报名"前置至第 1 句，搜索权重 +25%</div>
+              </div>
+            </div>
+            <div class="seo-item">
+              <div class="seo-num">3</div>
+              <div class="seo-body">
+                <div class="seo-title">关键词组合：赛事类型 + 城市</div>
+                <div class="seo-desc">建议增补"XX马拉松"、"XX羽毛球赛"等长尾词，覆盖本地搜索</div>
+              </div>
+            </div>
+            <div class="seo-item">
+              <div class="seo-num">4</div>
+              <div class="seo-body">
+                <div class="seo-title">描述含数据与动词</div>
+                <div class="seo-desc">"1,200+ 场"、"8 万+ 用户" 等数据提升可信度；动词"报名/查询/累计"覆盖搜索意图</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;padding:0 0 24px">
+          <button class="btn" onclick="toast('已重置')">重置</button>
+          <button class="btn btn-primary" onclick="toast('保存成功，已提交我方审核')">保存并提交审核</button>
+        </div>
+      </div>
+
       <div class="pc-admin-page" id="pg-checkin">
         <div class="pc-stat-grid">
           <div class="pc-stat"><div class="n">186</div><div class="l">已签到</div><div class="trend">↑ 今日 +24</div></div>
@@ -1290,7 +1395,7 @@
     var k = map[screenId]; if (k) document.getElementById(k).classList.add('active');
   }
 
-  var adminTitles = { dashboard:'仪表盘', competitions:'赛事管理', news:'资讯管理', audit:'报名审核', schedule:'赛程编排', results:'成绩管理', ranking:'排名管理', theme:'主题设置', checkin:'签到管理' };
+  var adminTitles = { dashboard:'仪表盘', competitions:'赛事管理', news:'资讯管理', audit:'报名审核', schedule:'赛程编排', results:'成绩管理', ranking:'排名管理', theme:'主题设置', miniapp:'小程序设置', checkin:'签到管理' };
 
   // ===== 赛事分类 tab（C端） =====
   function catTab(el) {
@@ -1413,6 +1518,16 @@
   function newEvent() { document.getElementById('newEventModal').classList.add('show'); }
   function closeNewEvent() { document.getElementById('newEventModal').classList.remove('show'); }
   function confirmNewEvent() { closeNewEvent(); toast('✅ 赛事已创建，可继续配置报名信息'); }
+  function addKeyword() {
+    var name = prompt('请输入关键词（建议 2-6 字）');
+    if (!name) return;
+    var list = document.getElementById('kwList');
+    if (list.children.length >= 10) { toast('最多 10 个关键词'); return; }
+    var tag = document.createElement('span');
+    tag.className = 'kw-tag';
+    tag.innerHTML = name + '<span class="kw-x" onclick="this.parentNode.remove()">×</span>';
+    list.appendChild(tag);
+  }
   function toast(msg) {
     var tip = document.createElement('div');
     tip.style.cssText = 'position:fixed;top:24px;right:24px;background:#16a34a;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;box-shadow:0 8px 24px rgba(22,163,74,.35);z-index:1001;font-weight:600';
