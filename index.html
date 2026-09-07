@@ -62,7 +62,9 @@
   .navbar .back { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border: none; background: transparent; cursor: pointer; font-size: 22px; color: #1f2937; line-height: 1; }
   .navbar .right { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--primary); font-weight: 600; }
 
-  .content { flex: 1; overflow-y: auto; padding: 12px 16px 16px; scrollbar-width: none; }
+  /* 底部留白 40px：中间扫码大圆浮起 34px，会压住内容区最底部的元素（实测挡住了
+     「热门活动」的滚动圆点），留白后滚到底也不会被圆遮住。 */
+  .content { flex: 1; overflow-y: auto; padding: 12px 16px 40px; scrollbar-width: none; }
   .content::-webkit-scrollbar { display: none; }
 
   .tabbar { height: 62px; background: #fff; border-top: 1px solid var(--border); display: flex; flex-shrink: 0; padding-bottom: 4px; position: relative; align-items: flex-end; }
@@ -70,16 +72,25 @@
   .tabbar .tab .ico { font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
   .tabbar .tab .ico svg { width: 23px; height: 23px; }
   .tabbar .tab.active { color: var(--primary); font-weight: 600; }
-  /* 中间扫码大圆 */
-  .tabbar .tab.center { position: absolute; left: 50%; transform: translateX(-50%); top: -16px; width: 58px; height: 58px; background: #fff; border-radius: 50%; box-shadow: 0 5px 14px rgba(30,64,175,.16); border: 1px solid var(--border); z-index: 10; padding-bottom: 0; }
-  .tabbar .tab.center .ico { width: 42px; height: 42px; background: #fff; border-radius: 50%; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; }
-  .tabbar .tab.center .ico svg { width: 26px; height: 26px; color: var(--primary); stroke: var(--primary); stroke-width: 2.2; }
-  .tabbar .tab.center .lab { position: absolute; left: 50%; transform: translateX(-50%); bottom: 8px; width: max-content; }
-  .tabbar .tab.center.active .ico { background: linear-gradient(135deg, var(--primary), #1d4ed8); border-color: transparent; }
+  /* 中间扫码：仍占 1/5 栏宽（五个 tab 等分，与其余四个对齐），
+     圆靠负 margin 浮起到栏体之上，文字留在圆的正下方、与其他 tab 文字同一基线。
+     白色描边环 (0 0 0 5px #fff) 让圆"穿过"栏顶那条分隔线，产生浮起感。 */
+  .tabbar .tab.center { justify-content: flex-end; gap: 7px; }
+  .tabbar .tab.center .ico {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #fff;
+    margin-top: -34px;
+    box-shadow: 0 0 0 7px #fff,
+                0 7px 16px rgba(37,99,235,.26),
+                0 0 24px rgba(37,99,235,.13);
+    position: relative; z-index: 10;
+  }
+  .tabbar .tab.center .ico svg { width: 30px; height: 30px; color: var(--primary); stroke: var(--primary); stroke-width: 2.2; }
+  /* 覆盖旧的绝对定位——文字曾被压在圆上 */
+  .tabbar .tab.center .lab { position: static; transform: none; width: auto; line-height: 1; }
+  .tabbar .tab.center.active .ico { background: linear-gradient(135deg, var(--primary), #1d4ed8); }
   .tabbar .tab.center.active .ico svg { color: #fff; stroke: #fff; }
   .tabbar .tab.center.active .lab { color: var(--primary); font-weight: 700; }
-  /* 第三个 tab 是中间扫码大圆，自身浮起并占位 */
-  .tabbar .tab:nth-child(3).center { opacity: 1; pointer-events: auto; }
 
   .screen { display: none; } .screen.show { display: block; }
   .search { display: flex; align-items: center; gap: 8px; background: #fff; border-radius: 999px; padding: 10px 16px; font-size: 13px; color: var(--text-sub); box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 14px; }
@@ -582,7 +593,7 @@
         <div class="quick-grid">
           <div class="q-item" onclick="switchTab('events')"><div class="q-ico" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div>活动报名</div>
           <div class="q-item" onclick="show('ranking')"><div class="q-ico" style="background:linear-gradient(135deg,#fef3c7,#fde68a)"><svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>榜单排行</div>
-          <div class="q-item" onclick="show('calendar')"><div class="q-ico" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg></div>活动日历</div>
+          <div class="q-item" onclick="show('schedule')"><div class="q-ico" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M18 4v16"/><path d="M6 8h5a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h3"/><circle cx="6" cy="4" r="1.6"/><circle cx="6" cy="20" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg></div>赛程对阵</div>
           <div class="q-item" onclick="show('video')"><div class="q-ico" style="background:linear-gradient(135deg,#fee2e2,#fecaca)"><svg viewBox="0 0 24 24" fill="#ef4444"><polygon points="7 4 19 12 7 20 7 4"/></svg></div>精彩瞬间</div>
         </div>
 
@@ -1140,8 +1151,8 @@
     <div class="tabbar" id="tabbar">
       <div class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>主页</div>
       <div class="tab" id="tab-events" onclick="switchTab('events')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>活动</div>
-      <div class="tab center" id="tab-scan" onclick="switchTab('scan')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8V6a2 2 0 0 1 2-2h2"/><path d="M15 4h2a2 2 0 0 1 2 2v2"/><path d="M19 16v2a2 2 0 0 1-2 2h-2"/><path d="M9 20H7a2 2 0 0 1-2-2v-2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="9" x2="8" y2="9" stroke-width="3"/><line x1="12" y1="9" x2="12" y2="9" stroke-width="3"/><line x1="16" y1="9" x2="16" y2="9" stroke-width="3"/><line x1="8" y1="15" x2="8" y2="15" stroke-width="3"/><line x1="12" y1="15" x2="12" y2="15" stroke-width="3"/><line x1="16" y1="15" x2="16" y2="15" stroke-width="3"/></svg></span><span class="lab">扫码签到</span></div>
-      <div class="tab" id="tab-schedule" onclick="switchTab('schedule')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h3"/><path d="M14 14h3"/><path d="M8 18h3"/></svg></span>赛程</div>
+      <div class="tab center" id="tab-scan" onclick="switchTab('scan')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6.5A2.5 2.5 0 0 1 6.5 4h2"/><path d="M15.5 4h2A2.5 2.5 0 0 1 20 6.5v2"/><path d="M20 15.5v2a2.5 2.5 0 0 1-2.5 2.5h-2"/><path d="M8.5 20h-2A2.5 2.5 0 0 1 4 17.5v-2"/><line x1="4.5" y1="12" x2="19.5" y2="12" stroke-width="2.4"/></svg></span><span class="lab">扫码签到</span></div>
+      <div class="tab" id="tab-calendar" onclick="switchTab('calendar')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h3"/><path d="M14 14h3"/><path d="M8 18h3"/></svg></span>日历</div>
       <div class="tab" id="tab-mine" onclick="switchTab('mine')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>我的</div>
     </div>
     <div class="home-indicator"></div>
@@ -1602,7 +1613,7 @@
 <script>
   var role = 'user';
   var prev = [];
-  var tabPages = { 'home':'s-home','events':'s-events','scan':'s-checkin','schedule':'s-schedule','mine':'s-mine' };
+  var tabPages = { 'home':'s-home','events':'s-events','scan':'s-checkin','calendar':'s-calendar','mine':'s-mine' };
 
   function switchRole(r) {
     role = r;
@@ -1623,6 +1634,15 @@
     });
   }
 
+  // 扫码签到 / 活动日历 既是一级 tab，也能从活动详情页钻进去。
+  // 走 switchTab 时是一级页，不该有返回按钮；走 show() 时是二级页，需要。
+  // 用 visibility 而非 display —— 返回按钮占着布局位，display:none 会让标题偏移。
+  function setBackVisible(el, visible) {
+    if (!el) return;
+    var b = el.querySelector('.navbar .back');
+    if (b) b.style.visibility = visible ? '' : 'hidden';
+  }
+
   function show(id) {
     var el = document.getElementById(id);
     if (!el) el = document.getElementById('s-' + id);
@@ -1630,14 +1650,16 @@
     prev.push(currentScreen());
     document.querySelectorAll('.phone .screen').forEach(function(s){ s.classList.remove('show'); });
     el.classList.add('show');
+    setBackVisible(el, true);
     document.getElementById('tabbar').style.display = 'none';
   }
   function back() {
     if (prev.length > 0) {
       var target = prev.pop();
       document.querySelectorAll('.phone .screen').forEach(function(s){ s.classList.remove('show'); });
-      document.getElementById(target).classList.add('show');
-      if (isTabPage(target)) { document.getElementById('tabbar').style.display='flex'; highlightTab(target); }
+      var backEl = document.getElementById(target);
+      backEl.classList.add('show');
+      if (isTabPage(target)) { document.getElementById('tabbar').style.display='flex'; highlightTab(target); setBackVisible(backEl, false); }
     } else {
       switchTab('home');
     }
@@ -1646,17 +1668,19 @@
     var shown = document.querySelector('.phone .screen.show');
     return shown ? shown.id : 's-home';
   }
-  function isTabPage(id) { return ['s-home','s-events','s-checkin','s-schedule','s-mine'].indexOf(id) >= 0; }
+  function isTabPage(id) { return ['s-home','s-events','s-checkin','s-calendar','s-mine'].indexOf(id) >= 0; }
 
   function switchTab(name) {
     prev = [];
     document.querySelectorAll('.phone .screen').forEach(function(s){ s.classList.remove('show'); });
-    document.getElementById(tabPages[name]).classList.add('show');
+    var tabEl = document.getElementById(tabPages[name]);
+    tabEl.classList.add('show');
+    setBackVisible(tabEl, false);
     document.getElementById('tabbar').style.display = 'flex';
     highlightTab(tabPages[name]);
   }
   function highlightTab(screenId) {
-    var map = { 's-home':'tab-home','s-events':'tab-events','s-checkin':'tab-scan','s-schedule':'tab-schedule','s-mine':'tab-mine' };
+    var map = { 's-home':'tab-home','s-events':'tab-events','s-checkin':'tab-scan','s-calendar':'tab-calendar','s-mine':'tab-mine' };
     document.querySelectorAll('.tabbar .tab').forEach(function(t){ t.classList.remove('active'); });
     var k = map[screenId]; if (k) document.getElementById(k).classList.add('active');
   }
