@@ -77,11 +77,11 @@
      白色描边环 (0 0 0 5px #fff) 让圆"穿过"栏顶那条分隔线，产生浮起感。 */
     /* gap 必须算上 7px 白色描边环：环让圆的视觉直径由 48 变成 62，
      按元素盒子算的 gap 会被环整个吃掉，文字就贴到圆上了。 */
-  .tabbar .tab.center { justify-content: flex-end; gap: 22px; }
+  .tabbar .tab.center { justify-content: flex-end; gap: 16px; }
   .tabbar .tab.center .ico {
     width: 48px; height: 48px; border-radius: 50%;
     background: #fff;
-    margin-top: -20px;
+    margin-top: -26px;
     /* 只留白色描边环 + 一层短投影。原来还有 0 0 24px 的外发光，它比描边环
        扩散得更远，会漫到下方文字上，视觉间距怎么加都不够。 */
     box-shadow: 0 0 0 6px #fff,
