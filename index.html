@@ -426,11 +426,6 @@
   .match-row .m-teams .win { font-weight: 700; color: var(--primary-dark); }
   .match-row .m-court { color: var(--text-sub); font-size: 11px; margin-top: 2px; }
 
-  /* 赛程中心 match 行（C 端列表简版） */
-  .sch-match { display:flex; align-items:center; gap:8px; padding:7px 0; font-size:13px; }
-  .sch-match .sch-team { flex:1; font-weight:600; color:#1f2937; }
-  .sch-match .sch-team.right { text-align:right; }
-  .sch-match .sch-vs { padding:2px 9px; border-radius:8px; background:#f1f3f7; font-weight:700; color:var(--primary-dark); font-size:12px; min-width:46px; text-align:center; }
 
   /* 首页公告栏（横向滚动） */
   .notice-bar { display:flex; align-items:center; gap:8px; background:#fff; border-radius:12px; padding:9px 14px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,.04); overflow:hidden; }
@@ -825,52 +820,6 @@
       </div>
 
       <!-- 赛程中心（C 端新加） -->
-      <div class="screen" id="s-schedule">
-        <div class="navbar"><button class="back" onclick="back()">‹</button>赛程</div>
-        <div class="notice">📅 集中查看正在比赛 / 即将开始的活动对阵，点击进入可查看完整赛程</div>
-        <div class="cat-tab">
-          <div class="ct active" data-cat="all" onclick="filterSch(this)">全部</div>
-          <div class="ct" data-cat="ongoing" onclick="filterSch(this)">进行中</div>
-          <div class="ct" data-cat="upcoming" onclick="filterSch(this)">即将开始</div>
-        </div>
-
-        <div class="card-item" onclick="show('scheduleDetail')" data-cat="ongoing">
-          <div class="tag-row"><span class="chip green">进行中</span><span class="chip orange">淘汰赛</span></div>
-          <div class="title">职工羽毛球团体赛 · 半决赛</div>
-          <div class="meta">📍 市体育馆 1 号场 · 🕤 03-20 13:30</div>
-          <div class="sch-match">
-            <div class="sch-team">机关一队</div><div class="sch-vs">2 : 0</div><div class="sch-team right">研发中心</div>
-          </div>
-          <div class="sch-match" style="border-top:1px dashed #eef">
-            <div class="sch-team">财务联队</div><div class="sch-vs">2 : 1</div><div class="sch-team right">市场联队</div>
-          </div>
-        </div>
-
-        <div class="card-item" onclick="show('scheduleDetail')" data-cat="upcoming">
-          <div class="tag-row"><span class="chip blue">即将开始</span><span class="chip gray">决赛</span></div>
-          <div class="title">职工羽毛球团体赛 · 决赛</div>
-          <div class="meta">📍 市体育馆 1 号场 · 🕒 03-20 15:30</div>
-          <div class="sch-match" style="background:#fafbff;border-radius:8px;padding:7px 10px">
-            <div class="sch-team">机关一队</div><div class="sch-vs">VS</div><div class="sch-team right">财务联队</div>
-          </div>
-        </div>
-
-        <div class="card-item" onclick="show('scheduleDetail')" data-cat="ongoing">
-          <div class="tag-row"><span class="chip green">进行中</span><span class="chip gray">预赛</span></div>
-          <div class="title">2026 春季城市马拉松 · 5km 健康跑</div>
-          <div class="meta">📍 滨江体育中心 · 🏃 03-15 08:00 鸣枪</div>
-          <div class="meta">已出成绩 · 326 人完赛 · 冠军：张三（17:42）</div>
-        </div>
-
-        <div class="card-item" onclick="show('scheduleDetail')" data-cat="upcoming">
-          <div class="tag-row"><span class="chip blue">即将开始</span><span class="chip gray">小组赛</span></div>
-          <div class="title">青少年游泳锦标赛 · 男子 100m 自由泳</div>
-          <div class="meta">📍 水上运动中心 · 🏊 02-10 09:00</div>
-          <div class="meta">分 8 组 · 每组 8 人 · 取前 8 名进入决赛</div>
-        </div>
-        <div style="height:24px"></div>
-      </div>
-
       <!-- 活动详情 1 -->
       <div class="screen" id="s-eventDetail">
         <div class="navbar"><button class="back" onclick="back()">‹</button>活动详情</div>
@@ -1706,15 +1655,6 @@
     el.classList.add('active');
   }
 
-  // ===== 赛程中心状态筛选（C端） =====
-  function filterSch(el) {
-    document.querySelectorAll('#s-schedule .cat-tab .ct').forEach(function(t){ t.classList.remove('active'); });
-    el.classList.add('active');
-    var cat = el.getAttribute('data-cat');
-    document.querySelectorAll('#s-schedule .card-item').forEach(function(c){
-      c.style.display = (cat === 'all' || c.getAttribute('data-cat') === cat) ? '' : 'none';
-    });
-  }
 
   // ===== 后台：自动生成对阵 =====
   function genSchedule() { toast('✅ 已按报名名单自动生成对阵表'); }
