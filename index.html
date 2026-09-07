@@ -610,7 +610,7 @@
             <div class="hc-mask"></div>
             <div class="hc-title"><div class="ht">职工羽毛球团体赛</div><div class="hm">📍 市体育馆 · 🗓 03-20 · 12/16 队</div></div>
           </div>
-          <div class="hot-card" onclick="show('eventDetail3')">
+          <div class="hot-card" onclick="show('ranking')">
             <img class="hc-bg" src="images/swim2.jpg" alt="青少年游泳锦标赛">
             <span class="hc-tag chip-h solid-gray">已结束</span>
             <div class="hc-mask"></div>
@@ -781,7 +781,7 @@
 
       <!-- 现场签到：仅扫码签到 -->
       <div class="screen" id="s-checkin">
-        <div class="navbar"><button class="back" onclick="back()">‹</button>扫码签到</div>
+        <div class="navbar"><button class="back" onclick="back()">‹</button>扫码</div>
         <div class="scan-view active" id="scanView">
           <div class="scan-frame" onclick="mockScan()">
             <div class="sf-grid"></div>
@@ -852,6 +852,25 @@
         <div class="card-item"><div class="meta" style="line-height:1.7">团体赛设男单、女单、混双三个积分项，各队积分累加后排序，积分高者靠前；因多项累加基本不存在同分。</div></div>
         <div class="list-row" onclick="show('checkin')" style="margin-top:12px"><div class="l"><span class="t">📱 现场签到</span><span class="s">扫码签到 / 查看我的签到记录</span></div><div class="r">去签到 ›</div></div>
         <div class="list-row" onclick="show('scheduleDetail')" style="margin-top:12px"><div class="l"><span class="t">🏆 赛程对阵</span><span class="s">半决赛 / 决赛对阵表与实时比分</span></div><div class="r">查看 ›</div></div>
+        <div style="height:86px"></div>
+        <div class="fixed-cta"><button class="btn btn-primary" onclick="show('registerForm')">立即报名</button></div>
+      </div>
+
+      <!-- 活动详情 3 · 青少年篮球友谊赛（进行中） -->
+      <div class="screen" id="s-eventDetail3">
+        <div class="navbar"><button class="back" onclick="back()">‹</button>活动详情</div>
+        <div class="banner" style="background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.55)),url(images/swim2.jpg);background-size:cover;background-position:center"><h3>青少年篮球友谊赛</h3><p>少年宫体育馆 · 2026-03-22 09:00</p></div>
+        <div class="card-item">
+          <div class="tag-row"><span class="chip green">进行中</span><span class="chip orange">淘汰赛</span><span class="chip gray">免费</span></div>
+          <div class="title">活动信息</div>
+          <div class="meta">报名截止：03-18 18:00</div>
+          <div class="meta">参赛队伍：32 队（已报 24）</div>
+          <div class="meta">赛制：单败淘汰（按胜负晋级）</div>
+        </div>
+        <div class="sec-title" style="margin-top:6px">活动介绍</div>
+        <div class="card-item"><div class="meta" style="line-height:1.7">面向全市 12-16 岁青少年的篮球友谊赛，单败淘汰制，胜者晋级下一轮。比分由裁判现场录入，对阵表实时更新。</div></div>
+        <div class="list-row" onclick="show('checkin')" style="margin-top:12px"><div class="l"><span class="t">📱 现场签到</span><span class="s">扫码签到 / 查看我的签到记录</span></div><div class="r">去签到 ›</div></div>
+        <div class="list-row" onclick="show('scheduleDetail')" style="margin-top:12px"><div class="l"><span class="t">🏆 赛程对阵</span><span class="s">各轮次对阵表与实时比分</span></div><div class="r">查看 ›</div></div>
         <div style="height:86px"></div>
         <div class="fixed-cta"><button class="btn btn-primary" onclick="show('registerForm')">立即报名</button></div>
       </div>
@@ -1102,7 +1121,7 @@
     <div class="tabbar" id="tabbar">
       <div class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>主页</div>
       <div class="tab" id="tab-events" onclick="switchTab('events')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>活动</div>
-      <div class="tab center" id="tab-scan" onclick="switchTab('scan')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6.5A2.5 2.5 0 0 1 6.5 4h2"/><path d="M15.5 4h2A2.5 2.5 0 0 1 20 6.5v2"/><path d="M20 15.5v2a2.5 2.5 0 0 1-2.5 2.5h-2"/><path d="M8.5 20h-2A2.5 2.5 0 0 1 4 17.5v-2"/><line x1="4.5" y1="12" x2="19.5" y2="12" stroke-width="2.4"/></svg></span><span class="lab">扫码签到</span></div>
+      <div class="tab center" id="tab-scan" onclick="switchTab('scan')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6.5A2.5 2.5 0 0 1 6.5 4h2"/><path d="M15.5 4h2A2.5 2.5 0 0 1 20 6.5v2"/><path d="M20 15.5v2a2.5 2.5 0 0 1-2.5 2.5h-2"/><path d="M8.5 20h-2A2.5 2.5 0 0 1 4 17.5v-2"/><line x1="4.5" y1="12" x2="19.5" y2="12" stroke-width="2.4"/></svg></span><span class="lab">扫码</span></div>
       <div class="tab" id="tab-calendar" onclick="switchTab('calendar')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h3"/><path d="M14 14h3"/><path d="M8 18h3"/></svg></span>日历</div>
       <div class="tab" id="tab-mine" onclick="switchTab('mine')"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>我的</div>
     </div>
@@ -1650,7 +1669,7 @@
 
   // ===== 赛程对阵轮次切换（C端） =====
   function roundTab(el, r) {
-    document.querySelectorAll('#s-schedule .cat-tab .ct').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('#s-scheduleDetail .cat-tab .ct').forEach(function(t){ t.classList.remove('active'); });
     el.classList.add('active');
   }
 
