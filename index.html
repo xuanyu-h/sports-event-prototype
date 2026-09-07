@@ -825,7 +825,7 @@
 
       <!-- 赛程中心（C 端新加） -->
       <div class="screen" id="s-schedule">
-        <div class="navbar">赛程</div>
+        <div class="navbar"><button class="back" onclick="back()">‹</button>赛程</div>
         <div class="notice">📅 集中查看正在比赛 / 即将开始的活动对阵，点击进入可查看完整赛程</div>
         <div class="cat-tab">
           <div class="ct active" data-cat="all" onclick="filterSch(this)">全部</div>
@@ -833,7 +833,7 @@
           <div class="ct" data-cat="upcoming" onclick="filterSch(this)">即将开始</div>
         </div>
 
-        <div class="card-item" data-cat="ongoing">
+        <div class="card-item" onclick="show('scheduleDetail')" data-cat="ongoing">
           <div class="tag-row"><span class="chip green">进行中</span><span class="chip orange">淘汰赛</span></div>
           <div class="title">职工羽毛球团体赛 · 半决赛</div>
           <div class="meta">📍 市体育馆 1 号场 · 🕤 03-20 13:30</div>
@@ -845,7 +845,7 @@
           </div>
         </div>
 
-        <div class="card-item" data-cat="upcoming">
+        <div class="card-item" onclick="show('scheduleDetail')" data-cat="upcoming">
           <div class="tag-row"><span class="chip blue">即将开始</span><span class="chip gray">决赛</span></div>
           <div class="title">职工羽毛球团体赛 · 决赛</div>
           <div class="meta">📍 市体育馆 1 号场 · 🕒 03-20 15:30</div>
@@ -854,14 +854,14 @@
           </div>
         </div>
 
-        <div class="card-item" data-cat="ongoing">
+        <div class="card-item" onclick="show('scheduleDetail')" data-cat="ongoing">
           <div class="tag-row"><span class="chip green">进行中</span><span class="chip gray">预赛</span></div>
           <div class="title">2026 春季城市马拉松 · 5km 健康跑</div>
           <div class="meta">📍 滨江体育中心 · 🏃 03-15 08:00 鸣枪</div>
           <div class="meta">已出成绩 · 326 人完赛 · 冠军：张三（17:42）</div>
         </div>
 
-        <div class="card-item" data-cat="upcoming">
+        <div class="card-item" onclick="show('scheduleDetail')" data-cat="upcoming">
           <div class="tag-row"><span class="chip blue">即将开始</span><span class="chip gray">小组赛</span></div>
           <div class="title">青少年游泳锦标赛 · 男子 100m 自由泳</div>
           <div class="meta">📍 水上运动中心 · 🏊 02-10 09:00</div>
@@ -902,7 +902,7 @@
         <div class="sec-title" style="margin-top:6px">活动介绍</div>
         <div class="card-item"><div class="meta" style="line-height:1.7">团体赛设男单、女单、混双三个积分项，各队积分累加后排序，积分高者靠前；因多项累加基本不存在同分。</div></div>
         <div class="list-row" onclick="show('checkin')" style="margin-top:12px"><div class="l"><span class="t">📱 现场签到</span><span class="s">扫码签到 / 查看我的签到记录</span></div><div class="r">去签到 ›</div></div>
-        <div class="list-row" onclick="show('schedule')" style="margin-top:12px"><div class="l"><span class="t">🏆 赛程对阵</span><span class="s">半决赛 / 决赛对阵表与实时比分</span></div><div class="r">查看 ›</div></div>
+        <div class="list-row" onclick="show('scheduleDetail')" style="margin-top:12px"><div class="l"><span class="t">🏆 赛程对阵</span><span class="s">半决赛 / 决赛对阵表与实时比分</span></div><div class="r">查看 ›</div></div>
         <div style="height:86px"></div>
         <div class="fixed-cta"><button class="btn btn-primary" onclick="show('registerForm')">立即报名</button></div>
       </div>
@@ -1077,7 +1077,7 @@
       </div>
 
       <!-- 赛程对阵 -->
-      <div class="screen" id="s-schedule">
+      <div class="screen" id="s-scheduleDetail">
         <div class="navbar"><button class="back" onclick="back()">‹</button>赛程对阵</div>
         <div class="card-item" style="margin-bottom:12px">
           <div class="title" style="margin-bottom:6px">职工羽毛球团体赛</div>
