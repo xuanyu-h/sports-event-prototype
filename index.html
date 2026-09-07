@@ -465,7 +465,7 @@
   .hero-dots span { width: 5px; height: 5px; border-radius: 50%; background: #cfd6e1; transition: all .3s; }
   .hero-dots span.cur { background: var(--primary); width: 14px; border-radius: 3px; }
 
-  /* ===== 扫码签到 ===== */
+  /* ===== 扫码 ===== */
   .checkin-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
   .checkin-tabs .ck-tab { flex: 1; text-align: center; padding: 9px 0; border-radius: 10px; font-size: 13px; background: #fff; color: var(--text-sub); font-weight: 600; cursor: pointer; }
   .checkin-tabs .ck-tab.active { background: var(--primary); color: #fff; }
@@ -779,7 +779,7 @@
         <div class="hint-box">💡 积分由系统按报名、完赛、名次自动累计，可在活动报名、完赛、获得名次后获得。</div>
       </div>
 
-      <!-- 现场签到：仅扫码签到 -->
+      <!-- 扫码：只扫主办方二维码，不放个人签到码 -->
       <div class="screen" id="s-checkin">
         <div class="navbar"><button class="back" onclick="back()">‹</button>扫码</div>
         <div class="scan-view active" id="scanView">
@@ -1604,7 +1604,7 @@
     });
   }
 
-  // 扫码签到 / 活动日历 既是一级 tab，也能从活动详情页钻进去。
+  // 扫码页既是一级 tab，也能从活动详情页与「我的」钻进去（show('checkin')）。
   // 走 switchTab 时是一级页，不该有返回按钮；走 show() 时是二级页，需要。
   // 用 visibility 而非 display —— 返回按钮占着布局位，display:none 会让标题偏移。
   function setBackVisible(el, visible) {
@@ -1825,7 +1825,7 @@
     });
   }
 
-  // ===== 扫码签到 =====
+  // ===== 扫码 =====
   function mockScan() {
     document.getElementById('scanSuccess').classList.add('show');
   }
