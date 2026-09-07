@@ -432,6 +432,51 @@
   .hot-scroll-dot { display:flex; justify-content:center; gap:5px; margin-top:8px; }
   .hot-scroll-dot span { width:5px; height:5px; border-radius:50%; background:#cfd6e1; }
   .hot-scroll-dot span.cur { background:var(--primary); width:14px; border-radius:3px; }
+
+  /* ===== 首页顶部公告轮播（左右翻页） ===== */
+  .hero-carousel { position: relative; height: 176px; border-radius: 18px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 10px 24px rgba(30,64,175,.28); }
+  .hero-track { display: flex; height: 100%; transition: transform .45s cubic-bezier(.4,0,.2,1); }
+  .hero-slide { flex: 0 0 100%; position: relative; cursor: pointer; overflow: hidden; }
+  .hero-slide .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-slide .hero-top { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
+  .hero-slide .hero-bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px; background: linear-gradient(transparent, rgba(0,0,0,.64)); color: #fff; }
+  .hero-slide h3 { font-size: 18px; font-weight: 800; text-shadow: 0 1px 4px rgba(0,0,0,.45); margin: 0; }
+  .hero-slide p { font-size: 12px; opacity: .95; margin-top: 3px; }
+  .hero-dots { display: flex; justify-content: center; gap: 5px; margin: 4px 0 16px; }
+  .hero-dots span { width: 5px; height: 5px; border-radius: 50%; background: #cfd6e1; transition: all .3s; }
+  .hero-dots span.cur { background: var(--primary); width: 14px; border-radius: 3px; }
+
+  /* ===== 扫码签到 ===== */
+  .checkin-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+  .checkin-tabs .ck-tab { flex: 1; text-align: center; padding: 9px 0; border-radius: 10px; font-size: 13px; background: #fff; color: var(--text-sub); font-weight: 600; cursor: pointer; }
+  .checkin-tabs .ck-tab.active { background: var(--primary); color: #fff; }
+  .scan-view { display: none; }
+  .scan-view.active { display: block; }
+  .scan-frame { position: relative; height: 248px; border-radius: 16px; overflow: hidden; background: #0b1220; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .scan-frame .sf-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 24px 24px; }
+  .scan-frame .sf-corner { position: absolute; width: 44px; height: 44px; border: 3px solid #4ade80; }
+  .scan-frame .sf-corner.tl { top: 34px; left: 34px; border-right: 0; border-bottom: 0; border-top-left-radius: 8px; }
+  .scan-frame .sf-corner.tr { top: 34px; right: 34px; border-left: 0; border-bottom: 0; border-top-right-radius: 8px; }
+  .scan-frame .sf-corner.bl { bottom: 34px; left: 34px; border-right: 0; border-top: 0; border-bottom-left-radius: 8px; }
+  .scan-frame .sf-corner.br { bottom: 34px; right: 34px; border-left: 0; border-top: 0; border-bottom-right-radius: 8px; }
+  .scan-frame .sf-line { position: absolute; left: 36px; right: 36px; height: 2px; background: linear-gradient(90deg, transparent, #4ade80, transparent); box-shadow: 0 0 10px #4ade80; animation: scan-line 2.2s ease-in-out infinite; }
+  @keyframes scan-line { 0%,100% { top: 38px; } 50% { top: calc(100% - 40px); } }
+  .scan-frame .sf-emoji { font-size: 64px; opacity: .3; }
+  .scan-hint { text-align: center; color: var(--text-sub); font-size: 12.5px; line-height: 1.7; margin-bottom: 14px; }
+  .scan-tip-card { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--text-sub); }
+  .scan-tip-card .st-ico { font-size: 22px; }
+  .scan-success { display: none; position: absolute; inset: 0; z-index: 60; background: rgba(15,23,42,.55); backdrop-filter: blur(2px); align-items: center; justify-content: center; padding: 0 26px; }
+  .scan-success.show { display: flex; }
+  .scan-success .ss-card { background: #fff; border-radius: 18px; padding: 26px 22px; width: 100%; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.3); animation: pop .3s; }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .scan-success .ss-ico { font-size: 46px; line-height: 1; }
+  .scan-success .ss-title { font-size: 18px; font-weight: 800; margin: 10px 0 4px; color: #16a34a; }
+  .scan-success .ss-event { font-size: 14px; font-weight: 700; margin: 10px 0 2px; color: #1f2937; }
+  .scan-success .ss-meta { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
+  .scan-success .ss-btn { display: flex; gap: 10px; margin-top: 18px; }
+  .scan-success .ss-btn button { flex: 1; padding: 10px 0; border-radius: 10px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; }
+  .scan-success .ss-btn .b-ghost { background: #f1f5f9; color: #475569; }
+  .scan-success .ss-btn .b-primary { background: var(--primary); color: #fff; }
 </style>
 </head>
 <body>
@@ -483,18 +528,44 @@
         </div>
         <div class="search">🔍 搜索活动、资讯</div>
 
-        <!-- 主视觉大图 -->
-        <div class="hero" onclick="show('eventDetail')">
-          <img class="hero-bg" src="images/run1.jpg" alt="春季城市马拉松">
-          <div class="hero-top">
-            <span class="chip-h solid-green">报名中</span>
-            <span class="chip-h">免费参赛</span>
-            <span class="chip-h">限额 500 人</span>
+        <!-- 主视觉公告（左右翻页轮播） -->
+        <div class="hero-carousel" id="heroCarousel">
+          <div class="hero-track" id="heroTrack">
+            <div class="hero-slide" onclick="show('eventDetail')">
+              <img class="hero-bg" src="images/run1.jpg" alt="春季城市马拉松">
+              <div class="hero-top">
+                <span class="chip-h solid-green">报名中</span>
+                <span class="chip-h">免费参赛</span>
+              </div>
+              <div class="hero-bottom">
+                <h3>2026 春季城市马拉松</h3>
+                <p>滨江体育中心 · 03-15 08:00 · 已报 328 人</p>
+              </div>
+            </div>
+            <div class="hero-slide" onclick="show('newsDetail2')">
+              <img class="hero-bg" src="images/badminton1.jpg" alt="羽毛球团体赛对阵出炉">
+              <div class="hero-top">
+                <span class="chip-h solid-orange">对阵出炉</span>
+              </div>
+              <div class="hero-bottom">
+                <h3>职工羽毛球团体赛分组公布</h3>
+                <p>点击查看小组赛分组与淘汰赛时间</p>
+              </div>
+            </div>
+            <div class="hero-slide" onclick="show('points')">
+              <img class="hero-bg" src="images/swim2.jpg" alt="新会员注册领积分">
+              <div class="hero-top">
+                <span class="chip-h">会员礼包</span>
+              </div>
+              <div class="hero-bottom">
+                <h3>注册会员 · 领 8 积分</h3>
+                <p>积分可用于后续兑换精美周边</p>
+              </div>
+            </div>
           </div>
-          <div class="hero-bottom">
-            <h3>2026 春季城市马拉松</h3>
-            <p>滨江体育中心 · 03-15 08:00 鸣枪 · 已报 328 人</p>
-          </div>
+        </div>
+        <div class="hero-dots" id="heroDots">
+          <span class="cur"></span><span></span><span></span>
         </div>
 
         <!-- 快捷入口（金刚区） -->
@@ -689,25 +760,65 @@
         <div class="hint-box">💡 积分由系统按报名、完赛、名次自动累计，可在活动报名、完赛、获得名次后获得。</div>
       </div>
 
-      <!-- 现场签到 -->
+      <!-- 现场签到（扫码签到 + 我的签到码） -->
       <div class="screen" id="s-checkin">
-        <div class="navbar"><button class="back" onclick="back()">‹</button>现场签到</div>
-        <div class="notice">📱 到场出示二维码给志愿者扫码，或扫描现场签到码完成签到</div>
-        <div class="checkin-qr-card">
-          <div class="qr-placeholder">
-            <div class="qr-box">
-              <div class="qr-inner">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-              </div>
-            </div>
-            <div class="qr-label">我的签到码 · M-2026-0328</div>
-            <div class="qr-sub">向志愿者出示此码即可完成签到</div>
+        <div class="navbar"><button class="back" onclick="back()">‹</button>扫码签到</div>
+        <div class="checkin-tabs">
+          <div class="ck-tab active" data-ck="scan" onclick="scanTab('scan')">📷 扫码签到</div>
+          <div class="ck-tab" data-ck="mine" onclick="scanTab('mine')">我的签到码</div>
+        </div>
+
+        <!-- 扫码签到视图 -->
+        <div class="scan-view active" id="scanView">
+          <div class="scan-frame" onclick="mockScan()">
+            <div class="sf-grid"></div>
+            <span class="sf-corner tl"></span>
+            <span class="sf-corner tr"></span>
+            <span class="sf-corner bl"></span>
+            <span class="sf-corner br"></span>
+            <div class="sf-line"></div>
+            <span class="sf-emoji">📱</span>
+          </div>
+          <div class="scan-hint">将主办方签到二维码放入框内<br>即可自动扫码完成签到</div>
+          <div class="scan-tip-card">
+            <span class="st-ico">💡</span>
+            <span>现场由主办方张贴签到二维码，扫描后自动匹配活动并完成签到，无需手动选择活动。</span>
           </div>
         </div>
+
+        <!-- 我的签到码视图 -->
+        <div class="scan-view" id="mineView">
+          <div class="checkin-qr-card">
+            <div class="qr-placeholder">
+              <div class="qr-box">
+                <div class="qr-inner">
+                  <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                </div>
+              </div>
+              <div class="qr-label">我的签到码 · M-2026-0328</div>
+              <div class="qr-sub">向志愿者出示此码即可完成签到</div>
+            </div>
+          </div>
+        </div>
+
         <div class="sec-title" style="margin-top:8px">我的签到记录</div>
         <div class="list-row"><div class="l"><span class="t">2026 春季城市马拉松</span><span class="s">2026-03-15 07:42 · 现场扫码</span></div><div class="r"><span class="badge b-green">已签到</span></div></div>
         <div class="list-row"><div class="l"><span class="t">青少年游泳锦标赛</span><span class="s">2026-02-10 08:15 · 现场扫码</span></div><div class="r"><span class="badge b-green">已签到</span></div></div>
         <div style="height:24px"></div>
+
+        <!-- 扫码成功弹窗 -->
+        <div class="scan-success" id="scanSuccess">
+          <div class="ss-card">
+            <div class="ss-ico">✅</div>
+            <div class="ss-title">签到成功</div>
+            <div class="ss-event">2026 春季城市马拉松</div>
+            <div class="ss-meta">签到时间：2026-03-15 07:42<br>获得积分：<b style="color:#16a34a">+5 分</b></div>
+            <div class="ss-btn">
+              <button class="b-ghost" onclick="closeScanSuccess()">完成</button>
+              <button class="b-primary" onclick="closeScanSuccess();show('eventDetail')">查看活动</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 赛程中心（C 端新加） -->
@@ -1713,6 +1824,46 @@
   }
 
   var calYear = 2026, calMonth = 3;
+
+  // ===== 首页顶部公告轮播（左右翻页） =====
+  var heroIndex = 0, heroTotal = 3, heroTimer = null;
+  function heroGo(i) {
+    heroIndex = (i + heroTotal) % heroTotal;
+    var track = document.getElementById('heroTrack');
+    if (track) track.style.transform = 'translateX(-' + (heroIndex * 100) + '%)';
+    document.querySelectorAll('#heroDots span').forEach(function(d, k){ d.classList.toggle('cur', k === heroIndex); });
+  }
+  function initHeroCarousel() {
+    var carousel = document.getElementById('heroCarousel');
+    if (!carousel) return;
+    heroGo(0);
+    heroTimer = setInterval(function(){ heroGo(heroIndex + 1); }, 4000);
+    var sx = 0;
+    carousel.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; clearInterval(heroTimer); }, {passive:true});
+    carousel.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      if (dx < -30) heroGo(heroIndex + 1); else if (dx > 30) heroGo(heroIndex - 1);
+      clearInterval(heroTimer);
+      heroTimer = setInterval(function(){ heroGo(heroIndex + 1); }, 4000);
+    }, {passive:true});
+    document.querySelectorAll('#heroDots span').forEach(function(d, k){
+      d.addEventListener('click', function(){ heroGo(k); });
+    });
+  }
+
+  // ===== 扫码签到 =====
+  function scanTab(n) {
+    document.querySelectorAll('#s-checkin .ck-tab').forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-ck') === n); });
+    document.getElementById('scanView').classList.toggle('active', n === 'scan');
+    document.getElementById('mineView').classList.toggle('active', n === 'mine');
+  }
+  function mockScan() {
+    document.getElementById('scanSuccess').classList.add('show');
+  }
+  function closeScanSuccess() {
+    document.getElementById('scanSuccess').classList.remove('show');
+  }
+
   function renderCal() {
     var grid = document.getElementById('calGrid');
     var days = ['日','一','二','三','四','五','六'];
@@ -1733,6 +1884,7 @@
   function calPick(d){}
 
   renderCal();
+  initHeroCarousel();
   switchRole('user');
 </script>
 </body>
