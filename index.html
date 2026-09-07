@@ -77,15 +77,15 @@
      白色描边环 (0 0 0 5px #fff) 让圆"穿过"栏顶那条分隔线，产生浮起感。 */
   .tabbar .tab.center { justify-content: flex-end; gap: 7px; }
   .tabbar .tab.center .ico {
-    width: 56px; height: 56px; border-radius: 50%;
+    width: 48px; height: 48px; border-radius: 50%;
     background: #fff;
-    margin-top: -34px;
+    margin-top: -28px;
     box-shadow: 0 0 0 7px #fff,
                 0 7px 16px rgba(37,99,235,.26),
                 0 0 24px rgba(37,99,235,.13);
     position: relative; z-index: 10;
   }
-  .tabbar .tab.center .ico svg { width: 30px; height: 30px; color: var(--primary); stroke: var(--primary); stroke-width: 2.2; }
+  .tabbar .tab.center .ico svg { width: 32px; height: 32px; color: var(--primary); stroke: var(--primary); stroke-width: 2.2; }
   /* 覆盖旧的绝对定位——文字曾被压在圆上 */
   .tabbar .tab.center .lab { position: static; transform: none; width: auto; line-height: 1; }
   .tabbar .tab.center.active .ico { background: linear-gradient(135deg, var(--primary), #1d4ed8); }
