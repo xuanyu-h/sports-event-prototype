@@ -66,7 +66,7 @@
   .content::-webkit-scrollbar { display: none; }
 
   .tabbar { height: 62px; background: #fff; border-top: 1px solid var(--border); display: flex; flex-shrink: 0; padding-bottom: 4px; position: relative; align-items: flex-end; }
-  .tabbar .tab-group { flex: 1; display: flex; align-items: flex-end; }
+  .tabbar .tab-group { flex: none; width: 40%; display: flex; align-items: flex-end; }
   .tabbar .tab-group .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 10.5px; color: var(--tab-inactive); cursor: pointer; padding-bottom: 2px; }
   .tabbar .tab .ico { font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
   .tabbar .tab .ico svg { width: 23px; height: 23px; }
@@ -768,15 +768,9 @@
         <div class="hint-box">💡 积分由系统按报名、完赛、名次自动累计，可在活动报名、完赛、获得名次后获得。</div>
       </div>
 
-      <!-- 现场签到（扫码签到 + 我的签到码） -->
+      <!-- 现场签到：仅扫码签到 -->
       <div class="screen" id="s-checkin">
         <div class="navbar"><button class="back" onclick="back()">‹</button>扫码签到</div>
-        <div class="checkin-tabs">
-          <div class="ck-tab active" data-ck="scan" onclick="scanTab('scan')">📷 扫码签到</div>
-          <div class="ck-tab" data-ck="mine" onclick="scanTab('mine')">我的签到码</div>
-        </div>
-
-        <!-- 扫码签到视图 -->
         <div class="scan-view active" id="scanView">
           <div class="scan-frame" onclick="mockScan()">
             <div class="sf-grid"></div>
@@ -791,21 +785,6 @@
           <div class="scan-tip-card">
             <span class="st-ico">💡</span>
             <span>现场由主办方张贴签到二维码，扫描后自动匹配活动并完成签到，无需手动选择活动。</span>
-          </div>
-        </div>
-
-        <!-- 我的签到码视图 -->
-        <div class="scan-view" id="mineView">
-          <div class="checkin-qr-card">
-            <div class="qr-placeholder">
-              <div class="qr-box">
-                <div class="qr-inner">
-                  <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                </div>
-              </div>
-              <div class="qr-label">我的签到码 · M-2026-0328</div>
-              <div class="qr-sub">向志愿者出示此码即可完成签到</div>
-            </div>
           </div>
         </div>
 
@@ -1873,11 +1852,6 @@
   }
 
   // ===== 扫码签到 =====
-  function scanTab(n) {
-    document.querySelectorAll('#s-checkin .ck-tab').forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-ck') === n); });
-    document.getElementById('scanView').classList.toggle('active', n === 'scan');
-    document.getElementById('mineView').classList.toggle('active', n === 'mine');
-  }
   function mockScan() {
     document.getElementById('scanSuccess').classList.add('show');
   }
