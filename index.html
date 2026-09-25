@@ -168,7 +168,7 @@
   .member-card .mc-sub { font-size: 11.5px; opacity: .88; margin-top: 3px; }
   /* v14.8: 原为三等分统计行(报名场次/完赛次数/积分)，客户要求只留积分。
      一项内容撑满三等分布局会在卡片下半部留出一大片空白，故改为左标题右数值的单行。 */
-  .member-card .mc-points { display: flex; align-items: baseline; justify-content: space-between; margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.22); cursor: pointer; }
+  .member-card .mc-points { display: flex; align-items: baseline; justify-content: space-between; margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.22); }
   .member-card .mc-points span { font-size: 13px; opacity: .85; }
   .member-card .mc-points b { font-size: 17px; font-weight: 800; }
 
@@ -587,24 +587,26 @@
                 <p>滨江体育中心 · 03-15 08:00 · 已报 328 人</p>
               </div>
             </div>
-            <div class="hero-slide" onclick="show('newsDetail2')">
-              <img class="hero-bg" src="images/badminton1.jpg" alt="羽毛球团体赛对阵出炉">
+            <div class="hero-slide" onclick="show('eventDetail2')">
+              <img class="hero-bg" src="images/badminton1.jpg" alt="职工羽毛球团体赛">
               <div class="hero-top">
-                <span class="chip-h solid-orange">对阵出炉</span>
+                <span class="chip-h solid-green">报名中</span>
+                <span class="chip-h">免费参赛</span>
               </div>
               <div class="hero-bottom">
-                <h3>职工羽毛球团体赛分组公布</h3>
-                <p>点击查看小组赛分组与淘汰赛时间</p>
+                <h3>职工羽毛球团体赛</h3>
+                <p>市体育馆 · 03-20 13:30 · 已报 12 队</p>
               </div>
             </div>
-            <div class="hero-slide" onclick="show('points')">
-              <img class="hero-bg" src="images/swim2.jpg" alt="新会员注册领积分">
+            <div class="hero-slide" onclick="show('eventDetail3')">
+              <img class="hero-bg" src="images/basketball1.jpg" alt="青少年篮球友谊赛">
               <div class="hero-top">
-                <span class="chip-h">会员礼包</span>
+                <span class="chip-h solid-green">报名中</span>
+                <span class="chip-h">免费参赛</span>
               </div>
               <div class="hero-bottom">
-                <h3>注册会员 · 领 8 积分</h3>
-                <p>积分可用于后续兑换精美周边</p>
+                <h3>青少年篮球友谊赛</h3>
+                <p>少年宫体育馆 · 03-22 09:00 · 已报 24 队</p>
               </div>
             </div>
           </div>
@@ -736,8 +738,8 @@
               <div class="mc-sub">已认证 · 手机 138****8888</div>
             </div>
           </div>
-          <div class="mc-points" onclick="show('points')">
-            <span>我的积分</span><b>268 分 ›</b>
+          <div class="mc-points">
+            <span>我的积分</span><b>268 分</b>
           </div>
         </div>
         <div class="points-entry" onclick="show('points')">
