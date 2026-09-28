@@ -62,8 +62,7 @@
   .navbar .back { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border: none; background: transparent; cursor: pointer; font-size: 22px; color: #1f2937; line-height: 1; }
   .navbar .right { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--primary); font-weight: 600; }
 
-  /* 底部留白 40px：中间扫码大圆浮起 34px，会压住内容区最底部的元素（实测挡住了
-     「热门活动」的滚动圆点），留白后滚到底也不会被圆遮住。 */
+  /* 底部留白 40px：中间扫码圆浮起约 25px，会压住内容区最底部的元素，留白后滚到底也不会被圆遮住。 */
   .content { flex: 1; overflow-y: auto; padding: 12px 16px 40px; scrollbar-width: none; }
   .content::-webkit-scrollbar { display: none; }
 
@@ -72,26 +71,23 @@
   .tabbar .tab .ico { font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
   .tabbar .tab .ico svg { width: 23px; height: 23px; }
   .tabbar .tab.active { color: var(--primary); font-weight: 600; }
-  /* 中间扫码：仍占 1/5 栏宽（五个 tab 等分，与其余四个对齐），
-     圆靠负 margin 浮起到栏体之上，文字留在圆的正下方、与其他 tab 文字同一基线。
-     白色描边环 (0 0 0 5px #fff) 让圆"穿过"栏顶那条分隔线，产生浮起感。 */
-    /* gap 必须算上 7px 白色描边环：环让圆的视觉直径由 48 变成 62，
-     按元素盒子算的 gap 会被环整个吃掉，文字就贴到圆上了。 */
-  .tabbar .tab.center { justify-content: flex-end; gap: 16px; }
+  /* 中间扫码(与小程序交付版一致，2026-09-28 用户定稿)：仍占 1/5 栏宽。
+     52px 白底圆，只有一层轻阴影，不再有白色描边环；未选中时图标为灰色、与其他 tab 一致，
+     只有选中才用主色渐变 + 白色图标。margin-top 取 -(52 - 23)px，让「扫码」文字与其他
+     23px 图标的 tab 落在同一基线。图标 38px，笔画按屏幕线宽与其他图标对齐
+     (1.8 x 23 / 38 约 1.09，中间横线同比例约 1.31)。 */
+  .tabbar .tab.center { gap: 3px; }
   .tabbar .tab.center .ico {
-    width: 48px; height: 48px; border-radius: 50%;
+    width: 52px; height: 52px; border-radius: 50%;
     background: #fff;
-    margin-top: -26px;
-    /* 只留白色描边环 + 一层短投影。原来还有 0 0 24px 的外发光，它比描边环
-       扩散得更远，会漫到下方文字上，视觉间距怎么加都不够。 */
-    box-shadow: 0 0 0 6px #fff,
-                0 6px 14px rgba(37,99,235,.22);
+    margin-top: -29px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
     position: relative; z-index: 10;
   }
-  .tabbar .tab.center .ico svg { width: 32px; height: 32px; color: var(--primary); stroke: var(--primary); stroke-width: 2.2; }
-  /* 覆盖旧的绝对定位——文字曾被压在圆上 */
-  .tabbar .tab.center .lab { position: static; transform: none; width: auto; line-height: 1; }
-  .tabbar .tab.center.active .ico { background: linear-gradient(135deg, var(--primary), #1d4ed8); }
+  .tabbar .tab.center .ico svg { width: 38px; height: 38px; color: var(--tab-inactive); stroke: var(--tab-inactive); stroke-width: 1.09; }
+  .tabbar .tab.center .ico svg line { stroke-width: 1.31; }
+  .tabbar .tab.center .lab { position: static; transform: none; width: auto; }
+  .tabbar .tab.center.active .ico { background: linear-gradient(135deg, var(--primary), #1d4ed8); box-shadow: 0 2px 8px rgba(37,99,235,.25); }
   .tabbar .tab.center.active .ico svg { color: #fff; stroke: #fff; }
   .tabbar .tab.center.active .lab { color: var(--primary); font-weight: 700; }
 
